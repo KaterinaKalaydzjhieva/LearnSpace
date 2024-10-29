@@ -8,8 +8,6 @@
 
         public const string InvalidDecimal = "The field must be greater than or equal to zero.";
 
-        public const string InvalidCategory = "Category does not exist";
-
         public const string InvalidDateTimeFormat = "Invalid date! Format must be: dd/MM/yyyy";
     }
 }
