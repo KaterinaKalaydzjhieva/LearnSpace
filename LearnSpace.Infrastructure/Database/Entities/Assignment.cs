@@ -19,7 +19,7 @@ namespace LearnSpace.Infrastructure.Database.Entities
         public DateTime DueDate { get; set; }
 
         [ForeignKey(nameof(Teacher))]
-        public string TeacherId { get; set; } = string.Empty;
+        public int TeacherId { get; set; }
         public Teacher Teacher { get; set; } = null!;
 
         [ForeignKey(nameof(Course))]

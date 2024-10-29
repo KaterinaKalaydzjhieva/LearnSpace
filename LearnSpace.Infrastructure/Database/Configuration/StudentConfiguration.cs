@@ -8,18 +8,46 @@ namespace LearnSpace.Infrastructure.Database.Configuration
     {
         public void Configure(EntityTypeBuilder<Student> builder)
         {
-           // builder.HasData(SeedStudents());
+            builder.HasData(SeedStudents());
         }
 
-        //private static List<Student> SeedStudents()
-        //{
-        //    return new List<Student>
-        //{
-        //    new Student { Id = 1, ApplicationUserId = 3 },  // Linking to Charlie Clark
-        //    new Student { Id = 2, ApplicationUserId = 4 },  // Linking to Dana Davis
-        //    new Student { Id = 3, ApplicationUserId = 5 },  // Linking to Evan Evans
-        //    new Student { Id = 4, ApplicationUserId = 6 }   // Linking to Fiona Frank
-        //};
-        //}
+        private static List<Student> SeedStudents()
+        {
+            var students = new List<Student>();
+
+            var student = new Student()
+            {
+                Id = 1,
+                UserId = "a52dc824-b577-4862-ac67-29d391116793"
+            };
+
+            students.Add(student);
+
+            student = new Student()
+            {
+                Id = 2,
+                UserId = "08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6"
+            };
+
+            students.Add(student);
+
+            student = new Student()
+            {
+                Id = 3,
+                UserId = "3cc698b0-736e-490a-97e3-3f343bf8bfd8"
+            };
+
+            students.Add(student);
+
+            student = new Student()
+            {
+                Id = 4,
+                UserId = "ebdc00b8-7106-4cbd-a482-da93c40103d3"
+            };
+
+            students.Add(student);
+
+            return students;
+        }
     }
 }

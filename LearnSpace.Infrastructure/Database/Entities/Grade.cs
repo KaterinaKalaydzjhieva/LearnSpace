@@ -19,7 +19,7 @@ namespace LearnSpace.Infrastructure.Database.Entities
 
         [Required]
         [ForeignKey(nameof(Student))]
-        public string StudentId { get; set; } = string.Empty;
+        public int StudentId { get; set; }
         public Student Student { get; set; } = null!;
 
         [Required]

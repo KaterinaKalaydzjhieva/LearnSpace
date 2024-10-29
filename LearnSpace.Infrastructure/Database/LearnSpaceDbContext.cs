@@ -1,6 +1,7 @@
 ﻿using LearnSpace.Infrastructure.Database.Configuration;
 using LearnSpace.Infrastructure.Database.Entities;
 using LearnSpace.Infrastructure.Database.Entities.Account;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -31,7 +32,6 @@ namespace LearnSpace.Infrastructure.Database
                        sc.StudentId,
                        sc.CourseId
                    });
-
             builder.Entity<Notification>()
                     .HasOne(n => n.Student)
                     .WithMany() // Assuming no navigation property on Student for Notifications
@@ -66,7 +66,9 @@ namespace LearnSpace.Infrastructure.Database
                     .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete
 
             //Seeding
+
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
+            builder.ApplyConfiguration(new TeacherConfiguration());
 
             base.OnModelCreating(builder);
         }

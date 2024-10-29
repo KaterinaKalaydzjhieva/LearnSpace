@@ -19,7 +19,7 @@ namespace LearnSpace.Infrastructure.Database.Entities
         public string Description { get; set; } = string.Empty;
 
         [ForeignKey(nameof(Teacher))]
-        public string TeacherId { get; set; } = string.Empty;
+        public int TeacherId { get; set; }
         public Teacher Teacher { get; set; } = null!;
         public ICollection<StudentCourse> CourseStudents { get; set; } = new List<StudentCourse>();
         public ICollection<Assignment> Assignments { get; set; } = new List<Assignment>();
