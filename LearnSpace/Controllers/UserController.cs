@@ -1,9 +1,9 @@
-﻿using LearnSpace.Infrastructure.Database.Constants;
+﻿using LearnSpace.Core.Models.Account;
+using LearnSpace.Infrastructure.Database.Constants;
 using LearnSpace.Infrastructure.Database.Entities.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace LearnSpace.Web.Controllers
 {
@@ -129,7 +129,7 @@ namespace LearnSpace.Web.Controllers
 
             return RedirectToAction("Index", "Home");
         }
-
+        
         public async Task<IActionResult> AddUserToRoles()
         {
             string email1 = "admin@gmail.com";
@@ -141,10 +141,10 @@ namespace LearnSpace.Web.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        //public IActionResult Error()
+        //{
+        //    //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }

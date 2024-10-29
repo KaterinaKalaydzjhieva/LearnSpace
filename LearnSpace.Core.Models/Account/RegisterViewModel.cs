@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+using static LearnSpace.Infrastructure.Database.Constants.DataConstants.ApplicationUser;
 
 namespace LearnSpace.Core.Models.Account
 {
-    public class RegisterViewModel
+	public class RegisterViewModel
     {
         [Required]
         [EmailAddress]
@@ -16,12 +12,12 @@ namespace LearnSpace.Core.Models.Account
 
         [Required]
         [Display(Name = "First Name")]
-        [StringLength(FirstNameMaxLength, MinimumLength = FirstNameMinLength)]
+        [StringLength(FirstNameMaxLen, MinimumLength = FirstNameMinLen)]
         public string FirstName { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "Last Name")]
-        [StringLength(LastNameMaxLength, MinimumLength = LastNameMinLength)]
+        [StringLength(LastNameMaxLen, MinimumLength = LastNameMinLen)]
         public string LastName { get; set; } = string.Empty;
 
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
