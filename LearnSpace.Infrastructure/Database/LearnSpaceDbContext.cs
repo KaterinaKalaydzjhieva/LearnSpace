@@ -1,7 +1,6 @@
 ﻿using LearnSpace.Infrastructure.Database.Configuration;
 using LearnSpace.Infrastructure.Database.Entities;
 using LearnSpace.Infrastructure.Database.Entities.Account;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -69,6 +68,11 @@ namespace LearnSpace.Infrastructure.Database
 
             builder.ApplyConfiguration(new ApplicationUserConfiguration());
             builder.ApplyConfiguration(new TeacherConfiguration());
+            builder.ApplyConfiguration(new StudentConfiguration());
+            builder.ApplyConfiguration(new CourseConfiguration());
+            builder.ApplyConfiguration(new AssignmentConfiguration());
+            builder.ApplyConfiguration(new GradeConfiguration());
+            builder.ApplyConfiguration(new StudentCourseConfiguration());
 
             base.OnModelCreating(builder);
         }
