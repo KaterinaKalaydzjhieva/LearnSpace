@@ -1,0 +1,60 @@
+html {
+    font-size: 17px;
+}
+
+html, body {
+    height:100%;
+    width:100%;
+    margin:0;
+    padding:0;
+    border:none;
+}
+
+body {
+}
+
+
+.color-purple {
+    background-color: #6a4bca;
+}
+
+.color-grey {
+    background-color: #e3e3e3;
+}
+
+.color-blue {
+    background-color: #0e98e3;
+}
+
+.color-red {
+    background-color: #c4101f;
+}
+
+.color-green {
+    background-color: #17e34d;
+}
+
+.color-yellow {
+    background-color: #e0f21d;
+}
+
+.header-index {
+    height:8%;
+}
+
+.main-index{
+    height:85%;
+}
+
+.footer-index {
+    height:7%;
+}
+
+
+.tip {
+    width:85%;
+    display:flex;
+    flex-direction:column;
+    border:1px solid black;
+}
+

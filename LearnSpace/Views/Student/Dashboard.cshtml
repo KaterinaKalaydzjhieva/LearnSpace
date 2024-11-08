@@ -1,0 +1,37 @@
+﻿@model StudentDashboardModel
+
+<div id="dashboardStudent" class="d-flex flex-column">
+    <div class="text-center text-capitalize fs-4 text-white color-purple w-100 m-2">
+        @User.Identity.Name
+    </div>
+    <div class="d-grid">
+        <div class="row">
+            <div href="" class="color-blue">
+                <h1>@Model.Success</h1>
+                <p class="h4">Success</p>
+            </div>
+
+            <div href="" class="color-red">
+                <h1>@Model.GradeCount</h1>
+                <p class="h4">Grade Count</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div href="" class="color-green">
+                <h1>@Model.AssignmentCount</h1>
+                <p class="h4">Assignment Count</p>
+            </div>
+
+            <div href="" class="color-yellow">
+                <h1>@Model.ClassCount</h1>
+                <p class="h4">Classes Count</p>
+            </div>
+        </div>
+    </div>
+
+
+
+   
+</div>
+
