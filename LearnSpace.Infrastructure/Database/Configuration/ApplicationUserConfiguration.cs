@@ -23,6 +23,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
             {
                 Id = "2d522f0f-1d26-429e-8bef-0098f10d96e9",
                 UserName = "Admin",
+                NormalizedUserName = "ADMIN",
                 Email = "admin@abv.bg",
                 NormalizedEmail = "ADMIN@ABV.BG",
                 FirstName = "Admin",
@@ -37,6 +38,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
             {
                 Id = "bdc70ff8-a02a-428f-ad1c-b5ba645a45e1",
                 UserName = "teacher1",
+                NormalizedUserName = "TEACHER1",
                 Email = "teacher1@abv.bg",
                 NormalizedEmail = "TEACHER1@ABV.BG",
                 FirstName = "Ivan",
@@ -51,6 +53,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
             {
                 Id = "bc5f8df5-6115-4344-897b-73e185df4bff",
                 UserName = "teacher2",
+                NormalizedUserName = "TEACHER2",
                 Email = "teacher2@abv.bg",
                 NormalizedEmail = "TEACHER2@ABV.BG",
                 FirstName = "Grigor",
@@ -66,6 +69,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
             {
                 Id = "a52dc824-b577-4862-ac67-29d391116793",
                 UserName = "student1",
+                NormalizedUserName = "STUDENT1",
                 Email = "student1@abv.bg",
                 NormalizedEmail = "STUDENT1@ABV.BG",
                 FirstName = "Vladislav",
@@ -80,6 +84,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
             {
                 Id = "08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6",
                 UserName = "student2",
+                NormalizedUserName = "STUDENT2",
                 Email = "student2@abv.bg",
                 NormalizedEmail = "STUDENT2@ABV.BG",
                 FirstName = "Diana",
@@ -94,6 +99,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
             {
                 Id = "3cc698b0-736e-490a-97e3-3f343bf8bfd8",
                 UserName = "student3",
+                NormalizedUserName = "STUDENT3",
                 Email = "student3@abv.bg",
                 NormalizedEmail = "STUDENT3@ABV.BG",
                 FirstName = "Ema",
@@ -108,6 +114,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
             {
                 Id = "ebdc00b8-7106-4cbd-a482-da93c40103d3",
                 UserName = "student4",
+                NormalizedUserName = "STUDENT4",
                 Email = "student4@abv.bg",
                 NormalizedEmail = "STUDENT4@ABV.BG",
                 FirstName = "Alex",
