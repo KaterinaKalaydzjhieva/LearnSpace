@@ -1,4 +1,6 @@
-﻿using LearnSpace.Infrastructure.Database;
+﻿using LearnSpace.Core.Interfaces;
+using LearnSpace.Core.Services;
+using LearnSpace.Infrastructure.Database;
 using LearnSpace.Infrastructure.Database.Contracts;
 using LearnSpace.Infrastructure.Database.Entities.Account;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +12,8 @@ namespace LearnSpace.Web.Extensions
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
+            services.AddScoped<IStudentService, StudentService>();
+
             // <InterfaceService, Service>
             //services.AddScoped<ICakeService, CakeService>();
             //services.AddScoped<IAdminCakeService, AdminCakeService>();
@@ -24,10 +28,10 @@ namespace LearnSpace.Web.Extensions
             //Roles Authorization
             //services.AddAuthorization(options =>
             //{
-            //    options.AddPolicy("Administrator", policy => policy.RequireRole(AdminRoleName));
-            //    options.AddPolicy("User", policy => policy.RequireRole(UserRoleName));
+            //    options.AddPolicy("Administrator", policy => policy.RequireRole("Administrator"));
+            //    options.AddPolicy("User", policy => policy.RequireRole("User"));
             //});
-            // Authentication
+            //Authentication
             //services.AddAuthentication(options =>
             //{
             //    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;

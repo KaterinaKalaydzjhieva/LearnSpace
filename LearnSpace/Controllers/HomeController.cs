@@ -13,10 +13,6 @@ namespace LearnSpace.Controllers
 
         public IActionResult Index()
         {
-            if (User.IsInRole("Student"))
-            {
-                return RedirectToAction("Dashboard", "Student");
-            }
             return View();
         }
 

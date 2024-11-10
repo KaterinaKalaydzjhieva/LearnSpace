@@ -52,9 +52,25 @@ body {
 
 
 .tip {
-    width:85%;
-    display:flex;
-    flex-direction:column;
-    border:1px solid black;
+    width: 95%;
+    padding: 5px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    box-sizing: border-box;
+    border: 3px solid black;
+    margin: 15px;
 }
+    .tip h3 {
+        padding: 5px;
+        border-bottom: 3px solid black;
+    }
+    .tip p {
+        color:black;
+        background-color: white;
+        border-radius: 15px;
+        height:max-content;
+        margin:0;
+    }
 

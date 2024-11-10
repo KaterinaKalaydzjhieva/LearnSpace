@@ -11,8 +11,7 @@ namespace LearnSpace.Infrastructure.Database
         public LearnSpaceDbContext(DbContextOptions<LearnSpaceDbContext> options)
                 : base(options) 
         {
-            Database.EnsureDeleted();  
-            Database.EnsureCreated();  
+            
         }
 
         public DbSet<Student> Students { get; set; } = null!;

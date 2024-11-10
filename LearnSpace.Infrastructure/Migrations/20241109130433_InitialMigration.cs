@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LearnSpace.Infrastructure.Migrations
 {
-    public partial class Initial : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,8 +31,6 @@ namespace LearnSpace.Infrastructure.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SubjectSpecialization = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -160,6 +158,45 @@ namespace LearnSpace.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Students",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Students_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Teachers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SubjectSpecialization = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Teachers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Teachers_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Courses",
                 columns: table => new
                 {
@@ -167,15 +204,15 @@ namespace LearnSpace.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    TeacherId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    TeacherId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Courses_AspNetUsers_TeacherId",
+                        name: "FK_Courses_Teachers_TeacherId",
                         column: x => x.TeacherId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Teachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -188,36 +225,30 @@ namespace LearnSpace.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Message = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     DateSent = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TeacherId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    StudentId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    TeacherId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    TeacherId = table.Column<int>(type: "int", nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Notifications", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Notifications_AspNetUsers_StudentId",
+                        name: "FK_Notifications_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Notifications_Students_StudentId",
                         column: x => x.StudentId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Students",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Notifications_AspNetUsers_StudentId1",
-                        column: x => x.StudentId1,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Notifications_AspNetUsers_TeacherId",
+                        name: "FK_Notifications_Teachers_TeacherId",
                         column: x => x.TeacherId,
-                        principalTable: "AspNetUsers",
+                        principalTable: "Teachers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Notifications_AspNetUsers_TeacherId1",
-                        column: x => x.TeacherId1,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -229,24 +260,23 @@ namespace LearnSpace.Infrastructure.Migrations
                     Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    TeacherId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: false)
+                    CourseId = table.Column<int>(type: "int", nullable: false),
+                    TeacherId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Assignments", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Assignments_AspNetUsers_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Assignments_Courses_CourseId",
                         column: x => x.CourseId,
                         principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Assignments_Teachers_TeacherId",
+                        column: x => x.TeacherId,
+                        principalTable: "Teachers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -254,21 +284,21 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: table => new
                 {
                     CourseId = table.Column<int>(type: "int", nullable: false),
-                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    StudentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StudentsCourses", x => new { x.StudentId, x.CourseId });
                     table.ForeignKey(
-                        name: "FK_StudentsCourses_AspNetUsers_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_StudentsCourses_Courses_CourseId",
                         column: x => x.CourseId,
                         principalTable: "Courses",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_StudentsCourses_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -279,40 +309,106 @@ namespace LearnSpace.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Score = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Score = table.Column<double>(type: "float", nullable: false),
                     DateGraded = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StudentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    StudentId = table.Column<int>(type: "int", nullable: false),
                     AssignmentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Grades", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Grades_AspNetUsers_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Grades_Assignments_AssignmentId",
                         column: x => x.AssignmentId,
                         principalTable: "Assignments",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Grades_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateOfBirth", "Discriminator", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateOfBirth", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "08a5f9c6-85e8-48af-ad57-516eaa0d0dcf", 0, "905205be-dfc3-401b-a9ca-3aa287d69c0d", new DateTime(2006, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", "student4@example.com", false, "Fiona", "Frank", false, null, null, null, null, null, false, "b5d3352d-eede-41fd-b35b-c481b3fa77a4", false, "student4" },
-                    { "16b5d692-37b9-487e-bb7e-732803772704", 0, "89e695ac-013a-45c5-add4-e31dc29f8d30", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", "admin@abv.bg", false, "Admin", "Adminov", false, null, null, null, null, null, false, "2f782302-2a4b-478e-844d-1d79781a5256", false, "Admin" },
-                    { "1afbd126-0dba-4e36-80f3-2f2f51f0cb3f", 0, "1a4ca7a5-804e-4c26-a2e3-1f28bd85ead5", new DateTime(2006, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", "student2@example.com", false, "Dana", "Davis", false, null, null, null, null, null, false, "f2f90e64-9dd0-45af-a2ba-c0e22afe71d8", false, "student2" },
-                    { "4e4c9e0c-9738-4f09-b20e-c31d548af939", 0, "5a5f36bd-d6e9-4bbc-9382-4138a110d301", new DateTime(2005, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", "student3@example.com", false, "Evan", "Evans", false, null, null, null, null, null, false, "c99c305b-32d1-40c9-a3a2-4c406f079232", false, "student3" },
-                    { "6153a4c6-827b-4cc9-b692-8feb2cd855ee", 0, "acdf0070-e610-490f-95e5-56afa6293f43", new DateTime(1982, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", "teacher2@example.com", false, "Bob", "Brown", false, null, null, null, null, null, false, "f864cae5-7eda-4a92-a483-0063aa2c520a", false, "teacher2" },
-                    { "daf6e8d3-92c4-41ad-bbca-006c28735907", 0, "a3a17cd8-d5ab-4a6f-bace-13b006e73856", new DateTime(2005, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", "student1@example.com", false, "Charlie", "Clark", false, null, null, null, null, null, false, "a120ec38-a0e6-4bb4-bd18-47b911eb0cff", false, "student1" },
-                    { "f104b534-2299-466a-8a82-136bc3ee3147", 0, "25f84822-d443-4872-9221-729ba7b22cdf", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "ApplicationUser", "teacher1@example.com", false, "Alice", "Anderson", false, null, null, null, null, null, false, "c3df93bf-cb3c-47cc-997d-dad64600c027", false, "teacher1" }
+                    { "08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6", 0, "9ab039f9-2413-4d6c-a4aa-e0aee3ab4d64", new DateTime(2006, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "student2@abv.bg", false, "Diana", "Atanasova", false, null, "STUDENT2@ABV.BG", "STUDENT2", "AQAAAAEAACcQAAAAEEVkgCHs8RWj0TzhjAw/ThrJ8/FuaggBzZxUGxf5BA8fZudWog6FJCC+bLozQVuTMQ==", null, false, "d276ba7f-67d3-4b35-b4d7-e5041665ce4f", false, "student2" },
+                    { "2d522f0f-1d26-429e-8bef-0098f10d96e9", 0, "c288f2a0-3db8-4ffb-bc0c-710f1ed218d4", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@abv.bg", false, "Admin", "Adminov", false, null, "ADMIN@ABV.BG", "ADMIN", "AQAAAAEAACcQAAAAECH2o2oZj5GEkL8cFEmwU7zjTCidnr1H5e4DhknzO8MIz4gtB9bjkVYBzfnnvXrFKg==", null, false, "71835378-ef7e-4ceb-a95f-4c91d267954b", false, "Admin" },
+                    { "3cc698b0-736e-490a-97e3-3f343bf8bfd8", 0, "8bb898a7-87cd-4fb6-b754-829bebd0855b", new DateTime(2005, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "student3@abv.bg", false, "Ema", "Ivanova", false, null, "STUDENT3@ABV.BG", "STUDENT3", "AQAAAAEAACcQAAAAEAlEHovBYoxr9cegORShjQzwXUoVlP139M8cGDU0XzzV+QQGo2HZ6rqk1thUo4PPyQ==", null, false, "35f0dfab-d7cc-4757-96ca-ca81c3d7a825", false, "student3" },
+                    { "a52dc824-b577-4862-ac67-29d391116793", 0, "948f7937-f970-4f55-b5b5-786ee4f075b4", new DateTime(2005, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "student1@abv.bg", false, "Vladislav", "Popov", false, null, "STUDENT1@ABV.BG", "STUDENT1", "AQAAAAEAACcQAAAAEA5asQ137TubQpuivujFqUDLfTlKFsFG+6+jFtvaYqn82TiOKhp5/QVl651+SOP1/A==", null, false, "72ff5494-6843-4fd6-84c6-e976bdbf5be5", false, "student1" },
+                    { "bc5f8df5-6115-4344-897b-73e185df4bff", 0, "9056f296-43c5-4b0f-8e5b-934887ad7542", new DateTime(1982, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher2@abv.bg", false, "Grigor", "Georgiev", false, null, "TEACHER2@ABV.BG", "TEACHER2", "AQAAAAEAACcQAAAAEJCW52RsiDkS81DuEo6Md1EuVcx3BRIPd+D1yunRjz9n9G6Qx6gbHAfDwBSYxCInXg==", null, false, "3e1c2688-11d8-4639-b5a7-b63017c92902", false, "teacher2" },
+                    { "bdc70ff8-a02a-428f-ad1c-b5ba645a45e1", 0, "9aa2c9ac-7bf6-48eb-a9b1-d3599a898534", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher1@abv.bg", false, "Ivan", "Ivanov", false, null, "TEACHER1@ABV.BG", "TEACHER1", "AQAAAAEAACcQAAAAEMuHai3Ktj1SUPa3cHcCNbVNAqy8iRQbAv3pU5HwPd/1gicEt1iMDxFvZvQsog7ixA==", null, false, "e6a09221-444d-4a61-9e99-e42271a240a4", false, "teacher1" },
+                    { "ebdc00b8-7106-4cbd-a482-da93c40103d3", 0, "fdb9f50c-1705-4eb8-898a-3a0790c189ca", new DateTime(2006, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "student4@abv.bg", false, "Alex", "Georgiev", false, null, "STUDENT4@ABV.BG", "STUDENT4", "AQAAAAEAACcQAAAAEOUYjgjoD/elAulrNaEuyV3nXjjX4IVYV77IbQX+UcR7AqG5ayemDprEBZdT2sf6fg==", null, false, "37ae18b9-38da-47b7-bbf9-f2c47bf58c30", false, "student4" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Students",
+                columns: new[] { "Id", "UserId" },
+                values: new object[,]
+                {
+                    { 1, "a52dc824-b577-4862-ac67-29d391116793" },
+                    { 2, "08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6" },
+                    { 3, "3cc698b0-736e-490a-97e3-3f343bf8bfd8" },
+                    { 4, "ebdc00b8-7106-4cbd-a482-da93c40103d3" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Teachers",
+                columns: new[] { "Id", "SubjectSpecialization", "UserId" },
+                values: new object[,]
+                {
+                    { 1, "Math", "bdc70ff8-a02a-428f-ad1c-b5ba645a45e1" },
+                    { 2, "History", "bc5f8df5-6115-4344-897b-73e185df4bff" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "Id", "Description", "Name", "TeacherId" },
+                values: new object[] { 1, "In this course you can learn the basic concepts of the 3D world with Math. Learn Geometry today!", "Geometry", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "Id", "Description", "Name", "TeacherId" },
+                values: new object[] { 2, "In this course you can learn the basic concepts of numbers around us. Learn Algebra today!", "Algebra", 1 });
+
+            migrationBuilder.InsertData(
+                table: "Courses",
+                columns: new[] { "Id", "Description", "Name", "TeacherId" },
+                values: new object[] { 3, "In this course you can learn how is a nationality formed and passed to the next generations. Learn Geometry today!", "Nationalism", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Assignments",
+                columns: new[] { "Id", "CourseId", "Description", "DueDate", "TeacherId", "Title" },
+                values: new object[,]
+                {
+                    { 1, 1, "I need to make this test which will make 20% of your final score of the year!", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Test 101" },
+                    { 2, 3, "Write a 500 words essey of the theme for the ages around 1400 a. C.", new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Esey for the middle years" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "StudentsCourses",
+                columns: new[] { "CourseId", "StudentId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 1, 2 },
+                    { 3, 3 },
+                    { 3, 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Grades",
+                columns: new[] { "Id", "AssignmentId", "DateGraded", "Score", "StudentId" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2024, 11, 9, 15, 4, 33, 71, DateTimeKind.Local).AddTicks(7030), 4.0, 1 },
+                    { 2, 1, new DateTime(2024, 11, 9, 15, 4, 33, 71, DateTimeKind.Local).AddTicks(7062), 5.0, 2 },
+                    { 3, 2, new DateTime(2024, 11, 9, 15, 4, 33, 71, DateTimeKind.Local).AddTicks(7064), 5.0, 3 },
+                    { 4, 2, new DateTime(2024, 11, 9, 15, 4, 33, 71, DateTimeKind.Local).AddTicks(7066), 6.0, 4 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -380,14 +476,14 @@ namespace LearnSpace.Infrastructure.Migrations
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Notifications_ApplicationUserId",
+                table: "Notifications",
+                column: "ApplicationUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Notifications_StudentId",
                 table: "Notifications",
                 column: "StudentId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Notifications_StudentId1",
-                table: "Notifications",
-                column: "StudentId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Notifications_TeacherId",
@@ -395,14 +491,19 @@ namespace LearnSpace.Infrastructure.Migrations
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Notifications_TeacherId1",
-                table: "Notifications",
-                column: "TeacherId1");
+                name: "IX_Students_UserId",
+                table: "Students",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StudentsCourses_CourseId",
                 table: "StudentsCourses",
                 column: "CourseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Teachers_UserId",
+                table: "Teachers",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -438,7 +539,13 @@ namespace LearnSpace.Infrastructure.Migrations
                 name: "Assignments");
 
             migrationBuilder.DropTable(
+                name: "Students");
+
+            migrationBuilder.DropTable(
                 name: "Courses");
+
+            migrationBuilder.DropTable(
+                name: "Teachers");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

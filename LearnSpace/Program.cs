@@ -39,8 +39,7 @@ namespace LearnSpace
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
-            app.SeedRoles().GetAwaiter();
-            //app.AddUsersToRoles();
+            app.SeedRoles();
 
             app.Run();
         }

@@ -1,9 +1,10 @@
 ﻿using LearnSpace.Core.Interfaces;
-using LearnSpace.Core.Models.Student;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearnSpace.Web.Controllers
 {
+    [Authorize(Roles = "Student")]
     public class StudentController : BaseController
     {
         private readonly IStudentService studentService;
@@ -14,7 +15,7 @@ namespace LearnSpace.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Dashboard(int id)
+        public async Task<IActionResult> Dashboard(string id)
         {
             if (!User.Identity!.IsAuthenticated)
             {

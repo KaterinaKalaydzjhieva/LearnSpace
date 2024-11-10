@@ -1,4 +1,6 @@
-﻿using System.Security.Claims;
+﻿using LearnSpace.Infrastructure.Database.Entities.Account;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 using static LearnSpace.Infrastructure.Database.Constants.RoleConstants;
 
 namespace LearnSpace.Web.Extensions
@@ -12,10 +14,11 @@ namespace LearnSpace.Web.Extensions
 
         public static bool IsUser(this ClaimsPrincipal user)
         {
-            return !user.Identity!.IsAuthenticated;
+            return user.Identity.IsAuthenticated;
         }
         public static bool IsStudent(this ClaimsPrincipal user)
         {
+
             return user.IsInRole(StudentRoleName);
         }
         public static bool IsTeacher(this ClaimsPrincipal user)

@@ -28,17 +28,17 @@
                         @if (User.IsStudent())
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Student" asp-action="Dashboard">Dashboard</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Student" asp-action="Dashboard" asp-route-id="@User.Id()">Dashboard</a>
                             </li>
-                            
                         }
 
 
 
                     </ul>
                     <ul class="navbar-nav">
-                        @if (!User.IsUser())
+                        @if (User.IsUser())
                         {
+                            
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Logout">Log out</a>
                             </li>
