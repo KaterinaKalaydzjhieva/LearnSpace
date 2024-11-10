@@ -1,7 +1,7 @@
 ﻿using LearnSpace.Infrastructure.Database.Entities.Account;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
-using static LearnSpace.Infrastructure.Database.Constants.RoleConstants;
+using static LearnSpace.Common.RoleConstants;
 
 namespace LearnSpace.Web.Extensions
 {

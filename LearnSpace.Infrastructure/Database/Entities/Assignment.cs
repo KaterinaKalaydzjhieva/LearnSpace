@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using LearnSpace.Infrastructure.Database.Entities.Account;
-using static LearnSpace.Infrastructure.Database.Constants.DataConstants.Assignment;
+using static LearnSpace.Common.DataConstants.Assignment;
+
 namespace LearnSpace.Infrastructure.Database.Entities
 {
     public class Assignment

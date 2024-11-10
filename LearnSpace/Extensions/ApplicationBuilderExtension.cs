@@ -1,6 +1,6 @@
 ﻿using LearnSpace.Infrastructure.Database.Entities.Account;
 using Microsoft.AspNetCore.Identity;
-using static LearnSpace.Infrastructure.Database.Constants.RoleConstants;
+using static LearnSpace.Common.RoleConstants;
 
 namespace LearnSpace.Web.Extensions
 {
@@ -13,7 +13,7 @@ namespace LearnSpace.Web.Extensions
             var services = scopedServices.ServiceProvider;
 
             var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-            var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+            var roleManager = services.GetRequiredService<RoleManager<IdentityRole<Guid>>>();
 
             Task.Run(async ()=> 
             {
@@ -23,7 +23,7 @@ namespace LearnSpace.Web.Extensions
                 {
                     if (!await roleManager.RoleExistsAsync(role))
                     {
-                        await roleManager.CreateAsync(new IdentityRole(role));
+                        await roleManager.CreateAsync(new IdentityRole<Guid>(role));
                     }
                 }
 

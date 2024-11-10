@@ -2,8 +2,11 @@
 {
     public static class RoleConstants
     {
-        public const string Administrator = "Admin";
-        public const string Student = "Student";
-        public const string Teacher = "Teacher";
+        public const string AdminRoleName = "Administrator";
+        public const string StudentRoleName = "Student";
+        public const string TeacherRoleName = "Teacher";
+
+
+        public const string AdminEmail = "admin@abv.bg";
     }
 }

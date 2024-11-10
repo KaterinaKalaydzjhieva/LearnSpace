@@ -17,4 +17,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LearnSpace.Common\LearnSpace.Common.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace LearnSpace.Infrastructure.Database.Constants
+﻿namespace LearnSpace.Common
 {
     public class DataConstants
     {

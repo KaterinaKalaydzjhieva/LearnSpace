@@ -27,8 +27,8 @@ namespace LearnSpace
             }
             else 
             {
-                app.UseExceptionHandler();
-                app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
+                //app.UseExceptionHandler();
+                //app.UseStatusCodePagesWithRedirects("/Home/Error?statusCode={0}");
             }
 
             app.UseHttpsRedirection();

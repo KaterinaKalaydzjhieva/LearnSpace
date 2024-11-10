@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using static LearnSpace.Infrastructure.Database.Constants.DataConstants.ApplicationUser;
+using static LearnSpace.Common.DataConstants.ApplicationUser;
 
 namespace LearnSpace.Core.Models.Account
 {

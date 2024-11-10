@@ -7,18 +7,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LearnSpace.Infrastructure.Database
 {
-    public class LearnSpaceDbContext : IdentityDbContext<ApplicationUser,IdentityRole<Guid>, Guid>
+    public class LearnSpaceDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
         public LearnSpaceDbContext(DbContextOptions<LearnSpaceDbContext> options)
         : base(options) { }
 
-        public DbSet<Student> Students { get; set; } = null!;
-        public DbSet<Teacher> Teachers { get; set; } = null!;
-        public DbSet<Assignment> Assignments { get; set; } = null!;
-        public DbSet<Grade> Grades { get; set; } = null!;
-        public DbSet<Course> Courses { get; set; } = null!;
-        public DbSet<StudentCourse> StudentsCourses { get; set; } = null!;
-        public DbSet<Notification> Notifications { get; set; } = null!;
+        public virtual DbSet<Student> Students { get; set; } = null!;
+        public virtual DbSet<Teacher> Teachers { get; set; } = null!;
+        public virtual DbSet<Assignment> Assignments { get; set; } = null!;
+        public virtual DbSet<Grade> Grades { get; set; } = null!;
+        public virtual DbSet<Course> Courses { get; set; } = null!;
+        public virtual DbSet<StudentCourse> StudentsCourses { get; set; } = null!;
+        public virtual DbSet<Notification> Notifications { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

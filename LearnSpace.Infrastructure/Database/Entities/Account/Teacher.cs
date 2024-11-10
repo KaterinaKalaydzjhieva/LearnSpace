@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static LearnSpace.Infrastructure.Database.Constants.DataConstants.Teacher;
+using static LearnSpace.Common.DataConstants.Teacher;
 
 namespace LearnSpace.Infrastructure.Database.Entities.Account
 {

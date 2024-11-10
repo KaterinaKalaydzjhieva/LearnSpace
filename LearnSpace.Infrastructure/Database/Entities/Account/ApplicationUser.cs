@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
-using static LearnSpace.Infrastructure.Database.Constants.DataConstants.ApplicationUser;
+using static LearnSpace.Common.DataConstants.ApplicationUser;
 
 namespace LearnSpace.Infrastructure.Database.Entities.Account
 {
@@ -23,6 +23,9 @@ namespace LearnSpace.Infrastructure.Database.Entities.Account
         [Required]
         public DateTime DateOfBirth { get; set; }
         public virtual IEnumerable<Notification> Notifications { get; set; }
+
+        public virtual Teacher? Teacher { get; set; }
+        public virtual Student? Student { get; set; }
 
     }
 }

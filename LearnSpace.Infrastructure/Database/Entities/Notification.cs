@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using LearnSpace.Infrastructure.Database.Entities.Account;
-using static LearnSpace.Infrastructure.Database.Constants.DataConstants.Notification;
+using static LearnSpace.Common.DataConstants.Notification;
 
 namespace LearnSpace.Infrastructure.Database.Entities
 {

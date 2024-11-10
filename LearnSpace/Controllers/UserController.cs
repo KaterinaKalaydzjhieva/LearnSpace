@@ -1,9 +1,10 @@
 ﻿using LearnSpace.Core.Models.Account;
-using LearnSpace.Infrastructure.Database.Constants;
+using static LearnSpace.Common.RoleConstants;
 using LearnSpace.Infrastructure.Database.Entities.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using LearnSpace.Common;
 
 namespace LearnSpace.Web.Controllers
 {
@@ -13,12 +14,12 @@ namespace LearnSpace.Web.Controllers
 
         private readonly SignInManager<ApplicationUser> signInManager;
 
-        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<IdentityRole<Guid>> roleManager;
 
         public UserController(
             UserManager<ApplicationUser> _userManager,
             SignInManager<ApplicationUser> _signInManager,
-            RoleManager<IdentityRole> _roleManager)
+            RoleManager<IdentityRole<Guid>> _roleManager)
         {
             userManager = _userManager;
             signInManager = _signInManager;
@@ -125,7 +126,7 @@ namespace LearnSpace.Web.Controllers
 
         public async Task<IActionResult> CreateRoles()
         {
-            await roleManager.CreateAsync(new IdentityRole(RoleConstants.AdminRoleName));
+            await roleManager.CreateAsync(new IdentityRole<Guid>(RoleConstants.AdminRoleName));
 
             return RedirectToAction("Index", "Home");
         }
