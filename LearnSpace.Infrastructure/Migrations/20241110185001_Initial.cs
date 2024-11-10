@@ -162,14 +162,14 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Students", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Students_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Students_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -181,14 +181,14 @@ namespace LearnSpace.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SubjectSpecialization = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Teachers", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Teachers_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Teachers_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -334,18 +334,18 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateOfBirth", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6"), 0, "fbf02038-c2d7-4d71-a91a-4471de53aa27", new DateTime(2006, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "student2@abv.bg", false, "Diana", "Atanasova", false, null, "STUDENT2@ABV.BG", "STUDENT2", "AQAAAAEAACcQAAAAEFvjShA6YmImH1xI98JZqWU9A4UD/NClelnSatRiyShKf6EaM9YuXSwp4H4t7fdDhQ==", null, false, "e7bd1cee-2967-4678-9914-baf0059cd894", false, "student2" },
-                    { new Guid("2d522f0f-1d26-429e-8bef-0098f10d96e9"), 0, "16ba7434-bdf4-43fb-b6cb-b847cfb140ba", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@abv.bg", false, "Admin", "Adminov", false, null, "ADMIN@ABV.BG", "ADMIN", "AQAAAAEAACcQAAAAEF5ocEeUd68Y8gNs0IreKdqyCalQ4TB8Lg3m4L7/j9ypSaSt6rn1YJAhAjHnvanZ6A==", null, false, "dbba6554-6418-48cd-a523-8721ad26055c", false, "Admin" },
-                    { new Guid("3cc698b0-736e-490a-97e3-3f343bf8bfd8"), 0, "0affea3d-f4b2-4c9f-8d2a-95e004af8e14", new DateTime(2005, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "student3@abv.bg", false, "Ema", "Ivanova", false, null, "STUDENT3@ABV.BG", "STUDENT3", "AQAAAAEAACcQAAAAEO2QfvH2qPCVBX9yaEyZ7y9ntZVMMJLfCZicz13QfyknTVCTNjInzdDiNc8k4Qq2fQ==", null, false, "40a5b137-6b1b-4f5a-90d0-3257678c26eb", false, "student3" },
-                    { new Guid("a52dc824-b577-4862-ac67-29d391116793"), 0, "3ad6b169-9840-4cbd-8438-80a2abecdf92", new DateTime(2005, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "student1@abv.bg", false, "Vladislav", "Popov", false, null, "STUDENT1@ABV.BG", "STUDENT1", "AQAAAAEAACcQAAAAEFxh+VrE+s63WBp364vEp+dqsAGtI3IMh8Xj8RPE3pJI//gwGjJHzcJxPhPOOgMCnA==", null, false, "89280298-12e4-4831-a73f-57407279b724", false, "student1" },
-                    { new Guid("bc5f8df5-6115-4344-897b-73e185df4bff"), 0, "1da5c224-8b58-4326-a82e-eebcb0695139", new DateTime(1982, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher2@abv.bg", false, "Grigor", "Georgiev", false, null, "TEACHER2@ABV.BG", "TEACHER2", "AQAAAAEAACcQAAAAEOEKYyl0JjpC70cV1/ZgRUElfqufJSGdN13ho09oI5qvwgJ9rYJDlsl0LBGDDtyk0Q==", null, false, "ab84e894-79f5-49ab-8409-04323515255d", false, "teacher2" },
-                    { new Guid("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1"), 0, "7a8e8017-587a-4bd0-9bc8-8ceacb3eb120", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher1@abv.bg", false, "Ivan", "Ivanov", false, null, "TEACHER1@ABV.BG", "TEACHER1", "AQAAAAEAACcQAAAAEI0fLguujJPvH9oSb+do05f9A0t4qZBxdT1uq8HIoAN3eQYTUyk5nvwYosKXbmWMmw==", null, false, "77fad4a7-7797-44d2-b130-6beaf75bfb50", false, "teacher1" },
-                    { new Guid("ebdc00b8-7106-4cbd-a482-da93c40103d3"), 0, "bff43cc8-5d60-46be-b315-cde6c1fbf597", new DateTime(2006, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "student4@abv.bg", false, "Alex", "Georgiev", false, null, "STUDENT4@ABV.BG", "STUDENT4", "AQAAAAEAACcQAAAAEEa6eFfGDnYjzRrNN9l8/CRIGnCscP4U6Gqlrxhtn96xzjwids/qL5yVyjmj6G/7+A==", null, false, "06e5a558-70f1-4c32-9981-863943fc1319", false, "student4" }
+                    { new Guid("08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6"), 0, "b2f7ff1e-86ea-47be-a001-0756b19138c4", new DateTime(2006, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "student2@abv.bg", false, "Diana", "Atanasova", false, null, "STUDENT2@ABV.BG", "STUDENT2", "AQAAAAEAACcQAAAAEJaDhYavdto5Sx53YnJGBIoAK9bNIivaRHvqvl2cvzNZGtiGXok9uDUu4L5JlEnHJQ==", null, false, "e1011a6d-999c-418c-bcd2-926724047492", false, "student2" },
+                    { new Guid("2d522f0f-1d26-429e-8bef-0098f10d96e9"), 0, "73c3936e-58a2-4ca0-a29e-dd5858ac5df0", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@abv.bg", false, "Admin", "Adminov", false, null, "ADMIN@ABV.BG", "ADMIN", "AQAAAAEAACcQAAAAEO+uIIxyh2QBPy6s2QowLLY4hyXHaudX0MeHKs8wwP7L4nkgakTfXNw98ICGN43e1g==", null, false, "067dc83e-899c-41ae-b60e-6f1eb88c1eda", false, "Admin" },
+                    { new Guid("3cc698b0-736e-490a-97e3-3f343bf8bfd8"), 0, "2302580d-41a8-4882-8fe4-fb19cc308868", new DateTime(2005, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "student3@abv.bg", false, "Ema", "Ivanova", false, null, "STUDENT3@ABV.BG", "STUDENT3", "AQAAAAEAACcQAAAAEL6/+FtAxpNEeDIWV16NutpwPQmcJw6zx6NT65Y0NP+BFCNzL2vfpUoSy5GrY9ryYA==", null, false, "43c28a83-4516-419a-afbf-2dedc1f456e2", false, "student3" },
+                    { new Guid("a52dc824-b577-4862-ac67-29d391116793"), 0, "e41196f9-44e5-48a9-8ba5-ac72a55c708f", new DateTime(2005, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "student1@abv.bg", false, "Vladislav", "Popov", false, null, "STUDENT1@ABV.BG", "STUDENT1", "AQAAAAEAACcQAAAAEKA4kYWcWjwUEdm+RjBHNAsauUT7e84PS+jTbltuSnm23L8mtuTqMHvlFcr5cj6Akg==", null, false, "090cd876-c03d-429c-9706-6c458fbafbef", false, "student1" },
+                    { new Guid("bc5f8df5-6115-4344-897b-73e185df4bff"), 0, "f81651c2-5b0d-4780-97ed-3495a2236a2a", new DateTime(1982, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher2@abv.bg", false, "Grigor", "Georgiev", false, null, "TEACHER2@ABV.BG", "TEACHER2", "AQAAAAEAACcQAAAAECtt5pKgKASgt2ma4YIgxDUTT8brar4xc0CTvjTFhTBKsesyc2bl50rryFc1Icwk9w==", null, false, "9ba80610-e5a6-4833-95b4-25812a017339", false, "teacher2" },
+                    { new Guid("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1"), 0, "6470742d-8820-410a-8f98-8b509f559e30", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher1@abv.bg", false, "Ivan", "Ivanov", false, null, "TEACHER1@ABV.BG", "TEACHER1", "AQAAAAEAACcQAAAAEGvUvSOe+BUEUeX8RcbzsR5gT0qg0D7SNLQpI8oUq9WX59/D4/GC05SPMervvH0NSw==", null, false, "e6866dee-8b17-4449-acfe-e4eba69ae9b5", false, "teacher1" },
+                    { new Guid("ebdc00b8-7106-4cbd-a482-da93c40103d3"), 0, "7aa18aaf-5378-4213-b7d2-b571aec12893", new DateTime(2006, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "student4@abv.bg", false, "Alex", "Georgiev", false, null, "STUDENT4@ABV.BG", "STUDENT4", "AQAAAAEAACcQAAAAEBfwcsioShDArAGe8nsCNmwlOf+bm5Q/kkWeXicUELlOtt12WY2o6RSkwOAOyg2Vtw==", null, false, "fb7c83c9-d985-45fd-b0b0-1b208fcdeb46", false, "student4" }
                 });
 
             migrationBuilder.InsertData(
                 table: "Students",
-                columns: new[] { "Id", "UserId" },
+                columns: new[] { "Id", "ApplicationUserId" },
                 values: new object[,]
                 {
                     { new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8"), new Guid("08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6") },
@@ -356,11 +356,11 @@ namespace LearnSpace.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Teachers",
-                columns: new[] { "Id", "SubjectSpecialization", "UserId" },
+                columns: new[] { "Id", "ApplicationUserId", "SubjectSpecialization" },
                 values: new object[,]
                 {
-                    { new Guid("047e49c7-8466-4419-88e3-1b6f7107d247"), "History", new Guid("bc5f8df5-6115-4344-897b-73e185df4bff") },
-                    { new Guid("5e846435-c18b-4df9-b4a2-b6d9d0414694"), "Math", new Guid("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1") }
+                    { new Guid("047e49c7-8466-4419-88e3-1b6f7107d247"), new Guid("bc5f8df5-6115-4344-897b-73e185df4bff"), "History" },
+                    { new Guid("5e846435-c18b-4df9-b4a2-b6d9d0414694"), new Guid("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1"), "Math" }
                 });
 
             migrationBuilder.InsertData(
@@ -403,10 +403,10 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: new[] { "Id", "AssignmentId", "DateGraded", "Score", "StudentId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2024, 11, 10, 19, 44, 54, 225, DateTimeKind.Local).AddTicks(1429), 4.0, new Guid("5c07f155-602e-403b-bb86-5a786814f575") },
-                    { 2, 1, new DateTime(2024, 11, 10, 19, 44, 54, 225, DateTimeKind.Local).AddTicks(1462), 5.0, new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8") },
-                    { 3, 2, new DateTime(2024, 11, 10, 19, 44, 54, 225, DateTimeKind.Local).AddTicks(1465), 5.0, new Guid("c6903087-71e5-41ba-80be-ed119b7902fc") },
-                    { 4, 2, new DateTime(2024, 11, 10, 19, 44, 54, 225, DateTimeKind.Local).AddTicks(1467), 6.0, new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f") }
+                    { 1, 1, new DateTime(2024, 11, 10, 20, 50, 1, 216, DateTimeKind.Local).AddTicks(360), 4.0, new Guid("5c07f155-602e-403b-bb86-5a786814f575") },
+                    { 2, 1, new DateTime(2024, 11, 10, 20, 50, 1, 216, DateTimeKind.Local).AddTicks(393), 5.0, new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8") },
+                    { 3, 2, new DateTime(2024, 11, 10, 20, 50, 1, 216, DateTimeKind.Local).AddTicks(396), 5.0, new Guid("c6903087-71e5-41ba-80be-ed119b7902fc") },
+                    { 4, 2, new DateTime(2024, 11, 10, 20, 50, 1, 216, DateTimeKind.Local).AddTicks(398), 6.0, new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f") }
                 });
 
             migrationBuilder.CreateIndex(
@@ -489,9 +489,9 @@ namespace LearnSpace.Infrastructure.Migrations
                 column: "TeacherId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Students_UserId",
+                name: "IX_Students_ApplicationUserId",
                 table: "Students",
-                column: "UserId",
+                column: "ApplicationUserId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -500,10 +500,9 @@ namespace LearnSpace.Infrastructure.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Teachers_UserId",
+                name: "IX_Teachers_ApplicationUserId",
                 table: "Teachers",
-                column: "UserId",
-                unique: true);
+                column: "ApplicationUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

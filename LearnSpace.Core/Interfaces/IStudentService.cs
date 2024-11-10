@@ -5,8 +5,8 @@ namespace LearnSpace.Core.Interfaces
 {
     public interface IStudentService
     {
-        Task<bool> ExistsByIdAsync(int id);
+        Task<bool> ExistsByIdAsync(string id);
 
-        Task<StudentDashboardModel> GetStudentDashboardInformationAsync(int id);
+        Task<StudentDashboardModel> GetStudentDashboardInformationAsync(string id);
     }
 }

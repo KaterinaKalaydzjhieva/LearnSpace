@@ -19,7 +19,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
             { 
                 Id = Guid.Parse("5e846435-c18b-4df9-b4a2-b6d9d0414694"),
                 SubjectSpecialization = "Math",
-                UserId = Guid.Parse("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1")
+                ApplicationUserId = Guid.Parse("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1")
             };
 
             teachers.Add(teacher);
@@ -28,7 +28,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
             {
                 Id = Guid.Parse("047e49c7-8466-4419-88e3-1b6f7107d247"),
                 SubjectSpecialization = "History",
-                UserId = Guid.Parse("bc5f8df5-6115-4344-897b-73e185df4bff")
+                ApplicationUserId = Guid.Parse("bc5f8df5-6115-4344-897b-73e185df4bff")
             };
 
             teachers.Add(teacher);

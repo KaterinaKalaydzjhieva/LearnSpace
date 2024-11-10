@@ -17,8 +17,8 @@ namespace LearnSpace.Infrastructure.Database.Entities.Account
         public virtual IEnumerable<Grade> Grades { get; set; }
         public virtual IEnumerable<StudentCourse> StudentCourses { get; set; } 
 
-        [ForeignKey(nameof(User))]
-        public Guid UserId { get; set; } = Guid.Empty;
-        public virtual ApplicationUser User { get; set; } = null!;
+        [ForeignKey(nameof(ApplicationUser))]
+        public Guid ApplicationUserId { get; set; } = Guid.Empty;
+        public virtual ApplicationUser ApplicationUser { get; set; } = null!;
     }
 }

@@ -21,9 +21,9 @@ namespace LearnSpace.Infrastructure.Database.Entities.Account
         public virtual ICollection<Course> Courses { get; set; }
         public virtual ICollection<Assignment> Assignments { get; set; }
 
-        [ForeignKey(nameof(User))]
-        public Guid UserId { get; set; }
-        public virtual ApplicationUser User { get; set; } = null!;
+        [ForeignKey(nameof(ApplicationUser))]
+        public Guid ApplicationUserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; } = null!;
     }
 
 }

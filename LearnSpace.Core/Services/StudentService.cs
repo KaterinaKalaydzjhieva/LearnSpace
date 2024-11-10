@@ -13,27 +13,25 @@ namespace LearnSpace.Core.Services
             repository = _repository;
         }
 
-        public async Task<bool> ExistsByIdAsync(int id)
+        public async Task<bool> ExistsByIdAsync(string id)
         {
-            var student = await repository.GetByIdAsync<Student>(id);
+            var user = await repository.GetByIdAsync<ApplicationUser>(Guid.Parse(id));
 
-            return student != null;
+            return user.Student != null;
         }
 
-        public async Task<StudentDashboardModel> GetStudentDashboardInformationAsync(int id)
+        public async Task<StudentDashboardModel> GetStudentDashboardInformationAsync(string id)
         {
-
+            var user = await repository.GetByIdAsync<ApplicationUser>(Guid.Parse(id));
             var model = new StudentDashboardModel() 
-            { 
-                //Success = student.Grades.ToList().Average(g=>g.Score),
-                //GradeCount = student.Grades.Count(),
-                //ClassCount = student.StudentCourses.Count(),
-                //AssignmentCount = student.StudentCourses.Sum(c=>c.Course.Assignments.Count)
+            {
+                Success = user.Student.Grades.ToList().Average(g => g.Score),
+                GradeCount = user.Student.Grades.Count(),
+                ClassCount = user.Student.StudentCourses.Count(),
+                AssignmentCount = user.Student.StudentCourses.Sum(c => c.Course.Assignments.Count)
             };
 
             return model;
         }
-
-
     }
 }

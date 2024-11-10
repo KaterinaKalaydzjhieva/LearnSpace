@@ -24,7 +24,6 @@ namespace LearnSpace.Infrastructure.Database.Entities.Account
         public DateTime DateOfBirth { get; set; }
         public virtual IEnumerable<Notification> Notifications { get; set; }
 
-        public virtual Teacher? Teacher { get; set; }
         public virtual Student? Student { get; set; }
 
     }
