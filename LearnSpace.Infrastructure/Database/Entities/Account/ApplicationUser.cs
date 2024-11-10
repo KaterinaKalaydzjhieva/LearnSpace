@@ -4,8 +4,14 @@ using static LearnSpace.Infrastructure.Database.Constants.DataConstants.Applicat
 
 namespace LearnSpace.Infrastructure.Database.Entities.Account
 {
-    public class ApplicationUser:IdentityUser
+    public class ApplicationUser:IdentityUser<Guid>
     {
+        public ApplicationUser()
+        {
+            Id = Guid.NewGuid();
+            this.Notifications = new HashSet<Notification>();
+        }
+
         [Required]
         [StringLength(FirstNameMaxLen)]
         public string FirstName { get; set; } = null!;
@@ -16,7 +22,7 @@ namespace LearnSpace.Infrastructure.Database.Entities.Account
 
         [Required]
         public DateTime DateOfBirth { get; set; }
-        public ICollection<Notification> Notifications { get; set; } = new List<Notification>();
+        public virtual IEnumerable<Notification> Notifications { get; set; }
 
     }
 }

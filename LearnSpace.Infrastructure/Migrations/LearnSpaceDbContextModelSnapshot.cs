@@ -24,8 +24,9 @@ namespace LearnSpace.Infrastructure.Migrations
 
             modelBuilder.Entity("LearnSpace.Infrastructure.Database.Entities.Account.ApplicationUser", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -102,9 +103,9 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2d522f0f-1d26-429e-8bef-0098f10d96e9",
+                            Id = new Guid("2d522f0f-1d26-429e-8bef-0098f10d96e9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c288f2a0-3db8-4ffb-bc0c-710f1ed218d4",
+                            ConcurrencyStamp = "ee22365d-6cf9-4cb3-8b7b-ab0e14006266",
                             DateOfBirth = new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@abv.bg",
                             EmailConfirmed = false,
@@ -113,17 +114,16 @@ namespace LearnSpace.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ABV.BG",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAECH2o2oZj5GEkL8cFEmwU7zjTCidnr1H5e4DhknzO8MIz4gtB9bjkVYBzfnnvXrFKg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAdofm5VYIZU8ElAGDEtQtm+Bx88P1nESATjKYRpsx6F9XMgRSQySrH3+aPjQHjLDQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "71835378-ef7e-4ceb-a95f-4c91d267954b",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = "bdc70ff8-a02a-428f-ad1c-b5ba645a45e1",
+                            Id = new Guid("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9aa2c9ac-7bf6-48eb-a9b1-d3599a898534",
+                            ConcurrencyStamp = "6cf351c1-cef5-4e86-b1e4-8c69608ceea1",
                             DateOfBirth = new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "teacher1@abv.bg",
                             EmailConfirmed = false,
@@ -132,17 +132,16 @@ namespace LearnSpace.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TEACHER1@ABV.BG",
                             NormalizedUserName = "TEACHER1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMuHai3Ktj1SUPa3cHcCNbVNAqy8iRQbAv3pU5HwPd/1gicEt1iMDxFvZvQsog7ixA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIfLZEd6tN4vBZE+Fk/+UhQU/ynR9YH0hJ+9OPg/rUrGZvBLe+leXk/4yOPS/uKh6w==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e6a09221-444d-4a61-9e99-e42271a240a4",
                             TwoFactorEnabled = false,
                             UserName = "teacher1"
                         },
                         new
                         {
-                            Id = "bc5f8df5-6115-4344-897b-73e185df4bff",
+                            Id = new Guid("bc5f8df5-6115-4344-897b-73e185df4bff"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9056f296-43c5-4b0f-8e5b-934887ad7542",
+                            ConcurrencyStamp = "dd421ff0-c1bd-4695-8a95-b5b23b1562f4",
                             DateOfBirth = new DateTime(1982, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "teacher2@abv.bg",
                             EmailConfirmed = false,
@@ -151,17 +150,16 @@ namespace LearnSpace.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TEACHER2@ABV.BG",
                             NormalizedUserName = "TEACHER2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJCW52RsiDkS81DuEo6Md1EuVcx3BRIPd+D1yunRjz9n9G6Qx6gbHAfDwBSYxCInXg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKolAr7pi0mQEvp16DhNJGqvGr8eAa60CVCUhybLiw1nGpjtA5Qq7cbUfKzHTP9FFQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3e1c2688-11d8-4639-b5a7-b63017c92902",
                             TwoFactorEnabled = false,
                             UserName = "teacher2"
                         },
                         new
                         {
-                            Id = "a52dc824-b577-4862-ac67-29d391116793",
+                            Id = new Guid("a52dc824-b577-4862-ac67-29d391116793"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "948f7937-f970-4f55-b5b5-786ee4f075b4",
+                            ConcurrencyStamp = "a56c437b-8780-4c13-bf51-9c8dca9182c6",
                             DateOfBirth = new DateTime(2005, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "student1@abv.bg",
                             EmailConfirmed = false,
@@ -170,17 +168,16 @@ namespace LearnSpace.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT1@ABV.BG",
                             NormalizedUserName = "STUDENT1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEA5asQ137TubQpuivujFqUDLfTlKFsFG+6+jFtvaYqn82TiOKhp5/QVl651+SOP1/A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHnAWod4h6gwMXF/HrJFqBbCRWOjghnVodZiV23+vInVWDWcU1wyOvsw+tSR2TIFYw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "72ff5494-6843-4fd6-84c6-e976bdbf5be5",
                             TwoFactorEnabled = false,
                             UserName = "student1"
                         },
                         new
                         {
-                            Id = "08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6",
+                            Id = new Guid("08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9ab039f9-2413-4d6c-a4aa-e0aee3ab4d64",
+                            ConcurrencyStamp = "98d0bc49-bbc0-4345-b9a4-9a8386b92e01",
                             DateOfBirth = new DateTime(2006, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "student2@abv.bg",
                             EmailConfirmed = false,
@@ -189,17 +186,16 @@ namespace LearnSpace.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT2@ABV.BG",
                             NormalizedUserName = "STUDENT2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEVkgCHs8RWj0TzhjAw/ThrJ8/FuaggBzZxUGxf5BA8fZudWog6FJCC+bLozQVuTMQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK88PJbxhC6zbk3n2WR5H/vfzniR5tFq8rYsyb2gUg2vlWJ+xhgr4XuTFvVT8XMBPg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "d276ba7f-67d3-4b35-b4d7-e5041665ce4f",
                             TwoFactorEnabled = false,
                             UserName = "student2"
                         },
                         new
                         {
-                            Id = "3cc698b0-736e-490a-97e3-3f343bf8bfd8",
+                            Id = new Guid("3cc698b0-736e-490a-97e3-3f343bf8bfd8"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8bb898a7-87cd-4fb6-b754-829bebd0855b",
+                            ConcurrencyStamp = "4b82665f-45b1-45f0-93ac-fc123549c2ee",
                             DateOfBirth = new DateTime(2005, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "student3@abv.bg",
                             EmailConfirmed = false,
@@ -208,17 +204,16 @@ namespace LearnSpace.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT3@ABV.BG",
                             NormalizedUserName = "STUDENT3",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAlEHovBYoxr9cegORShjQzwXUoVlP139M8cGDU0XzzV+QQGo2HZ6rqk1thUo4PPyQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEar6upZF6XJPzMc9QfqYePvD8ia3JaFhyuiuQE4ezECj/kq51qesLc2zyezbgRChg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "35f0dfab-d7cc-4757-96ca-ca81c3d7a825",
                             TwoFactorEnabled = false,
                             UserName = "student3"
                         },
                         new
                         {
-                            Id = "ebdc00b8-7106-4cbd-a482-da93c40103d3",
+                            Id = new Guid("ebdc00b8-7106-4cbd-a482-da93c40103d3"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fdb9f50c-1705-4eb8-898a-3a0790c189ca",
+                            ConcurrencyStamp = "94f2d330-ea3a-4a05-ba5a-91e34703b307",
                             DateOfBirth = new DateTime(2006, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "student4@abv.bg",
                             EmailConfirmed = false,
@@ -227,9 +222,8 @@ namespace LearnSpace.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT4@ABV.BG",
                             NormalizedUserName = "STUDENT4",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOUYjgjoD/elAulrNaEuyV3nXjjX4IVYV77IbQX+UcR7AqG5ayemDprEBZdT2sf6fg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIcoAc4bOcTGmfFF8q52nvy4F59dXlpC7lENQNxuxg6BCmh6CN4t9RBzL35WJUzzfA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "37ae18b9-38da-47b7-bbf9-f2c47bf58c30",
                             TwoFactorEnabled = false,
                             UserName = "student4"
                         });
@@ -237,15 +231,12 @@ namespace LearnSpace.Infrastructure.Migrations
 
             modelBuilder.Entity("LearnSpace.Infrastructure.Database.Entities.Account.Student", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -256,42 +247,39 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            UserId = "a52dc824-b577-4862-ac67-29d391116793"
+                            Id = new Guid("5c07f155-602e-403b-bb86-5a786814f575"),
+                            UserId = new Guid("a52dc824-b577-4862-ac67-29d391116793")
                         },
                         new
                         {
-                            Id = 2,
-                            UserId = "08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6"
+                            Id = new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8"),
+                            UserId = new Guid("08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6")
                         },
                         new
                         {
-                            Id = 3,
-                            UserId = "3cc698b0-736e-490a-97e3-3f343bf8bfd8"
+                            Id = new Guid("c6903087-71e5-41ba-80be-ed119b7902fc"),
+                            UserId = new Guid("3cc698b0-736e-490a-97e3-3f343bf8bfd8")
                         },
                         new
                         {
-                            Id = 4,
-                            UserId = "ebdc00b8-7106-4cbd-a482-da93c40103d3"
+                            Id = new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f"),
+                            UserId = new Guid("ebdc00b8-7106-4cbd-a482-da93c40103d3")
                         });
                 });
 
             modelBuilder.Entity("LearnSpace.Infrastructure.Database.Entities.Account.Teacher", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("SubjectSpecialization")
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -302,15 +290,15 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
+                            Id = new Guid("5e846435-c18b-4df9-b4a2-b6d9d0414694"),
                             SubjectSpecialization = "Math",
-                            UserId = "bdc70ff8-a02a-428f-ad1c-b5ba645a45e1"
+                            UserId = new Guid("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1")
                         },
                         new
                         {
-                            Id = 2,
+                            Id = new Guid("047e49c7-8466-4419-88e3-1b6f7107d247"),
                             SubjectSpecialization = "History",
-                            UserId = "bc5f8df5-6115-4344-897b-73e185df4bff"
+                            UserId = new Guid("bc5f8df5-6115-4344-897b-73e185df4bff")
                         });
                 });
 
@@ -333,8 +321,8 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("TeacherId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -386,8 +374,8 @@ namespace LearnSpace.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -401,21 +389,21 @@ namespace LearnSpace.Infrastructure.Migrations
                             Id = 1,
                             Description = "In this course you can learn the basic concepts of the 3D world with Math. Learn Geometry today!",
                             Name = "Geometry",
-                            TeacherId = 1
+                            TeacherId = new Guid("5e846435-c18b-4df9-b4a2-b6d9d0414694")
                         },
                         new
                         {
                             Id = 2,
                             Description = "In this course you can learn the basic concepts of numbers around us. Learn Algebra today!",
                             Name = "Algebra",
-                            TeacherId = 1
+                            TeacherId = new Guid("5e846435-c18b-4df9-b4a2-b6d9d0414694")
                         },
                         new
                         {
                             Id = 3,
                             Description = "In this course you can learn how is a nationality formed and passed to the next generations. Learn Geometry today!",
                             Name = "Nationalism",
-                            TeacherId = 2
+                            TeacherId = new Guid("047e49c7-8466-4419-88e3-1b6f7107d247")
                         });
                 });
 
@@ -436,8 +424,8 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.Property<double>("Score")
                         .HasColumnType("float");
 
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -452,33 +440,33 @@ namespace LearnSpace.Infrastructure.Migrations
                         {
                             Id = 1,
                             AssignmentId = 1,
-                            DateGraded = new DateTime(2024, 11, 9, 15, 4, 33, 71, DateTimeKind.Local).AddTicks(7030),
+                            DateGraded = new DateTime(2024, 11, 10, 18, 40, 5, 784, DateTimeKind.Local).AddTicks(6035),
                             Score = 4.0,
-                            StudentId = 1
+                            StudentId = new Guid("5c07f155-602e-403b-bb86-5a786814f575")
                         },
                         new
                         {
                             Id = 2,
                             AssignmentId = 1,
-                            DateGraded = new DateTime(2024, 11, 9, 15, 4, 33, 71, DateTimeKind.Local).AddTicks(7062),
+                            DateGraded = new DateTime(2024, 11, 10, 18, 40, 5, 784, DateTimeKind.Local).AddTicks(6063),
                             Score = 5.0,
-                            StudentId = 2
+                            StudentId = new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8")
                         },
                         new
                         {
                             Id = 3,
                             AssignmentId = 2,
-                            DateGraded = new DateTime(2024, 11, 9, 15, 4, 33, 71, DateTimeKind.Local).AddTicks(7064),
+                            DateGraded = new DateTime(2024, 11, 10, 18, 40, 5, 784, DateTimeKind.Local).AddTicks(6111),
                             Score = 5.0,
-                            StudentId = 3
+                            StudentId = new Guid("c6903087-71e5-41ba-80be-ed119b7902fc")
                         },
                         new
                         {
                             Id = 4,
                             AssignmentId = 2,
-                            DateGraded = new DateTime(2024, 11, 9, 15, 4, 33, 71, DateTimeKind.Local).AddTicks(7066),
+                            DateGraded = new DateTime(2024, 11, 10, 18, 40, 5, 784, DateTimeKind.Local).AddTicks(6114),
                             Score = 6.0,
-                            StudentId = 4
+                            StudentId = new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f")
                         });
                 });
 
@@ -490,8 +478,8 @@ namespace LearnSpace.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid?>("ApplicationUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("DateSent")
                         .HasColumnType("datetime2");
@@ -501,11 +489,11 @@ namespace LearnSpace.Infrastructure.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("TeacherId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -520,8 +508,8 @@ namespace LearnSpace.Infrastructure.Migrations
 
             modelBuilder.Entity("LearnSpace.Infrastructure.Database.Entities.StudentCourse", b =>
                 {
-                    b.Property<int>("StudentId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("StudentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("int");
@@ -535,30 +523,31 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            StudentId = 1,
+                            StudentId = new Guid("5c07f155-602e-403b-bb86-5a786814f575"),
                             CourseId = 1
                         },
                         new
                         {
-                            StudentId = 2,
+                            StudentId = new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8"),
                             CourseId = 1
                         },
                         new
                         {
-                            StudentId = 3,
+                            StudentId = new Guid("c6903087-71e5-41ba-80be-ed119b7902fc"),
                             CourseId = 3
                         },
                         new
                         {
-                            StudentId = 4,
+                            StudentId = new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f"),
                             CourseId = 3
                         });
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -582,7 +571,7 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -596,9 +585,8 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -607,7 +595,7 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -621,9 +609,8 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -632,7 +619,7 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -643,9 +630,8 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -654,13 +640,13 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -669,10 +655,10 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -797,16 +783,16 @@ namespace LearnSpace.Infrastructure.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("LearnSpace.Infrastructure.Database.Entities.Account.ApplicationUser", null)
                         .WithMany()
@@ -815,7 +801,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("LearnSpace.Infrastructure.Database.Entities.Account.ApplicationUser", null)
                         .WithMany()
@@ -824,9 +810,9 @@ namespace LearnSpace.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<System.Guid>", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -839,7 +825,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.HasOne("LearnSpace.Infrastructure.Database.Entities.Account.ApplicationUser", null)
                         .WithMany()

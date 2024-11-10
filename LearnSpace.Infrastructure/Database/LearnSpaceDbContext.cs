@@ -1,18 +1,16 @@
 ﻿using LearnSpace.Infrastructure.Database.Configuration;
 using LearnSpace.Infrastructure.Database.Entities;
 using LearnSpace.Infrastructure.Database.Entities.Account;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LearnSpace.Infrastructure.Database
 {
-    public class LearnSpaceDbContext : IdentityDbContext<ApplicationUser>
+    public class LearnSpaceDbContext : IdentityDbContext<ApplicationUser,IdentityRole<Guid>, Guid>
     {
         public LearnSpaceDbContext(DbContextOptions<LearnSpaceDbContext> options)
-                : base(options) 
-        {
-            
-        }
+        : base(options) { }
 
         public DbSet<Student> Students { get; set; } = null!;
         public DbSet<Teacher> Teachers { get; set; } = null!;

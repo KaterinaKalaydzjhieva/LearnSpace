@@ -6,6 +6,10 @@ namespace LearnSpace.Infrastructure.Database.Entities
 {
     public class Assignment
     {
+        public Assignment()
+        {
+            this.Grades = new HashSet<Grade>();
+        }
         [Key]
         public int Id { get; set; }
 
@@ -20,8 +24,8 @@ namespace LearnSpace.Infrastructure.Database.Entities
 
         [ForeignKey(nameof(Course))]
         public int CourseId { get; set; }
-        public Course Course { get; set; } = null!;
-        public ICollection<Grade> Grades { get; set; } = new List<Grade>();
+        public virtual Course Course { get; set; } = null!;
+        public virtual ICollection<Grade> Grades { get; set; }
     }
 
 }

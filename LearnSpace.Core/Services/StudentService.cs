@@ -20,19 +20,15 @@ namespace LearnSpace.Core.Services
             return student != null;
         }
 
-        public async Task<StudentDashboardModel> GetStudentDashboardInformationAsync(string id)
+        public async Task<StudentDashboardModel> GetStudentDashboardInformationAsync(int id)
         {
-            var user = await repository.GetByIdAsync<ApplicationUser>(id);
-
-            var student = await repository.GetByIdAsync<Student>(id);
-
 
             var model = new StudentDashboardModel() 
             { 
-                Success = student.Grades.ToList().Average(g=>g.Score),
-                GradeCount = student.Grades.Count(),
-                ClassCount = student.StudentCourses.Count(),
-                AssignmentCount = student.StudentCourses.Sum(c=>c.Course.Assignments.Count)
+                //Success = student.Grades.ToList().Average(g=>g.Score),
+                //GradeCount = student.Grades.Count(),
+                //ClassCount = student.StudentCourses.Count(),
+                //AssignmentCount = student.StudentCourses.Sum(c=>c.Course.Assignments.Count)
             };
 
             return model;

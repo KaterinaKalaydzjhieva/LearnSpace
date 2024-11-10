@@ -5,13 +5,20 @@ namespace LearnSpace.Infrastructure.Database.Entities.Account
 {
     public class Student
     {
+        public Student()
+        {
+            Id = Guid.NewGuid();
+            this.Grades = new HashSet<Grade>();
+            this.StudentCourses = new HashSet<StudentCourse>();
+        }
+
         [Key]
-        public int Id { get; set; }
-        public IEnumerable<Grade> Grades { get; set; } = new List<Grade>();
-        public IEnumerable<StudentCourse> StudentCourses { get; set; } = new List<StudentCourse>();
+        public Guid Id { get; set; }
+        public virtual IEnumerable<Grade> Grades { get; set; }
+        public virtual IEnumerable<StudentCourse> StudentCourses { get; set; } 
 
         [ForeignKey(nameof(User))]
-        public string UserId { get; set; } = string.Empty;
-        public ApplicationUser User { get; set; } = null!;
+        public Guid UserId { get; set; } = Guid.Empty;
+        public virtual ApplicationUser User { get; set; } = null!;
     }
 }

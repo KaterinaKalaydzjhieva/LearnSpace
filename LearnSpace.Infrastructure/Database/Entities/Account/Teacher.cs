@@ -6,18 +6,24 @@ namespace LearnSpace.Infrastructure.Database.Entities.Account
 {
     public class Teacher
     {
+        public Teacher()
+        {
+            Id = Guid.NewGuid();
+            this.Courses = new HashSet<Course>();
+            this.Assignments = new HashSet<Assignment>();
+        }
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
 
         [Required]
         [StringLength(SubjectSpecializationMaxLen)]
         public string SubjectSpecialization { get; set; } = string.Empty;
-        public ICollection<Course> Courses { get; set; } = new List<Course>();
-        public ICollection<Assignment> Assignments { get; set; } = new List<Assignment>();
+        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<Assignment> Assignments { get; set; }
 
         [ForeignKey(nameof(User))]
-        public string UserId { get; set; } = string.Empty;
-        public ApplicationUser User { get; set; } = null!;
+        public Guid UserId { get; set; }
+        public virtual ApplicationUser User { get; set; } = null!;
     }
 
 }

@@ -19,13 +19,13 @@ namespace LearnSpace.Infrastructure.Database.Entities
 
         [Required]
         [ForeignKey(nameof(Student))]
-        public int StudentId { get; set; }
-        public Student Student { get; set; } = null!;
+        public Guid StudentId { get; set; }
+        public virtual Student Student { get; set; } = null!;
 
         [Required]
         [ForeignKey(nameof(Assignment))]
         public int AssignmentId { get; set; }
-        public Assignment Assignment { get; set; } = null!;
+        public virtual Assignment Assignment { get; set; } = null!;
     }
 
 }

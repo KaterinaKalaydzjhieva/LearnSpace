@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace LearnSpace.Infrastructure.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace LearnSpace.Infrastructure.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -27,7 +27,7 @@ namespace LearnSpace.Infrastructure.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     FirstName = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -57,7 +57,7 @@ namespace LearnSpace.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -78,7 +78,7 @@ namespace LearnSpace.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
@@ -100,7 +100,7 @@ namespace LearnSpace.Infrastructure.Migrations
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -117,8 +117,8 @@ namespace LearnSpace.Infrastructure.Migrations
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RoleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -141,7 +141,7 @@ namespace LearnSpace.Infrastructure.Migrations
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -161,9 +161,8 @@ namespace LearnSpace.Infrastructure.Migrations
                 name: "Students",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -180,10 +179,9 @@ namespace LearnSpace.Infrastructure.Migrations
                 name: "Teachers",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     SubjectSpecialization = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -204,7 +202,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    TeacherId = table.Column<int>(type: "int", nullable: false)
+                    TeacherId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -225,9 +223,9 @@ namespace LearnSpace.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Message = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     DateSent = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StudentId = table.Column<int>(type: "int", nullable: false),
-                    TeacherId = table.Column<int>(type: "int", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    StudentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TeacherId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ApplicationUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -261,7 +259,7 @@ namespace LearnSpace.Infrastructure.Migrations
                     Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: false),
-                    TeacherId = table.Column<int>(type: "int", nullable: true)
+                    TeacherId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -284,7 +282,7 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: table => new
                 {
                     CourseId = table.Column<int>(type: "int", nullable: false),
-                    StudentId = table.Column<int>(type: "int", nullable: false)
+                    StudentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -311,7 +309,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Score = table.Column<double>(type: "float", nullable: false),
                     DateGraded = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    StudentId = table.Column<int>(type: "int", nullable: false),
+                    StudentId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     AssignmentId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -336,13 +334,13 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateOfBirth", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6", 0, "9ab039f9-2413-4d6c-a4aa-e0aee3ab4d64", new DateTime(2006, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "student2@abv.bg", false, "Diana", "Atanasova", false, null, "STUDENT2@ABV.BG", "STUDENT2", "AQAAAAEAACcQAAAAEEVkgCHs8RWj0TzhjAw/ThrJ8/FuaggBzZxUGxf5BA8fZudWog6FJCC+bLozQVuTMQ==", null, false, "d276ba7f-67d3-4b35-b4d7-e5041665ce4f", false, "student2" },
-                    { "2d522f0f-1d26-429e-8bef-0098f10d96e9", 0, "c288f2a0-3db8-4ffb-bc0c-710f1ed218d4", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@abv.bg", false, "Admin", "Adminov", false, null, "ADMIN@ABV.BG", "ADMIN", "AQAAAAEAACcQAAAAECH2o2oZj5GEkL8cFEmwU7zjTCidnr1H5e4DhknzO8MIz4gtB9bjkVYBzfnnvXrFKg==", null, false, "71835378-ef7e-4ceb-a95f-4c91d267954b", false, "Admin" },
-                    { "3cc698b0-736e-490a-97e3-3f343bf8bfd8", 0, "8bb898a7-87cd-4fb6-b754-829bebd0855b", new DateTime(2005, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "student3@abv.bg", false, "Ema", "Ivanova", false, null, "STUDENT3@ABV.BG", "STUDENT3", "AQAAAAEAACcQAAAAEAlEHovBYoxr9cegORShjQzwXUoVlP139M8cGDU0XzzV+QQGo2HZ6rqk1thUo4PPyQ==", null, false, "35f0dfab-d7cc-4757-96ca-ca81c3d7a825", false, "student3" },
-                    { "a52dc824-b577-4862-ac67-29d391116793", 0, "948f7937-f970-4f55-b5b5-786ee4f075b4", new DateTime(2005, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "student1@abv.bg", false, "Vladislav", "Popov", false, null, "STUDENT1@ABV.BG", "STUDENT1", "AQAAAAEAACcQAAAAEA5asQ137TubQpuivujFqUDLfTlKFsFG+6+jFtvaYqn82TiOKhp5/QVl651+SOP1/A==", null, false, "72ff5494-6843-4fd6-84c6-e976bdbf5be5", false, "student1" },
-                    { "bc5f8df5-6115-4344-897b-73e185df4bff", 0, "9056f296-43c5-4b0f-8e5b-934887ad7542", new DateTime(1982, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher2@abv.bg", false, "Grigor", "Georgiev", false, null, "TEACHER2@ABV.BG", "TEACHER2", "AQAAAAEAACcQAAAAEJCW52RsiDkS81DuEo6Md1EuVcx3BRIPd+D1yunRjz9n9G6Qx6gbHAfDwBSYxCInXg==", null, false, "3e1c2688-11d8-4639-b5a7-b63017c92902", false, "teacher2" },
-                    { "bdc70ff8-a02a-428f-ad1c-b5ba645a45e1", 0, "9aa2c9ac-7bf6-48eb-a9b1-d3599a898534", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher1@abv.bg", false, "Ivan", "Ivanov", false, null, "TEACHER1@ABV.BG", "TEACHER1", "AQAAAAEAACcQAAAAEMuHai3Ktj1SUPa3cHcCNbVNAqy8iRQbAv3pU5HwPd/1gicEt1iMDxFvZvQsog7ixA==", null, false, "e6a09221-444d-4a61-9e99-e42271a240a4", false, "teacher1" },
-                    { "ebdc00b8-7106-4cbd-a482-da93c40103d3", 0, "fdb9f50c-1705-4eb8-898a-3a0790c189ca", new DateTime(2006, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "student4@abv.bg", false, "Alex", "Georgiev", false, null, "STUDENT4@ABV.BG", "STUDENT4", "AQAAAAEAACcQAAAAEOUYjgjoD/elAulrNaEuyV3nXjjX4IVYV77IbQX+UcR7AqG5ayemDprEBZdT2sf6fg==", null, false, "37ae18b9-38da-47b7-bbf9-f2c47bf58c30", false, "student4" }
+                    { new Guid("08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6"), 0, "98d0bc49-bbc0-4345-b9a4-9a8386b92e01", new DateTime(2006, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "student2@abv.bg", false, "Diana", "Atanasova", false, null, "STUDENT2@ABV.BG", "STUDENT2", "AQAAAAEAACcQAAAAEK88PJbxhC6zbk3n2WR5H/vfzniR5tFq8rYsyb2gUg2vlWJ+xhgr4XuTFvVT8XMBPg==", null, false, null, false, "student2" },
+                    { new Guid("2d522f0f-1d26-429e-8bef-0098f10d96e9"), 0, "ee22365d-6cf9-4cb3-8b7b-ab0e14006266", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@abv.bg", false, "Admin", "Adminov", false, null, "ADMIN@ABV.BG", "ADMIN", "AQAAAAEAACcQAAAAEAdofm5VYIZU8ElAGDEtQtm+Bx88P1nESATjKYRpsx6F9XMgRSQySrH3+aPjQHjLDQ==", null, false, null, false, "Admin" },
+                    { new Guid("3cc698b0-736e-490a-97e3-3f343bf8bfd8"), 0, "4b82665f-45b1-45f0-93ac-fc123549c2ee", new DateTime(2005, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "student3@abv.bg", false, "Ema", "Ivanova", false, null, "STUDENT3@ABV.BG", "STUDENT3", "AQAAAAEAACcQAAAAEEar6upZF6XJPzMc9QfqYePvD8ia3JaFhyuiuQE4ezECj/kq51qesLc2zyezbgRChg==", null, false, null, false, "student3" },
+                    { new Guid("a52dc824-b577-4862-ac67-29d391116793"), 0, "a56c437b-8780-4c13-bf51-9c8dca9182c6", new DateTime(2005, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "student1@abv.bg", false, "Vladislav", "Popov", false, null, "STUDENT1@ABV.BG", "STUDENT1", "AQAAAAEAACcQAAAAEHnAWod4h6gwMXF/HrJFqBbCRWOjghnVodZiV23+vInVWDWcU1wyOvsw+tSR2TIFYw==", null, false, null, false, "student1" },
+                    { new Guid("bc5f8df5-6115-4344-897b-73e185df4bff"), 0, "dd421ff0-c1bd-4695-8a95-b5b23b1562f4", new DateTime(1982, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher2@abv.bg", false, "Grigor", "Georgiev", false, null, "TEACHER2@ABV.BG", "TEACHER2", "AQAAAAEAACcQAAAAEKolAr7pi0mQEvp16DhNJGqvGr8eAa60CVCUhybLiw1nGpjtA5Qq7cbUfKzHTP9FFQ==", null, false, null, false, "teacher2" },
+                    { new Guid("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1"), 0, "6cf351c1-cef5-4e86-b1e4-8c69608ceea1", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher1@abv.bg", false, "Ivan", "Ivanov", false, null, "TEACHER1@ABV.BG", "TEACHER1", "AQAAAAEAACcQAAAAEIfLZEd6tN4vBZE+Fk/+UhQU/ynR9YH0hJ+9OPg/rUrGZvBLe+leXk/4yOPS/uKh6w==", null, false, null, false, "teacher1" },
+                    { new Guid("ebdc00b8-7106-4cbd-a482-da93c40103d3"), 0, "94f2d330-ea3a-4a05-ba5a-91e34703b307", new DateTime(2006, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "student4@abv.bg", false, "Alex", "Georgiev", false, null, "STUDENT4@ABV.BG", "STUDENT4", "AQAAAAEAACcQAAAAEIcoAc4bOcTGmfFF8q52nvy4F59dXlpC7lENQNxuxg6BCmh6CN4t9RBzL35WJUzzfA==", null, false, null, false, "student4" }
                 });
 
             migrationBuilder.InsertData(
@@ -350,10 +348,10 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: new[] { "Id", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "a52dc824-b577-4862-ac67-29d391116793" },
-                    { 2, "08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6" },
-                    { 3, "3cc698b0-736e-490a-97e3-3f343bf8bfd8" },
-                    { 4, "ebdc00b8-7106-4cbd-a482-da93c40103d3" }
+                    { new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8"), new Guid("08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6") },
+                    { new Guid("5c07f155-602e-403b-bb86-5a786814f575"), new Guid("a52dc824-b577-4862-ac67-29d391116793") },
+                    { new Guid("c6903087-71e5-41ba-80be-ed119b7902fc"), new Guid("3cc698b0-736e-490a-97e3-3f343bf8bfd8") },
+                    { new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f"), new Guid("ebdc00b8-7106-4cbd-a482-da93c40103d3") }
                 });
 
             migrationBuilder.InsertData(
@@ -361,24 +359,24 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: new[] { "Id", "SubjectSpecialization", "UserId" },
                 values: new object[,]
                 {
-                    { 1, "Math", "bdc70ff8-a02a-428f-ad1c-b5ba645a45e1" },
-                    { 2, "History", "bc5f8df5-6115-4344-897b-73e185df4bff" }
+                    { new Guid("047e49c7-8466-4419-88e3-1b6f7107d247"), "History", new Guid("bc5f8df5-6115-4344-897b-73e185df4bff") },
+                    { new Guid("5e846435-c18b-4df9-b4a2-b6d9d0414694"), "Math", new Guid("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1") }
                 });
 
             migrationBuilder.InsertData(
                 table: "Courses",
                 columns: new[] { "Id", "Description", "Name", "TeacherId" },
-                values: new object[] { 1, "In this course you can learn the basic concepts of the 3D world with Math. Learn Geometry today!", "Geometry", 1 });
+                values: new object[] { 1, "In this course you can learn the basic concepts of the 3D world with Math. Learn Geometry today!", "Geometry", new Guid("5e846435-c18b-4df9-b4a2-b6d9d0414694") });
 
             migrationBuilder.InsertData(
                 table: "Courses",
                 columns: new[] { "Id", "Description", "Name", "TeacherId" },
-                values: new object[] { 2, "In this course you can learn the basic concepts of numbers around us. Learn Algebra today!", "Algebra", 1 });
+                values: new object[] { 2, "In this course you can learn the basic concepts of numbers around us. Learn Algebra today!", "Algebra", new Guid("5e846435-c18b-4df9-b4a2-b6d9d0414694") });
 
             migrationBuilder.InsertData(
                 table: "Courses",
                 columns: new[] { "Id", "Description", "Name", "TeacherId" },
-                values: new object[] { 3, "In this course you can learn how is a nationality formed and passed to the next generations. Learn Geometry today!", "Nationalism", 2 });
+                values: new object[] { 3, "In this course you can learn how is a nationality formed and passed to the next generations. Learn Geometry today!", "Nationalism", new Guid("047e49c7-8466-4419-88e3-1b6f7107d247") });
 
             migrationBuilder.InsertData(
                 table: "Assignments",
@@ -394,10 +392,10 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: new[] { "CourseId", "StudentId" },
                 values: new object[,]
                 {
-                    { 1, 1 },
-                    { 1, 2 },
-                    { 3, 3 },
-                    { 3, 4 }
+                    { 1, new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8") },
+                    { 1, new Guid("5c07f155-602e-403b-bb86-5a786814f575") },
+                    { 3, new Guid("c6903087-71e5-41ba-80be-ed119b7902fc") },
+                    { 3, new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f") }
                 });
 
             migrationBuilder.InsertData(
@@ -405,10 +403,10 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: new[] { "Id", "AssignmentId", "DateGraded", "Score", "StudentId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2024, 11, 9, 15, 4, 33, 71, DateTimeKind.Local).AddTicks(7030), 4.0, 1 },
-                    { 2, 1, new DateTime(2024, 11, 9, 15, 4, 33, 71, DateTimeKind.Local).AddTicks(7062), 5.0, 2 },
-                    { 3, 2, new DateTime(2024, 11, 9, 15, 4, 33, 71, DateTimeKind.Local).AddTicks(7064), 5.0, 3 },
-                    { 4, 2, new DateTime(2024, 11, 9, 15, 4, 33, 71, DateTimeKind.Local).AddTicks(7066), 6.0, 4 }
+                    { 1, 1, new DateTime(2024, 11, 10, 18, 40, 5, 784, DateTimeKind.Local).AddTicks(6035), 4.0, new Guid("5c07f155-602e-403b-bb86-5a786814f575") },
+                    { 2, 1, new DateTime(2024, 11, 10, 18, 40, 5, 784, DateTimeKind.Local).AddTicks(6063), 5.0, new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8") },
+                    { 3, 2, new DateTime(2024, 11, 10, 18, 40, 5, 784, DateTimeKind.Local).AddTicks(6111), 5.0, new Guid("c6903087-71e5-41ba-80be-ed119b7902fc") },
+                    { 4, 2, new DateTime(2024, 11, 10, 18, 40, 5, 784, DateTimeKind.Local).AddTicks(6114), 6.0, new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f") }
                 });
 
             migrationBuilder.CreateIndex(

@@ -15,7 +15,7 @@ namespace LearnSpace.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Dashboard(string id)
+        public async Task<IActionResult> Dashboard(int id)
         {
             if (!User.Identity!.IsAuthenticated)
             {

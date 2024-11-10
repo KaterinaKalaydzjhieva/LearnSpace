@@ -7,6 +7,11 @@ namespace LearnSpace.Infrastructure.Database.Entities
 {
     public class Course
     {
+        public Course()
+        {
+            this.CourseStudents = new HashSet<StudentCourse>();
+            this.Assignments = new HashSet<Assignment>();
+        }
         [Key]
         public int Id { get; set; }
 
@@ -19,10 +24,10 @@ namespace LearnSpace.Infrastructure.Database.Entities
         public string Description { get; set; } = string.Empty;
 
         [ForeignKey(nameof(Teacher))]
-        public int TeacherId { get; set; }
-        public Teacher Teacher { get; set; } = null!;
-        public ICollection<StudentCourse> CourseStudents { get; set; } = new List<StudentCourse>();
-        public ICollection<Assignment> Assignments { get; set; } = new List<Assignment>();
+        public Guid TeacherId { get; set; }
+        public virtual Teacher Teacher { get; set; } = null!;
+        public virtual ICollection<StudentCourse> CourseStudents { get; set; }
+        public virtual ICollection<Assignment> Assignments { get; set; }
     }
 
 }
