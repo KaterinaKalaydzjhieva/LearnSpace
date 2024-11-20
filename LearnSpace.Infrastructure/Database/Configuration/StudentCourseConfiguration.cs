@@ -47,7 +47,15 @@ namespace LearnSpace.Infrastructure.Database.Configuration
 
             studentcourses.Add(studentcourse);
 
-            return studentcourses;
+			studentcourse = new StudentCourse()
+			{
+				CourseId = 3,
+				StudentId = Guid.Parse("5c07f155-602e-403b-bb86-5a786814f575"),
+			};
+
+			studentcourses.Add(studentcourse);
+
+			return studentcourses;
         }
     }
 }

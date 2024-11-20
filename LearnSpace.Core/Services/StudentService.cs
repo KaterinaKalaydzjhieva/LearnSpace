@@ -33,7 +33,7 @@ namespace LearnSpace.Core.Services
 
 			if (student.Grades.Any())
 			{
-				model.Success = student.Grades.ToList().Count;
+				model.Success = student.Grades.ToList().Average(g=>g.Score);
 			}
 			model.GradeCount = student.Grades.Count();
 

@@ -59,7 +59,18 @@ namespace LearnSpace.Infrastructure.Database.Configuration
 
             grades.Add(grade);
 
-            return grades;
+			grade = new Grade()
+			{
+				Id = 5,
+				Score = 5,
+				DateGraded = DateTime.Now,
+				StudentId = Guid.Parse("5c07f155-602e-403b-bb86-5a786814f575"),
+				AssignmentId = 2
+			};
+
+			grades.Add(grade);
+
+			return grades;
         }
     }
 }
