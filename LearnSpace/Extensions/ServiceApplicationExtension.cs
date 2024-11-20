@@ -3,7 +3,6 @@ using LearnSpace.Core.Services;
 using LearnSpace.Infrastructure.Database;
 using LearnSpace.Infrastructure.Database.Entities.Account;
 using LearnSpace.Infrastructure.Database.Repository;
-using LearnSpace.Infrastructure.Database.Repository.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -15,8 +14,6 @@ namespace LearnSpace.Web.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IStudentService, StudentService>();
-			services.AddScoped<IRepository<Student, Guid>, Repository<Student, Guid>>();
-			services.AddScoped<IRepository<ApplicationUser, Guid>, Repository<ApplicationUser, Guid>>();
 
 			// <InterfaceService, Service>
 			//services.AddScoped<ICakeService, CakeService>();
@@ -57,6 +54,8 @@ namespace LearnSpace.Web.Extensions
 				options.UseLazyLoadingProxies()
 							  .UseSqlServer(connectionString);
 			});
+
+			services.AddScoped<IRepository, Repository>();
 
 			services.AddDatabaseDeveloperPageExceptionFilter();
 

@@ -2,10 +2,11 @@
 
 <div id="dashboardStudent" class="d-flex flex-column">
 	<div class="text-center text-capitalize fs-4 text-white color-purple w-100 m-2">
-		@User.Identity.Name
+		@Model.FullName
 	</div>
 	<div class="container">
-		<div class="row gap-1">
+		<div class="d-flex flex-row m-2">
+			<a asp-controller="Grade" asp-action=""></a>
 			<div href="" class="color-blue col">
 				<h1 class="text-center">@Model.Success</h1>
 				<p class="h4  text-center">Success</p>

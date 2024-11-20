@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LearnSpace.Infrastructure.Migrations
 {
     [DbContext(typeof(LearnSpaceDbContext))]
-    [Migration("20241110185001_Initial")]
+    [Migration("20241120192916_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,7 +107,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         {
                             Id = new Guid("2d522f0f-1d26-429e-8bef-0098f10d96e9"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "73c3936e-58a2-4ca0-a29e-dd5858ac5df0",
+                            ConcurrencyStamp = "acf416e4-a540-4bde-a18e-07a249e144b8",
                             DateOfBirth = new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "admin@abv.bg",
                             EmailConfirmed = false,
@@ -116,9 +116,9 @@ namespace LearnSpace.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@ABV.BG",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEO+uIIxyh2QBPy6s2QowLLY4hyXHaudX0MeHKs8wwP7L4nkgakTfXNw98ICGN43e1g==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEHvwuBNPXGHDehwStciqt6zmLe9AfTBD6pT3rjpVbqYDN6jwJsD/l7y8sHMERYqNmA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "067dc83e-899c-41ae-b60e-6f1eb88c1eda",
+                            SecurityStamp = "2638293a-a872-40ab-8144-d1d9ce93f9ac",
                             TwoFactorEnabled = false,
                             UserName = "Admin"
                         },
@@ -126,7 +126,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         {
                             Id = new Guid("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6470742d-8820-410a-8f98-8b509f559e30",
+                            ConcurrencyStamp = "c7ca3ee9-61da-4610-94c1-64c920c36ca9",
                             DateOfBirth = new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "teacher1@abv.bg",
                             EmailConfirmed = false,
@@ -135,9 +135,9 @@ namespace LearnSpace.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TEACHER1@ABV.BG",
                             NormalizedUserName = "TEACHER1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGvUvSOe+BUEUeX8RcbzsR5gT0qg0D7SNLQpI8oUq9WX59/D4/GC05SPMervvH0NSw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKScOWemmuwkqOUNXiKytHZxE8QbcVOSJjOBcO6CF+7B5QSBETu1ea56TeYvgMoX0Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e6866dee-8b17-4449-acfe-e4eba69ae9b5",
+                            SecurityStamp = "8a8ddba1-9a87-4b0d-bc98-8fe78348aff0",
                             TwoFactorEnabled = false,
                             UserName = "teacher1"
                         },
@@ -145,7 +145,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         {
                             Id = new Guid("bc5f8df5-6115-4344-897b-73e185df4bff"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f81651c2-5b0d-4780-97ed-3495a2236a2a",
+                            ConcurrencyStamp = "8a7eff8f-7d69-47c6-a969-b1699c27b904",
                             DateOfBirth = new DateTime(1982, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "teacher2@abv.bg",
                             EmailConfirmed = false,
@@ -154,9 +154,9 @@ namespace LearnSpace.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "TEACHER2@ABV.BG",
                             NormalizedUserName = "TEACHER2",
-                            PasswordHash = "AQAAAAEAACcQAAAAECtt5pKgKASgt2ma4YIgxDUTT8brar4xc0CTvjTFhTBKsesyc2bl50rryFc1Icwk9w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPMCUJ2hGaQNUEA90Z61/j1LvNvgQk03HUNjusAYs5NSf47bEfYi+vphUUJDbB01fQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9ba80610-e5a6-4833-95b4-25812a017339",
+                            SecurityStamp = "d5ae5f94-af35-4c96-b93f-714b144252ba",
                             TwoFactorEnabled = false,
                             UserName = "teacher2"
                         },
@@ -164,7 +164,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         {
                             Id = new Guid("a52dc824-b577-4862-ac67-29d391116793"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e41196f9-44e5-48a9-8ba5-ac72a55c708f",
+                            ConcurrencyStamp = "7639a27c-391c-44f2-a0a6-4e6351e555cc",
                             DateOfBirth = new DateTime(2005, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "student1@abv.bg",
                             EmailConfirmed = false,
@@ -173,9 +173,9 @@ namespace LearnSpace.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT1@ABV.BG",
                             NormalizedUserName = "STUDENT1",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKA4kYWcWjwUEdm+RjBHNAsauUT7e84PS+jTbltuSnm23L8mtuTqMHvlFcr5cj6Akg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKyjOnYSevZ9eHu1BLSZaUsBT+jgTC2wOt+zdEb4Wx+6mCbIoj24a8UZ8eTDRoK4og==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "090cd876-c03d-429c-9706-6c458fbafbef",
+                            SecurityStamp = "56f70534-74ce-40c1-90d2-cb7c1220bd55",
                             TwoFactorEnabled = false,
                             UserName = "student1"
                         },
@@ -183,7 +183,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         {
                             Id = new Guid("08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b2f7ff1e-86ea-47be-a001-0756b19138c4",
+                            ConcurrencyStamp = "80c7fc35-1312-42ac-958b-5a25c9f83edb",
                             DateOfBirth = new DateTime(2006, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "student2@abv.bg",
                             EmailConfirmed = false,
@@ -192,9 +192,9 @@ namespace LearnSpace.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT2@ABV.BG",
                             NormalizedUserName = "STUDENT2",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJaDhYavdto5Sx53YnJGBIoAK9bNIivaRHvqvl2cvzNZGtiGXok9uDUu4L5JlEnHJQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJwOlcd36eYJv03CMvxmsS+Lh+Xie6Yu8/kpjhCISw51qt/R7whfa4TU+Zee/5xU7Q==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e1011a6d-999c-418c-bcd2-926724047492",
+                            SecurityStamp = "4bdf9117-a797-49ad-8922-bf2a0716f095",
                             TwoFactorEnabled = false,
                             UserName = "student2"
                         },
@@ -202,7 +202,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         {
                             Id = new Guid("3cc698b0-736e-490a-97e3-3f343bf8bfd8"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2302580d-41a8-4882-8fe4-fb19cc308868",
+                            ConcurrencyStamp = "2624e144-abfc-4941-8882-6e027860ee7b",
                             DateOfBirth = new DateTime(2005, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "student3@abv.bg",
                             EmailConfirmed = false,
@@ -211,9 +211,9 @@ namespace LearnSpace.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT3@ABV.BG",
                             NormalizedUserName = "STUDENT3",
-                            PasswordHash = "AQAAAAEAACcQAAAAEL6/+FtAxpNEeDIWV16NutpwPQmcJw6zx6NT65Y0NP+BFCNzL2vfpUoSy5GrY9ryYA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAENtFsGA3DyyyGlZL0Gc7idij9r0gR8capU/Iz0wJw1iMHGF6f2gKzQj0uG6INr6+/g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "43c28a83-4516-419a-afbf-2dedc1f456e2",
+                            SecurityStamp = "5df0b586-3a03-4fb0-b826-51c425b6ee8b",
                             TwoFactorEnabled = false,
                             UserName = "student3"
                         },
@@ -221,7 +221,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         {
                             Id = new Guid("ebdc00b8-7106-4cbd-a482-da93c40103d3"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "7aa18aaf-5378-4213-b7d2-b571aec12893",
+                            ConcurrencyStamp = "c805dc10-5530-4dbc-815b-ed3d649ad8c6",
                             DateOfBirth = new DateTime(2006, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "student4@abv.bg",
                             EmailConfirmed = false,
@@ -230,9 +230,9 @@ namespace LearnSpace.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "STUDENT4@ABV.BG",
                             NormalizedUserName = "STUDENT4",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBfwcsioShDArAGe8nsCNmwlOf+bm5Q/kkWeXicUELlOtt12WY2o6RSkwOAOyg2Vtw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMR08UtgqkGsRD/SEDbnGKulrsjF2nlR8UoYmP7Wm0KNjncVMfGIBsDTWYcQMvPy9A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "fb7c83c9-d985-45fd-b0b0-1b208fcdeb46",
+                            SecurityStamp = "4cd5f5ba-53cd-4c5f-869b-554e3d33b689",
                             TwoFactorEnabled = false,
                             UserName = "student4"
                         });
@@ -450,7 +450,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         {
                             Id = 1,
                             AssignmentId = 1,
-                            DateGraded = new DateTime(2024, 11, 10, 20, 50, 1, 216, DateTimeKind.Local).AddTicks(360),
+                            DateGraded = new DateTime(2024, 11, 20, 21, 29, 15, 911, DateTimeKind.Local).AddTicks(1547),
                             Score = 4.0,
                             StudentId = new Guid("5c07f155-602e-403b-bb86-5a786814f575")
                         },
@@ -458,7 +458,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         {
                             Id = 2,
                             AssignmentId = 1,
-                            DateGraded = new DateTime(2024, 11, 10, 20, 50, 1, 216, DateTimeKind.Local).AddTicks(393),
+                            DateGraded = new DateTime(2024, 11, 20, 21, 29, 15, 911, DateTimeKind.Local).AddTicks(1584),
                             Score = 5.0,
                             StudentId = new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8")
                         },
@@ -466,7 +466,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         {
                             Id = 3,
                             AssignmentId = 2,
-                            DateGraded = new DateTime(2024, 11, 10, 20, 50, 1, 216, DateTimeKind.Local).AddTicks(396),
+                            DateGraded = new DateTime(2024, 11, 20, 21, 29, 15, 911, DateTimeKind.Local).AddTicks(1587),
                             Score = 5.0,
                             StudentId = new Guid("c6903087-71e5-41ba-80be-ed119b7902fc")
                         },
@@ -474,9 +474,17 @@ namespace LearnSpace.Infrastructure.Migrations
                         {
                             Id = 4,
                             AssignmentId = 2,
-                            DateGraded = new DateTime(2024, 11, 10, 20, 50, 1, 216, DateTimeKind.Local).AddTicks(398),
+                            DateGraded = new DateTime(2024, 11, 20, 21, 29, 15, 911, DateTimeKind.Local).AddTicks(1589),
                             Score = 6.0,
                             StudentId = new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f")
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AssignmentId = 2,
+                            DateGraded = new DateTime(2024, 11, 20, 21, 29, 15, 911, DateTimeKind.Local).AddTicks(1592),
+                            Score = 5.0,
+                            StudentId = new Guid("5c07f155-602e-403b-bb86-5a786814f575")
                         });
                 });
 
@@ -549,6 +557,11 @@ namespace LearnSpace.Infrastructure.Migrations
                         new
                         {
                             StudentId = new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f"),
+                            CourseId = 3
+                        },
+                        new
+                        {
+                            StudentId = new Guid("5c07f155-602e-403b-bb86-5a786814f575"),
                             CourseId = 3
                         });
                 });

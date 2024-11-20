@@ -1,137 +1,113 @@
-﻿namespace LearnSpace.Infrastructure.Database.Repository
+﻿using LearnSpace.Infrastructure.Database.Entities.Account;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Linq.Expressions;
+
+namespace LearnSpace.Infrastructure.Database.Repository
 {
-	using System.Linq.Expressions;
+    public class Repository : IRepository
+    {
+        private readonly DbContext _context;
+        public Repository(LearnSpaceDbContext context)
+        {
+            _context = context;
+        }
+        private DbSet<T> DbSet<T>() where T : class
+        {
+            return _context.Set<T>();
+        }
+        public IQueryable<T> All<T>() where T : class
+        {
+            return DbSet<T>();
+        }
+        public IQueryable<T> AllReadOnly<T>() where T : class
+        {
+            return DbSet<T>()
+                        .AsNoTracking();
+        }
+        public async Task AddAsync<T>(T entity) where T : class
+        {
+            await DbSet<T>().AddAsync(entity);
+        }
+        public async Task AddRangeAsync<T>(IEnumerable<T> entities) where T : class
+        {
+            await DbSet<T>().AddRangeAsync(entities);
+        }
+        public IQueryable<T> All<T>(Expression<Func<T, bool>> search) where T : class
+        {
+            return this.DbSet<T>().Where(search);
+        }
+        public IQueryable<T> AllReadOnly<T>(Expression<Func<T, bool>> search) where T : class
+        {
+            return this.DbSet<T>()
+                .Where(search)
+                .AsNoTracking();
+        }
+        public async Task DeleteAsync<T>(object id) where T : class
+        {
+            T entity = await GetByIdAsync<T>(id);
 
-	using Microsoft.EntityFrameworkCore;
+            Delete<T>(entity);
+        }
+        //not understanding
+        public void Delete<T>(T entity) where T : class
+        {
+            EntityEntry entry = _context.Entry(entity);
 
-	using LearnSpace.Infrastructure.Database.Repository.Interfaces;
-	using LearnSpace.Infrastructure.Database;
+            if (entry.State == EntityState.Detached)
+            {
+                this.DbSet<T>().Attach(entity);
+            }
 
-	public class Repository<TType, TId> : IRepository<TType, TId>
-		where TType : class
-	{
-		private readonly LearnSpaceDbContext dbContext;
-		private readonly DbSet<TType> dbSet;
+            entry.State = EntityState.Deleted;
+        }
+        public void Detach<T>(T entity) where T : class
+        {
+            EntityEntry entry = _context.Entry(entity);
 
-		public Repository(LearnSpaceDbContext dbContext)
-		{
-			this.dbContext = dbContext;
-			this.dbSet = this.dbContext.Set<TType>();
-		}
+            entry.State = EntityState.Detached;
+        }
+        public void Dispose()
+        {
+            _context.Dispose();
+        }
+        public async Task<T> GetByIdAsync<T>(object id) where T : class
+        {
+            return await DbSet<T>().FindAsync(id);
+        }
+        public async Task<T> GetByIdsAsync<T>(object[] id) where T : class
+        {
+            return await DbSet<T>().FindAsync(id);
+        }
+        public async Task<int> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync();
+        }
+        public void Update<T>(T entity) where T : class
+        {
+            this.DbSet<T>().Update(entity);
+        }
+        public void UpdateRange<T>(IEnumerable<T> entities) where T : class
+        {
+            this.DbSet<T>().UpdateRange(entities);
+        }
+        public void DeleteRange<T>(IEnumerable<T> entities) where T : class
+        {
+            this.DbSet<T>().RemoveRange(entities);
+        }
+        public void DeleteRange<T>(Expression<Func<T, bool>> deleteWhereClause) where T : class
+        {
+            var entities = All<T>(deleteWhereClause);
+            DeleteRange(entities);
+        }
 
-		public TType GetById(TId id)
-		{
-			TType entity = this.dbSet.Find(id);
+        public async Task<Student> GetStudentAsync(string id) 
+        {
+            var user = await DbSet<ApplicationUser>().FindAsync(Guid.Parse(id));
+            var student = user!.Student;
 
-			return entity;
-		}
+            return student!;
+        }
 
-		public async Task<TType> GetByIdAsync(TId id)
-		{
-			TType entity = await this.dbSet.FindAsync(id);
-
-			return entity;
-		}
-
-		public TType FirstOrDefault(Func<TType, bool> predicate)
-		{
-			TType entity = this.dbSet.FirstOrDefault(predicate);
-
-			return entity;
-		}
-
-		public async Task<TType> FirstOrDefaultAsync(Expression<Func<TType, bool>> predicate)
-		{
-			TType entity = await this.dbSet.FirstOrDefaultAsync(predicate);
-
-			return entity;
-		}
-
-		public IEnumerable<TType> GetAll()
-		{
-			return this.dbSet.ToArray();
-		}
-
-		public async Task<IEnumerable<TType>> GetAllAsync()
-		{
-			return await this.dbSet.ToListAsync();
-		}
-
-		public IQueryable<TType> GetAllAttached()
-		{
-			return this.dbSet.AsQueryable();
-		}
-
-		public void Add(TType item)
-		{
-			this.dbSet.Add(item);
-			this.dbContext.SaveChanges();
-		}
-
-		public async Task AddAsync(TType item)
-		{
-			await this.dbSet.AddAsync(item);
-			await this.dbContext.SaveChangesAsync();
-		}
-
-		public void AddRange(TType[] items)
-		{
-			this.dbSet.AddRange(items);
-			this.dbContext.SaveChanges();
-		}
-
-		public async Task AddRangeAsync(TType[] items)
-		{
-			await this.dbSet.AddRangeAsync(items);
-			await this.dbContext.SaveChangesAsync();
-		}
-
-		public bool Delete(TType entity)
-		{
-			this.dbSet.Remove(entity);
-			this.dbContext.SaveChanges();
-
-			return true;
-		}
-
-		public async Task<bool> DeleteAsync(TType entity)
-		{
-			this.dbSet.Remove(entity);
-			await this.dbContext.SaveChangesAsync();
-
-			return true;
-		}
-
-		public bool Update(TType item)
-		{
-			try
-			{
-				this.dbSet.Attach(item);
-				this.dbContext.Entry(item).State = EntityState.Modified;
-				this.dbContext.SaveChanges();
-
-				return true;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
-
-		public async Task<bool> UpdateAsync(TType item)
-		{
-			try
-			{
-				this.dbSet.Attach(item);
-				this.dbContext.Entry(item).State = EntityState.Modified;
-				await this.dbContext.SaveChangesAsync();
-
-				return true;
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
-	}
+    }
 }

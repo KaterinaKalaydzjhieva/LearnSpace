@@ -4,7 +4,6 @@ using LearnSpace.Infrastructure.Database.Entities.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
 namespace LearnSpace.Infrastructure.Database
 {
