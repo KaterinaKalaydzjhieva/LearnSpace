@@ -4,16 +4,16 @@
 
 	using Microsoft.EntityFrameworkCore;
 
-	using LearnSpace.Infrastructure.Database.Repository;
+	using LearnSpace.Infrastructure.Database.Repository.Interfaces;
 	using LearnSpace.Infrastructure.Database;
 
-	public class BaseRepository<TType, TId> : IRepository<TType, TId>
+	public class Repository<TType, TId> : IRepository<TType, TId>
 		where TType : class
 	{
 		private readonly LearnSpaceDbContext dbContext;
 		private readonly DbSet<TType> dbSet;
 
-		public BaseRepository(LearnSpaceDbContext dbContext)
+		public Repository(LearnSpaceDbContext dbContext)
 		{
 			this.dbContext = dbContext;
 			this.dbSet = this.dbContext.Set<TType>();
@@ -54,7 +54,7 @@
 
 		public async Task<IEnumerable<TType>> GetAllAsync()
 		{
-			return await this.dbSet.ToArrayAsync();
+			return await this.dbSet.ToListAsync();
 		}
 
 		public IQueryable<TType> GetAllAttached()

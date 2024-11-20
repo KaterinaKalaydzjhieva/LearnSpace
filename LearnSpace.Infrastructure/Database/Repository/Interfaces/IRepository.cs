@@ -1,4 +1,4 @@
-﻿namespace LearnSpace.Infrastructure.Database.Repository;
+﻿namespace LearnSpace.Infrastructure.Database.Repository.Interfaces;
 
 using System.Linq.Expressions;
 

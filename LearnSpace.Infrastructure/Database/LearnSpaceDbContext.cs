@@ -29,6 +29,13 @@ namespace LearnSpace.Infrastructure.Database
                        sc.StudentId,
                        sc.CourseId
                    });
+
+            builder.Entity<Grade>()
+                    .HasOne(g => g.Student)
+                    .WithMany(s => s.Grades)
+                    .HasForeignKey(g => g.StudentId);
+
+
             builder.Entity<Notification>()
                     .HasOne(n => n.Student)
                     .WithMany() // Assuming no navigation property on Student for Notifications
@@ -56,6 +63,7 @@ namespace LearnSpace.Infrastructure.Database
                     .WithMany(c => c.CourseStudents)
                     .HasForeignKey(sc => sc.CourseId)
                     .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete
+
             builder.Entity<Grade>()
                     .HasOne(g => g.Assignment)
                     .WithMany(a => a.Grades)
