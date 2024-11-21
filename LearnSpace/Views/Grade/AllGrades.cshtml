@@ -1,0 +1,43 @@
+﻿@model List<GradeCourse>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Grades List</h1>
+    @if (Model == null || !Model.Any())
+    {
+        <div class="alert alert-warning">No grades available to display.</div>
+    }
+    else
+    {
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Course Name</th>
+                    <th>Grades</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var course in Model)
+                {
+                    <tr>
+                        <td>@course.Name</td>
+                        <td>
+                            @if (course.Grades.Any())
+                            {
+                                <ul>
+                                    @foreach (var grade in course.Grades)
+                                    {
+                                        <li>@grade</li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <span>No grades recorded</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

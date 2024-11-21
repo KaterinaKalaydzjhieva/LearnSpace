@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Error\**" />
+    <Content Remove="Views\Error\**" />
+    <EmbeddedResource Remove="Views\Error\**" />
+    <None Remove="Views\Error\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\LearnSpace.Common\LearnSpace.Common.csproj" />
     <ProjectReference Include="..\LearnSpace.Core.Models\LearnSpace.Core.Models.csproj" />
     <ProjectReference Include="..\LearnSpace.Core\LearnSpace.Core.csproj" />
@@ -26,10 +33,6 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.18" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\Error\" />
   </ItemGroup>
 
 </Project>
