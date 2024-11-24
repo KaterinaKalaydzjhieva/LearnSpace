@@ -1,8 +1,8 @@
 ﻿using LearnSpace.Core.Interfaces;
 using LearnSpace.Core.Models.Grade;
 using LearnSpace.Infrastructure.Database.Entities;
-using LearnSpace.Infrastructure.Database.Entities.Account;
 using LearnSpace.Infrastructure.Database.Repository;
+using Microsoft.AspNetCore.Identity;
 
 namespace LearnSpace.Core.Services
 {
@@ -24,7 +24,7 @@ namespace LearnSpace.Core.Services
             {
                 if (course.Assignments.Any(a => a.Grades.Any())) 
                 {
-                    gradeCourse.Grades = course.Assignments.SelectMany(a => a.Grades.Where(g=>g.StudentId.ToString().ToLower() == id)).Select(g=>g.Score).ToList();
+                    gradeCourse.Grades = course.Assignments.SelectMany(a => a.Grades.Where(g=>g.StudentId == student.Id)).Select(g=>g.Score).ToList();
                 }
                 gradeCourse.Name = course.Name;
                 list.Add(gradeCourse);

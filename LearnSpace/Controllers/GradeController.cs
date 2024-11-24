@@ -16,6 +16,7 @@ namespace LearnSpace.Web.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Dairy(string id)
 		{
+
 			var list = await gradeService.GetAllGradesAsync(id);
 
 			return View("AllGrades",list);
