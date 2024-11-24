@@ -24,7 +24,7 @@ namespace LearnSpace.Core.Services
             {
                 if (course.Assignments.Any(a => a.Grades.Any())) 
                 {
-                    gradeCourse.Grades = course.Assignments.SelectMany(a => a.Grades).Select(g=>g.Score).ToList();
+                    gradeCourse.Grades = course.Assignments.SelectMany(a => a.Grades.Where(g=>g.StudentId.ToString().ToLower() == id)).Select(g=>g.Score).ToList();
                 }
                 gradeCourse.Name = course.Name;
                 list.Add(gradeCourse);

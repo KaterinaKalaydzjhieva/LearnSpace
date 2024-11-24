@@ -14,6 +14,7 @@ namespace LearnSpace.Web.Extensions
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
             services.AddScoped<IStudentService, StudentService>();
+            services.AddScoped<IGradeService, GradeService>();
 
 			// <InterfaceService, Service>
 			//services.AddScoped<ICakeService, CakeService>();
