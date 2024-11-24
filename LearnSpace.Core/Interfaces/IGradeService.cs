@@ -4,6 +4,8 @@ namespace LearnSpace.Core.Interfaces
 {
     public interface IGradeService
     {
-        Task<List<GradeCourse>> GetAllGradesAsync(string id);
+        Task<List<GradeCourseViewModel>> GetAllGradesAsync(string id);
+
+        Task<GradeInfoViewModel> GetGradeInfoAsync(int id);
     }
 }

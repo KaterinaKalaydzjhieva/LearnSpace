@@ -1,5 +1,7 @@
 ﻿using LearnSpace.Core.Interfaces;
 using LearnSpace.Core.Models.Grade;
+using LearnSpace.Infrastructure.Database.Entities;
+using LearnSpace.Infrastructure.Database.Entities.Account;
 using LearnSpace.Infrastructure.Database.Repository;
 
 namespace LearnSpace.Core.Services
@@ -11,11 +13,11 @@ namespace LearnSpace.Core.Services
         {
             repository = _repository;
         }
-        public async Task<List<GradeCourse>> GetAllGradesAsync(string id)
+        public async Task<List<GradeCourseViewModel>> GetAllGradesAsync(string id)
         {
             var student = await repository.GetStudentAsync(id);
-            var list = new List<GradeCourse>();
-            var gradeCourse = new GradeCourse();
+            var list = new List<GradeCourseViewModel>();
+            var gradeCourse = new GradeCourseViewModel();
             var courses = student.StudentCourses.Select(sc => sc.Course).ToList();
 
             foreach (var course in courses) 
@@ -26,10 +28,26 @@ namespace LearnSpace.Core.Services
                 }
                 gradeCourse.Name = course.Name;
                 list.Add(gradeCourse);
-                gradeCourse = new GradeCourse();
+                gradeCourse = new GradeCourseViewModel();
             }
 
             return list;
+        }
+
+        public async Task<GradeInfoViewModel> GetGradeInfoAsync(int id)
+        {
+            var grade = await repository.GetByIdAsync<Grade>(id);
+
+            var gradeInfo = new GradeInfoViewModel();
+
+            gradeInfo.Id = id;
+            gradeInfo.CourseName = grade.Assignment.Course.Name;
+            gradeInfo.AssignmentDescription = grade.Assignment.Description;
+            gradeInfo.Score = grade.Score;
+            gradeInfo.Teacher = grade.Assignment.Course.Teacher.ApplicationUser.FirstName + " " + grade.Assignment.Course.Teacher.ApplicationUser.LastName;
+
+            return gradeInfo;
+
         }
     }
 }
