@@ -1,30 +1,31 @@
 ﻿@model StudentDashboardModel
 
 <div id="dashboardStudent" class="d-flex flex-column">
-	<div class="text-center text-capitalize fs-4 text-white color-purple w-100 m-2">
+	<div class="text-center text-capitalize fs-4 text-white color-purple w-auto m-2">
 		@Model.FullName
 	</div>
 	<div class="container">
-		<div class="d-flex flex-row m-2">
-			<a asp-controller="Grade" asp-action=""></a>
-			<div href="" class="color-blue col">
-				<h1 class="text-center">@Model.Success</h1>
-				<p class="h4  text-center">Success</p>
-			</div>
+		<div class="d-flex flex-row">
+			<div asp-controller="Grade" asp-action="Dairy" class="color-blue m-2 w-100">
+					<h1 class="text-center">@Model.Success</h1>
+					<p class="h4  text-center">Success</p>
+				</div>
 
-			<div href="" class="color-red col">
+			
+
+			<div href="" class="color-red m-2 w-100">
 				<h1 class="text-center">@Model.GradeCount</h1>
 				<p class="h4  text-center">Grade Count</p>
 			</div>
 		</div>
 
-		<div class="row">
-			<div href="" class="color-green col">
+		<div class="d-flex flex-row">
+			<div href="" class="color-green m-2 w-100">
 				<h1 class="text-center">@Model.AssignmentCount</h1>
 				<p class="h4  text-center">Assignment Count</p>
 			</div>
 
-			<div href="" class="color-yellow col">
+			<div href="" class="color-yellow m-2 w-100">
 				<h1 class="text-center">@Model.ClassCount</h1>
 				<p class="h4 text-center">Classes Count</p>
 			</div>
