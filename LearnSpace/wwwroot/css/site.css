@@ -41,6 +41,10 @@ html, body {
     background-color: #e0f21d;
 }
 
+.color-orange {
+    background-color: #fc8403;
+}
+
 .header-index {
     height:8%;
 }

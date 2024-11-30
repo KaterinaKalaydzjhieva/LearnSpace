@@ -1,5 +1,8 @@
 ﻿@model StudentDashboardModel
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 <div id="dashboardStudent" class="d-flex flex-column">
 	<div class="text-center text-capitalize fs-4 text-white color-purple w-auto m-2">
 		@Model.FullName
@@ -7,11 +10,11 @@
 	<div class="container">
 		<div class="d-flex flex-row">
 			<div asp-controller="Grade" asp-action="Dairy" class="color-blue m-2 w-100 text-white">
-					<h1 class="text-center">@Model.Success</h1>
-					<p class="h4  text-center">Success</p>
-				</div>
+				<h1 class="text-center">@Model.Success.ToString("f2")</h1>
+				<p class="h4  text-center">Success</p>
+			</div>
 
-			
+
 
 			<div href="" class="color-red m-2 w-100 text-white">
 				<h1 class="text-center">@Model.GradeCount</h1>
@@ -25,11 +28,69 @@
 				<p class="h4  text-center">Assignment Count</p>
 			</div>
 
-			<div href="" class="color-yellow m-2 w-100 text-white">
+			<div href="" class="color-orange m-2 w-100 text-white">
 				<h1 class="text-center">@Model.ClassCount</h1>
 				<p class="h4 text-center">Classes Count</p>
 			</div>
 		</div>
 	</div>
+
+
+	<div class="d-flex justify-content-center mb-5 mt-2">
+		<div class="charBox">
+			<canvas id="lineChart" class="w-100"></canvas>
+		</div>
+	</div>
 </div>
 
+<style>
+	.charMenu {
+		width: 100vw;
+		height: 40px;
+		padding: 10px;
+		font-size: 20px;
+	}
+
+	.charCard {
+		width: 100vw;
+		height: calc(100vw - 40px);
+		display: flex;
+		align-items: center;
+		justify-content: start;
+	}
+
+	.charBox {
+		width: 600px;
+		padding: 20px;
+		border-radius: 20px;
+		border: solid 3px rgba(54, 162, 235, 1);
+		background: white;
+	}
+
+</style>
+
+<script>
+	const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
+	const data = {
+		labels: labels,
+		datasets: [{
+			label: 'Grades by months',
+			data: [65, 59, 80, 81, 56, 55, 40],
+			fill: false,
+			borderColor: 'rgb(75, 192, 192)',
+			tension: 0.1
+		}]
+	};
+
+	const config = {
+		type: 'line',
+		data: data,
+		options: {}
+	};
+
+	var myChart = new Chart(
+		document.getElementById('lineChart'),
+		config
+
+	);
+</script>
