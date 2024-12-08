@@ -4,40 +4,58 @@
 
 
 <div class="mx-auto">
-	<h1 class="text-center">@ViewData["Title"]</h1>
-	<div class="d-flex flex-row">
-		<ul class="list-unstyled m-5">
-			<li>
-				<p>We are LearnSpace and our purpose is to make the whole school system easier.</p>
-			</li>
-			<li>
-				<p>Streamline grading, enhance learning, and foster academic success with our grade management system.</p>
-			</li>
-			<li>
-				Core values:
-				<ul class="list-unstyled m-3">
-					<li>
-						Our mission is to transform the way schools handle grading by providing an intuitive and reliable system that saves time, increases accuracy, and fosters transparency.
-					</li>
-					<li>
-						We envision a world where technology empowers educators to focus more on teaching and less on administrative tasks.
-					</li>
+	<h1 class="text-center fw-bolder">@ViewData["Title"]</h1>
+	<div class="d-flex flex-row justify-content-around">
+		<div class="ms-4">
+			<div class="p-3 m-4" style="border: 4px black solid; border-radius: 15px;">
+				<div class="text-center">
+					<p>We are LearnSpace and our purpose is to make the whole school system easier.</p>
+				</div>
+				<div class="text-center">
+					<p>Streamline grading, enhance learning, and foster academic success with our grade management system.</p>
+				</div>
+				<div>
+					Core values:
+					<ul class=" m-3">
+						<li>
+							Our mission is to transform the way schools handle grading by providing an intuitive and reliable system that saves time, increases accuracy, and fosters transparency.
+						</li>
+						<li>
+							We envision a world where technology empowers educators to focus more on teaching and less on administrative tasks.
+						</li>
+					</ul>
+				</div>
+				<div>
+					Our system is built on three core principles:
+					<ul class=" m-3">
+						<li>ease of use</li>
+						<li>reliability</li>
+						<li>commitment to enhancing educational outcomes</li>
+					</ul>
+				</div>
+				<div>
+					We prioritize security, ensuring sensitive student information is always protected.
+				</div>
+			</div>
+			<div class="p-3 m-4 mb-5" style="border: 4px black solid; border-radius: 15px;">
+				<p>
+					We’d love to hear from you! Whether you have questions, feedback, or just want to learn more about LearnSpace, feel free to reach out to us through any of the methods below:
+				</p>
+				<ul class="list-unstyled ms-3">
+					<li>📧 Email Us: support@learnspace.com</li>
+					<li>☎️ Call Us: +1 (555) 123-4567</li>
 				</ul>
-			</li>
-			<li>
-				Our system is built on three core principles:
-				<ul class="list-unstyled m-3">
-					<li>ease of use</li>
-					<li>reliability</li>
-					<li>commitment to enhancing educational outcomes</li>
+				<p>You can also follow us on social media to stay updated with the latest features and news:</p>
+				<ul class="list-unstyled ms-3">
+					<li>📘 Facebook: facebook.com/LearnSpace</li>
+					<li>🐦 Twitter: twitter.com/LearnSpace</li>
+					<li>📸 Instagram: instagram.com/LearnSpace</li>
 				</ul>
-			</li>
-			<li>
-				We prioritize security, ensuring sensitive student information is always protected.
-			</li>
-		</ul>
-		<div>
-			<img src="~/images/picture.png" class="w-100 my-1"/>
+			</div>
+		</div>
+		<div class="m-auto d-flex flex-column"> 
+			<img src="~/images/picture.png" class="w-75 m-4" style="border-radius: 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);" />
+			<img src="~/images/LearnSpace_people.png" class="w-75 m-4 mb-5" style="border-radius: 15px; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);" />
 		</div>
 	</div>
 	
