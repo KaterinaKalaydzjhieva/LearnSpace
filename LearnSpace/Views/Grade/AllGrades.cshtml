@@ -23,7 +23,7 @@
                         <td>
                             @if (course.Grades.Any())
                             {
-                                <ul>
+                                <ul class="list-unstyled d-flex flex-row">
                                     @foreach (var grade in course.Grades)
                                     {
                                         <li>@grade</li>

@@ -1,0 +1,22 @@
+﻿@model AllClassesViewModel
+
+@{
+	ViewBag.Title = "Classes list";
+}
+
+
+<div>
+	<h1>
+		@ViewBag.Title
+	</h1>
+	<ul class="list-unstyled d-flex flex-column"> 
+		@foreach (var c in Model.Classes)
+		{
+			<li class="border-1">
+				<p>@c.Name</p>
+				<p>@c.TeacherName</p>
+				<p>@c.AssignmentCount</p>
+			</li>
+		}
+	</ul>
+</div>
