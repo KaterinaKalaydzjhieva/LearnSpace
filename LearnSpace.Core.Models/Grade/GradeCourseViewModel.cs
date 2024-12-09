@@ -3,6 +3,6 @@
     public class GradeCourseViewModel
     {
         public string Name { get; set; } = string.Empty;
-        public List<double> Grades { get; set; } = new List<double>();
+        public List<GradeServiceModel> Grades { get; set; } = new List<GradeServiceModel>();
     }
 }

@@ -8,36 +8,40 @@
     }
     else
     {
-        <table class="table table-bordered table-striped ">
-            <thead class="table-dark">
-                <tr>
-                    <th>Course Name</th>
-                    <th>Grades</th>
-                </tr>
-            </thead>
-            <tbody class="border-1">
-                @foreach (var course in Model)
-                {
+        <div class="" style="border: 3px black solid; ">
+            <table class="table table-bordered table-striped mb-0">
+                <thead class="table-dark">
                     <tr>
-                        <td>@course.Name</td>
-                        <td>
-                            @if (course.Grades.Any())
-                            {
-                                <ul class="list-unstyled d-flex flex-row">
-                                    @foreach (var grade in course.Grades)
-                                    {
-                                        <li>@grade</li>
-                                    }
-                                </ul>
-                            }
-                            else
-                            {
-                                <span>No grades recorded</span>
-                            }
-                        </td>
+                        <th>Course Name</th>
+                        <th>Grades</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody class="border-1">
+                    @foreach (var course in Model)
+                    {
+                        <tr>
+                            <td>
+                                @course.Name
+                                </td>
+                            <td>
+                                @if (course.Grades.Any())
+                                {
+                                    <ul class="list-unstyled d-flex flex-row">
+                                        @foreach (var grade in course.Grades)
+                                        {
+                                            <li><a class="text-decoration-none fs-5" asp-controller="Grade" asp-action="GradeInfo" asp-route-id="@grade.Id">@grade.Score</a></li>
+                                        }
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <span>No grades recorded</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     }
 </div>

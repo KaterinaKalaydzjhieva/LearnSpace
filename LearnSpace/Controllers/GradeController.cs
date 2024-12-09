@@ -22,6 +22,13 @@ namespace LearnSpace.Web.Controllers
 			return View("AllGrades",list);
 		}
 
+		public async Task<IActionResult> GradeInfo(string userId, int id) 
+		{
+			var grade = await gradeService.GetGradeInfoAsync(id);
+
+			return View(grade);
+		}
+
 
 
 	}
