@@ -1,5 +1,6 @@
 ﻿using LearnSpace.Core.Interfaces;
 using LearnSpace.Core.Models.Class;
+using LearnSpace.Infrastructure.Database.Entities;
 using LearnSpace.Infrastructure.Database.Repository;
 
 namespace LearnSpace.Core.Services
@@ -31,5 +32,14 @@ namespace LearnSpace.Core.Services
 
 			return classes;
 		}
-	}
+
+        public async Task LeaveClassAsync(string userId, int classId)
+        {
+			var user = await repository.GetStudentAsync(userId);
+			var studentCourse = user.StudentCourses.First(sc => sc.CourseId == classId);
+
+			repository.Delete(studentCourse);
+			await repository.SaveChangesAsync();
+        }
+    }
 }

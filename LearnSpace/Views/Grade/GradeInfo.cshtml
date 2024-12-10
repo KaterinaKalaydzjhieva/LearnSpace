@@ -1,10 +1,42 @@
 ﻿@model GradeInfoViewModel
 
 @{
-	ViewBag.Title = "Grade Information";
+    ViewBag.Title = "Grade Information";
 }
 
-<div>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">@ViewBag.Title</h1>
 
-
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h4>Grade Details</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Course Name:</strong> @Model.CourseName</p>
+            <p>
+                <strong>Grade Score:</strong>
+                <span class="badge text-white"
+                      style="background-color: @(GetGradeColor(Model.Score)); padding: 0.5em 1em; font-size: 1.2em;">
+                    @Model.Score
+                </span>
+            </p>
+            <p><strong>Assignment Description:</strong> @Model.AssignmentDescription</p>
+            <p><strong>Teacher:</strong> @Model.Teacher</p>
+        </div>
+        <div class="card-footer text-center">
+            <a asp-controller="Grade" asp-action="AllGrades" asp-route-id="@User.Id()" class="btn btn-secondary">Back to Grades List</a>
+        </div>
+    </div>
 </div>
+
+@functions {
+    // Helper method to calculate the background color based on the grade score
+    public string GetGradeColor(double score)
+    {
+        if (score <= 2) return "#dc3545"; // Red for lowest scores
+        if (score <= 3) return "#fd7e14"; // Orange
+        if (score <= 4) return "#ffc107"; // Yellow
+        if (score <= 5) return "#28a745"; // Light green
+        return "#198754";               // Dark green for highest scores
+    }
+}

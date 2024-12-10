@@ -1,22 +1,48 @@
-﻿@model AllClassesViewModel
+﻿@model LearnSpace.Core.Models.Class.AllClassesViewModel
 
 @{
-	ViewBag.Title = "Classes list";
+    ViewBag.Title = "Classes List";
 }
 
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">@ViewBag.Title</h2>
+    <p class="text-muted">Total Classes: <strong>@Model.ClassesCount</strong></p>
 
-<div>
-	<h1>
-		@ViewBag.Title
-	</h1>
-	<ul class="list-unstyled d-flex flex-column"> 
-		@foreach (var c in Model.Classes)
-		{
-			<li class="border-1">
-				<p>@c.Name</p>
-				<p>@c.TeacherName</p>
-				<p>@c.AssignmentCount</p>
-			</li>
-		}
-	</ul>
+    @if (Model.Classes.Any())
+    {
+        <table class="table table-hover table-bordered" style="border: 3px solid black;">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Class Name</th>
+                    <th scope="col">Teacher Name</th>
+                    <th scope="col">Assignments Count</th>
+                    <th scope="col" class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var classInfo in Model.Classes)
+                {
+                    <tr>
+                        <th scope="row">@classInfo.Id</th>
+                        <td>@classInfo.Name</td>
+                        <td>@classInfo.TeacherName</td>
+                        <td>@classInfo.AssignmentCount</td>
+                        <td class="text-center">
+                            <form asp-controller="Class" asp-action="LeaveClass" method="post">
+                                <input type="hidden" name="classId" value="@classInfo.Id" />
+                                <button type="submit" class="btn btn-danger btn-sm">Leave</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center" role="alert">
+            No classes are currently available.
+        </div>
+    }
 </div>

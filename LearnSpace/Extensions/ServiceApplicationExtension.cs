@@ -5,7 +5,6 @@ using LearnSpace.Infrastructure.Database.Entities.Account;
 using LearnSpace.Infrastructure.Database.Repository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace LearnSpace.Web.Extensions
 {
@@ -15,7 +14,7 @@ namespace LearnSpace.Web.Extensions
         {
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IGradeService, GradeService>();
-            services.AddScoped<IGradeService, GradeService>();
+            services.AddScoped<IClassService, ClassService>();
             services.AddScoped<IAssignmentService, AssignmentService>();
 
 			//Roles Authorization
