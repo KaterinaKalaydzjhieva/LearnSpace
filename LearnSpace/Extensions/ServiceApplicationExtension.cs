@@ -15,18 +15,8 @@ namespace LearnSpace.Web.Extensions
         {
             services.AddScoped<IStudentService, StudentService>();
             services.AddScoped<IGradeService, GradeService>();
-            services.AddScoped<IClassService, ClassService>();
-
-			// <InterfaceService, Service>
-			//services.AddScoped<ICakeService, CakeService>();
-			//services.AddScoped<IAdminCakeService, AdminCakeService>();
-			//services.AddScoped<IBiscuitService, BiscuitService>();
-			//services.AddScoped<IAdminBiscuitService, AdminBiscuitService>();
-			//services.AddTransient<IHomeService, HomeService>();
-			//services.AddTransient<ICartService, CartService>();
-			//services.AddScoped<IAdminOrderService, AdminOrderService>();
-			//services.AddScoped<IOrderService, OrderService>();
-			//services.AddTransient<IApplicationUserService, ApplicationUserService>();
+            services.AddScoped<IGradeService, GradeService>();
+            services.AddScoped<IAssignmentService, AssignmentService>();
 
 			//Roles Authorization
 			//services.AddAuthorization(options =>
