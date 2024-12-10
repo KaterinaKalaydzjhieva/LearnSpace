@@ -1,5 +1,4 @@
 ﻿using LearnSpace.Core.Interfaces;
-using LearnSpace.Core.Services;
 using LearnSpace.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,11 +13,19 @@ namespace LearnSpace.Web.Controllers
             classService = _classService;
         }
         [HttpGet]
-        public async Task<IActionResult> AllClasses(string id) 
+        public async Task<IActionResult> AllClassesForStudent(string id) 
         {
-            var list = await classService.GetAllClassesAsync(id);
+            var list = await classService.GetAllClassesForStudentAsync(id);
 
-            return View("AllClasses", list);
+            return View(list);
+        }
+
+        [HttpGet]
+        public IActionResult AllClasses(string id)
+        {
+            var list = classService.GetAllClasses(id);
+
+            return View(list);
         }
 
         [HttpPost]
@@ -26,7 +33,15 @@ namespace LearnSpace.Web.Controllers
         {
             await classService.LeaveClassAsync(userId, classId);
 
-            return RedirectToAction(nameof(AllClasses), User.Id());
+            return RedirectToAction(nameof(AllClassesForStudent), new { userId = userId });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> JoinClass(string userId, int classId) 
+        {
+            await classService.JoinClassAsync(userId, classId);
+
+            return RedirectToAction(nameof(AllClassesForStudent), userId);
         }
     }
 }

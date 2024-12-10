@@ -16,10 +16,9 @@ namespace LearnSpace.Web.Controllers
 		[HttpGet]
 		public async Task<IActionResult> AllGrades(string id)
 		{
-
 			var list = await gradeService.GetAllGradesAsync(id);
 
-			return View("AllGrades",list);
+			return View(list);
 		}
 
 		public async Task<IActionResult> GradeInfo(string userId, int id) 

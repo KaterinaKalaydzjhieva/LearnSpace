@@ -1,7 +1,7 @@
 ﻿@model AllClassesViewModel
 
 @{
-    ViewBag.Title = "Explore All Classes";
+    ViewBag.Title = "My Classes";
 }
 
 <div class="container mt-5">
@@ -29,11 +29,10 @@
                         <td>@classInfo.TeacherName</td>
                         <td>@classInfo.AssignmentCount</td>
                         <td class="text-center">
-                            
-                            <form asp-controller="Class" asp-action="JoinClass" method="post">
-                                <input type="hidden" name="userId" value="@User.Id()" />
+                            <form asp-controller="Class" asp-action="LeaveClass" method="post">
                                 <input type="hidden" name="classId" value="@classInfo.Id" />
-                                <button type="submit" class="btn btn-info btn-sm">Join</button>
+                                <input type="hidden" name="userId" value="@User.Id()" />
+                                <button type="submit" class="btn btn-danger btn-sm">Leave</button>
                             </form>
                         </td>
                     </tr>
@@ -48,4 +47,3 @@
         </div>
     }
 </div>
-
