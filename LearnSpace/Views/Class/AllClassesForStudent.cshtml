@@ -17,7 +17,7 @@
                     <th scope="col">Class Name</th>
                     <th scope="col">Teacher Name</th>
                     <th scope="col">Assignments Count</th>
-                    <th scope="col" class="text-center">Action</th>
+                    <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,14 +29,25 @@
                         <td>@classInfo.TeacherName</td>
                         <td>@classInfo.AssignmentCount</td>
                         <td class="text-center">
-                            <form asp-controller="Class" asp-action="LeaveClass" method="post">
-                                <input type="hidden" name="classId" value="@classInfo.Id" />
-                                <input type="hidden" name="userId" value="@User.Id()" />
-                                <button type="submit" class="btn btn-danger btn-sm">Leave</button>
-                            </form>
+                            <div class="d-flex justify-content-center">
+                                <!-- Leave Class Button -->
+                                <form asp-controller="Class" asp-action="LeaveClass" method="post" class="me-2">
+                                    <input type="hidden" name="classId" value="@classInfo.Id" />
+                                    <input type="hidden" name="userId" value="@User.Id()" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Leave</button>
+                                </form>
+
+                                <!-- View Assignments Button -->
+                                <form asp-controller="Assignment" asp-action="AllAssignmentsForClass" method="get">
+                                    <input type="hidden" name="userId" value="@User.Id()" />
+                                    <input type="hidden" name="classId" value="@classInfo.Id" />
+                                    <button type="submit" class="btn btn-primary btn-sm">View Assignments</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 }
+                @* End of foreach *@
             </tbody>
         </table>
     }
@@ -47,3 +58,4 @@
         </div>
     }
 </div>
+

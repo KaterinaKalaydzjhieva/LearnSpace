@@ -20,6 +20,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
                 Id = 1,
                 Title = "Test 101",
                 Description = "I need to make this test which will make 20% of your final score of the year!",
+                DueDate = DateTime.Parse("12/12/2024"),
                 CourseId = 1,
             };
 
@@ -30,6 +31,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
                 Id = 2,
                 Title = "Esey for the middle years",
                 Description = "Write a 500 words essey of the theme for the ages around 1400 a. C.",
+                DueDate = DateTime.Parse("12/12/2024"),
                 CourseId = 3,
             };
 

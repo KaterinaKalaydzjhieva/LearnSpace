@@ -13,15 +13,15 @@ namespace LearnSpace.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AllAssignments(string userId) 
+        public async Task<IActionResult> AllAssignments(string id) 
         {
-            var assignments = await assignmentService.GetAllAssignmentsAsync(userId);
+            var assignments = await assignmentService.GetAllAssignmentsAsync(id);
 
             return View(assignments);
         }
 
         [HttpGet]
-        public async Task<IActionResult> AllAssignmentsClass(string userId, int classId)
+        public async Task<IActionResult> AllAssignmentsForClass(string userId, int classId)
         {
             var assignments = await assignmentService.GetAllAssignmentsByClassAsync(userId, classId);
 

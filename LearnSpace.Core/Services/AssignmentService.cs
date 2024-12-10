@@ -33,9 +33,10 @@ namespace LearnSpace.Core.Services
             return result;
         }
 
-        public async Task<AllAssignmentsViewModel> GetAllAssignmentsByClassAsync(string userId, int classId)
+        public async Task<AssignmentsClassViewModel> GetAllAssignmentsByClassAsync(string userId, int classId)
         {
             var user = await repository.GetStudentAsync(userId);
+            var course = await repository.GetByIdAsync<Course>(classId);
 
             var allAssignments = user.StudentCourses
                                         .First(sc => sc.Course.Id == classId)
@@ -46,8 +47,9 @@ namespace LearnSpace.Core.Services
                                             Title = a.Title
                                         }).ToList();
 
-            var result = new AllAssignmentsViewModel()
+            var result = new AssignmentsClassViewModel()
             {
+                ClassName = course.Name,
                 Assignments = allAssignments
             };
 
@@ -59,12 +61,13 @@ namespace LearnSpace.Core.Services
         {
             var assignment = await repository.GetByIdAsync<Assignment>(id);
 
-            var model = new AssignmentInfoViewModel 
+            var model = new AssignmentInfoViewModel
             {
                 Title = assignment.Title,
                 Description = assignment.Description,
                 DueDate = assignment.DueDate.ToString(DateFormat),
-                ClassName = assignment.Course.Name
+                ClassName = assignment.Course.Name,
+                TeacherName = assignment.Course.Teacher.ApplicationUser.FirstName + " " + assignment.Course.Teacher.ApplicationUser.LastName
             };
 
             return model;

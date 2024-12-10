@@ -17,7 +17,7 @@ namespace LearnSpace.Core.Services
         public AllClassesViewModel GetAllClasses(string id)
         {
 			var list = repository.All<Course>()
-                                .Where(course => !course.CourseStudents.Any(cs => cs.StudentId.ToString().ToLower() != id))
+                                .Where(course => !course.CourseStudents.Any(cs => cs.StudentId.ToString().ToLower() == id))
 								.ToList();
 
 

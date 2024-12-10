@@ -1,0 +1,25 @@
+﻿@model LearnSpace.Core.Models.Assignment.AssignmentInfoViewModel
+
+@{
+    ViewBag.Title = "Assignment Details";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">@ViewBag.Title</h2>
+
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h4>@Model.Title</h4>
+        </div>
+        <div class="card-body">
+            <p><strong>Class Name:</strong> @Model.ClassName</p>
+            <p><strong>Teacher:</strong> @Model.TeacherName</p>
+            <p><strong>Description:</strong></p>
+            <p class="text-justify">@Model.Description</p>
+            <p><strong>Due Date:</strong> @Model.DueDate</p>
+        </div>
+        <div class="card-footer text-center">
+            <a asp-controller="Assignment" asp-action="AssignmentInfo" class="btn btn-secondary">Back to Assignments</a>
+        </div>
+    </div>
+</div>
