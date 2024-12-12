@@ -109,5 +109,12 @@ namespace LearnSpace.Infrastructure.Database.Repository
             return student!;
         }
 
+        public async Task<Teacher> GetTeacherAsync(string id)
+        {
+            var user = await DbSet<ApplicationUser>().FindAsync(Guid.Parse(id));
+            var student = user!.Teacher;
+
+            return student!;
+        }
     }
 }

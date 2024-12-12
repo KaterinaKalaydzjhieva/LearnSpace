@@ -25,6 +25,7 @@ namespace LearnSpace.Infrastructure.Database.Entities.Account
         public virtual IEnumerable<Notification> Notifications { get; set; }
 
         public virtual Student? Student { get; set; }
+        public virtual Teacher? Teacher { get; set; }
 
     }
 }

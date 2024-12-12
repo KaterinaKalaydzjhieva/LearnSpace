@@ -1,5 +1,5 @@
-﻿using LearnSpace.Core.Interfaces;
-using LearnSpace.Core.Services;
+﻿using LearnSpace.Core.Interfaces.Student;
+using LearnSpace.Core.Services.Student;
 using LearnSpace.Infrastructure.Database;
 using LearnSpace.Infrastructure.Database.Entities.Account;
 using LearnSpace.Infrastructure.Database.Repository;

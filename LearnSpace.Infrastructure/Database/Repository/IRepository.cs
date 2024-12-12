@@ -22,5 +22,6 @@ namespace LearnSpace.Infrastructure.Database.Repository
         void Detach<T>(T entity) where T : class;
         Task<int> SaveChangesAsync();
         Task<Student> GetStudentAsync(string id);
+        Task<Teacher> GetTeacherAsync(string id);
     }
 }

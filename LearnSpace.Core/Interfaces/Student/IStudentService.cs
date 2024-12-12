@@ -1,7 +1,7 @@
 ﻿using LearnSpace.Core.Models.Student;
 using Microsoft.AspNetCore.Mvc;
 
-namespace LearnSpace.Core.Interfaces
+namespace LearnSpace.Core.Interfaces.Student
 {
     public interface IStudentService
     {

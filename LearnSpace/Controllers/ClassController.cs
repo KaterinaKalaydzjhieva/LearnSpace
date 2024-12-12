@@ -1,4 +1,4 @@
-﻿using LearnSpace.Core.Interfaces;
+﻿using LearnSpace.Core.Interfaces.Student;
 using LearnSpace.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 

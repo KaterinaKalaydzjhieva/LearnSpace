@@ -1,6 +1,6 @@
 ﻿using LearnSpace.Core.Models.Grade;
 
-namespace LearnSpace.Core.Interfaces
+namespace LearnSpace.Core.Interfaces.Student
 {
     public interface IGradeService
     {

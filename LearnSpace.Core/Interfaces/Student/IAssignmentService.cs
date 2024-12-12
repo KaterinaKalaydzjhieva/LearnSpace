@@ -1,6 +1,6 @@
 ﻿using LearnSpace.Core.Models.Assignment;
 
-namespace LearnSpace.Core.Interfaces
+namespace LearnSpace.Core.Interfaces.Student
 {
     public interface IAssignmentService
     {

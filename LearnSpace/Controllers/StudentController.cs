@@ -1,4 +1,4 @@
-﻿using LearnSpace.Core.Interfaces;
+﻿using LearnSpace.Core.Interfaces.Student;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

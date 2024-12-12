@@ -1,9 +1,9 @@
-﻿using LearnSpace.Core.Interfaces;
+﻿using LearnSpace.Core.Interfaces.Student;
 using LearnSpace.Core.Models.Assignment;
 using LearnSpace.Infrastructure.Database.Entities;
 using LearnSpace.Infrastructure.Database.Repository;
 using static LearnSpace.Common.Constants;
-namespace LearnSpace.Core.Services
+namespace LearnSpace.Core.Services.Student
 {
     public class AssignmentService : IAssignmentService
     {
@@ -15,17 +15,17 @@ namespace LearnSpace.Core.Services
         public async Task<AllAssignmentsViewModel> GetAllAssignmentsAsync(string userId)
         {
             var user = await repository.GetStudentAsync(userId);
-            
+
             var allAssignments = user.StudentCourses
-                                .SelectMany(sc => sc.Course.Assignments).Select(a=> new AssignmentServiceModel 
-                                { 
+                                .SelectMany(sc => sc.Course.Assignments).Select(a => new AssignmentServiceModel
+                                {
                                     Id = a.Id,
                                     DueDate = a.DueDate.ToString(DateFormat),
                                     Title = a.Title
-                                
+
                                 }).ToList();
-            
-            var result = new AllAssignmentsViewModel() 
+
+            var result = new AllAssignmentsViewModel()
             {
                 Assignments = allAssignments
             };

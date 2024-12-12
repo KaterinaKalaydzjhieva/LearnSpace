@@ -1,10 +1,10 @@
-﻿using LearnSpace.Core.Interfaces;
+﻿using LearnSpace.Core.Interfaces.Student;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearnSpace.Web.Controllers
 {
-	
-	public class GradeController : BaseController
+
+    public class GradeController : BaseController
 	{
 		private readonly IGradeService gradeService;
 

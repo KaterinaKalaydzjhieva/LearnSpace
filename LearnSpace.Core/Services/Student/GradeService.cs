@@ -1,10 +1,10 @@
-﻿using LearnSpace.Core.Interfaces;
+﻿using LearnSpace.Core.Interfaces.Student;
 using LearnSpace.Core.Models.Grade;
 using LearnSpace.Infrastructure.Database.Entities;
 using LearnSpace.Infrastructure.Database.Repository;
 using Microsoft.AspNetCore.Identity;
 
-namespace LearnSpace.Core.Services
+namespace LearnSpace.Core.Services.Student
 {
     public class GradeService : IGradeService
     {
@@ -20,18 +20,18 @@ namespace LearnSpace.Core.Services
             var gradeCourse = new GradeCourseViewModel();
             var courses = student.StudentCourses.Select(sc => sc.Course).ToList();
 
-            foreach (var course in courses) 
+            foreach (var course in courses)
             {
-                if (course.Assignments.Any(a => a.Grades.Any())) 
+                if (course.Assignments.Any(a => a.Grades.Any()))
                 {
                     gradeCourse.Grades = course.Assignments
                                         .SelectMany(a => a.Grades.Where(g => g.StudentId == student.Id))
-                                        .Select(g => new GradeServiceModel 
+                                        .Select(g => new GradeServiceModel
                                         {
-                                            Score = g.Score,  
+                                            Score = g.Score,
                                             Id = g.Id
-                                        } ).ToList();
-				}
+                                        }).ToList();
+                }
                 gradeCourse.Name = course.Name;
                 list.Add(gradeCourse);
                 gradeCourse = new GradeCourseViewModel();
