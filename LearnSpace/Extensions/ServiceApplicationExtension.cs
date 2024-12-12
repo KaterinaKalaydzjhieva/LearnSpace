@@ -1,5 +1,7 @@
 ﻿using LearnSpace.Core.Interfaces.Student;
+using LearnSpace.Core.Interfaces.Teacher;
 using LearnSpace.Core.Services.Student;
+using LearnSpace.Core.Services.Teacher;
 using LearnSpace.Infrastructure.Database;
 using LearnSpace.Infrastructure.Database.Entities.Account;
 using LearnSpace.Infrastructure.Database.Repository;
@@ -16,6 +18,8 @@ namespace LearnSpace.Web.Extensions
             services.AddScoped<IGradeService, GradeService>();
             services.AddScoped<IClassService, ClassService>();
             services.AddScoped<IAssignmentService, AssignmentService>();
+            services.AddScoped<ITeacherService, TeacherService>();
+            services.AddScoped<ISubmissionService, SubmissionService>();
 
 			//Roles Authorization
 			//services.AddAuthorization(options =>

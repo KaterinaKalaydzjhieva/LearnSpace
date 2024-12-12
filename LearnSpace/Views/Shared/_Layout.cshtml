@@ -76,9 +76,9 @@
         </main>
     </div>
 
-    <footer class="footer footer-index bg-white border-1 w-100" style="position:fixed; bottom:0;">
+    <footer class="footer bg-white border-1">
         <div class="m-2">
-            &copy; @DateTime.Now.Year - LearnSpace 
+            &copy; @DateTime.Now.Year - LearnSpace
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -88,3 +88,30 @@
 </body>
 
 </html>
+<style>
+    .footer {
+        position: fixed;
+        bottom: -50px; /* Start hidden (height of the footer) */
+        left: 0;
+        width: 100%;
+        background-color: white;
+        transition: bottom 0.3s ease; /* Smooth transition */
+        box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+        .footer:hover, .footer.active {
+            bottom: 0; /* Fully visible when hovered or active */
+        }
+</style>
+<script>
+    document.addEventListener('mousemove', function (e) {
+        const footer = document.querySelector('.footer');
+        const windowHeight = window.innerHeight;
+
+        if (e.clientY > windowHeight - 50) { // Near the bottom of the screen
+            footer.classList.add('active');
+        } else {
+            footer.classList.remove('active');
+        }
+    });
+</script>

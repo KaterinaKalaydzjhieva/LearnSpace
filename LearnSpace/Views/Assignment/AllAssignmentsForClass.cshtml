@@ -27,9 +27,7 @@
                         <td>@assignment.Title</td>
                         <td>@assignment.DueDate</td>
                         <td class="text-center">
-                            <!-- Example Action Buttons -->
-                            <a href="@Url.Action("Details", "Assignment", new { id = assignment.Id })" class="btn btn-info btn-sm">Details</a>
-                            <a href="@Url.Action("Delete", "Assignment", new { id = assignment.Id })" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="@Url.Action("AssignmentInfo", "Assignment", new { id = assignment.Id })" class="btn btn-info btn-sm">Details</a>
                         </td>
                     </tr>
                 }

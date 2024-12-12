@@ -14,4 +14,8 @@
     <ProjectReference Include="..\LearnSpace.Infrastructure\LearnSpace.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Submission\" />
+  </ItemGroup>
+
 </Project>

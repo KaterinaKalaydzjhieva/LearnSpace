@@ -19,6 +19,7 @@ namespace LearnSpace.Infrastructure.Database
         public virtual DbSet<Course> Courses { get; set; } = null!;
         public virtual DbSet<StudentCourse> StudentsCourses { get; set; } = null!;
         public virtual DbSet<Notification> Notifications { get; set; } = null!;
+        public virtual DbSet<Submission> Submissions { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

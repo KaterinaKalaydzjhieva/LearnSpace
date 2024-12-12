@@ -9,6 +9,7 @@
 
             public const int LastNameMaxLen = 100;
             public const int LastNameMinLen = 3;
+
         }
 
         public static class Teacher
@@ -63,6 +64,11 @@
 
             public const int LastNameMaxLen = 200;
             public const int LastNameMinLen = 3;
+        }
+
+        public static class Submission
+        {
+            public const int FilePathMaxLength = 500;
         }
     }
 }
