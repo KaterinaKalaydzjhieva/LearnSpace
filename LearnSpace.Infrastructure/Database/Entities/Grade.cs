@@ -23,9 +23,9 @@ namespace LearnSpace.Infrastructure.Database.Entities
         public virtual Student Student { get; set; } = null!;
 
         [Required]
-        [ForeignKey(nameof(Assignment))]
-        public int AssignmentId { get; set; }
-        public virtual Assignment Assignment { get; set; } = null!;
+        [ForeignKey(nameof(Submission))]
+        public int SubmissionId { get; set; }
+        public virtual Submission Submission { get; set; } = null!;
     }
 
 }

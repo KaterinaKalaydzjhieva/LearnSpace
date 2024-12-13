@@ -15,6 +15,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
         {
             var grades = new List<Grade>();
 
+            //1
             var grade = new Grade() 
             {
                 Id = 1,
@@ -26,6 +27,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
 
             grades.Add(grade);
 
+            //2
             grade = new Grade()
             {
                 Id = 2,
@@ -37,6 +39,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
 
             grades.Add(grade);
 
+            //3
             grade = new Grade()
             {
                 Id = 3,
@@ -48,6 +51,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
 
             grades.Add(grade);
 
+            //4
             grade = new Grade()
             {
                 Id = 4,
@@ -59,6 +63,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
 
             grades.Add(grade);
 
+            //5
 			grade = new Grade()
 			{
 				Id = 5,

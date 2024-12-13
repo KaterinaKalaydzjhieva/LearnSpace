@@ -15,6 +15,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
         {
             var students = new List<Student>();
 
+            //1
             var student = new Student()
             {
                 Id = Guid.Parse("5c07f155-602e-403b-bb86-5a786814f575"),
@@ -22,7 +23,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
             };
 
             students.Add(student);
-
+            //2
             student = new Student()
             {
                 Id = Guid.Parse("18e76084-b8a6-4e78-bd26-143f33a05eb8"),
@@ -30,7 +31,7 @@ namespace LearnSpace.Infrastructure.Database.Configuration
             };
 
             students.Add(student);
-
+            //3
             student = new Student()
             {
                 Id = Guid.Parse("c6903087-71e5-41ba-80be-ed119b7902fc"),
@@ -38,11 +39,20 @@ namespace LearnSpace.Infrastructure.Database.Configuration
             };
 
             students.Add(student);
-
+            //4
             student = new Student()
             {
                 Id = Guid.Parse("f4aa693d-305e-426b-950c-d02a8ca8b56f"),
                 ApplicationUserId = Guid.Parse("ebdc00b8-7106-4cbd-a482-da93c40103d3")
+            };
+
+            students.Add(student);
+
+            //5
+            student = new Student()
+            {
+                Id = Guid.Parse("bb5432a1-ea56-450b-9db6-f7349faf28a6"),
+                ApplicationUserId = Guid.Parse("267a7709-17b4-413c-9026-a6f365d59731")
             };
 
             students.Add(student);

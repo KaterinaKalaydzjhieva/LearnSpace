@@ -24,19 +24,18 @@
             <p><strong>Teacher:</strong> @Model.Teacher</p>
         </div>
         <div class="card-footer text-center">
-            <a asp-controller="Grade" asp-action="AllGrades" asp-route-id="@User.Id()" class="btn btn-secondary">Back to Grades List</a>
+            <a asp-controller="Grade" asp-action="AllGrades" class="btn btn-secondary">Back to Grades List</a>
         </div>
     </div>
 </div>
 
 @functions {
-    // Helper method to calculate the background color based on the grade score
     public string GetGradeColor(double score)
     {
-        if (score <= 2) return "#dc3545"; // Red for lowest scores
+        if (score <= 2) return "#dc3545"; // Red
         if (score <= 3) return "#fd7e14"; // Orange
         if (score <= 4) return "#ffc107"; // Yellow
         if (score <= 5) return "#4169E1"; // Blue
-        return "#198754";               // Dark green for highest scores
+        return "#198754";                 // Green
     }
 }

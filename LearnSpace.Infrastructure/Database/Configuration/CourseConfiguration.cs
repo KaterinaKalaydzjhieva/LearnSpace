@@ -38,8 +38,28 @@ namespace LearnSpace.Infrastructure.Database.Configuration
             course = new Course()
             {
                 Id = 3,
-                Name = "Nationalism",
-                Description = "In this course you can learn how is a nationality formed and passed to the next generations. Learn Geometry today!",
+                Name = "Modern History",
+                Description = "In this course you can learn how the new empires are formed and passed to the next generations. Join us!",
+                TeacherId = Guid.Parse("047e49c7-8466-4419-88e3-1b6f7107d247")
+            };
+
+            courses.Add(course);
+
+            course = new Course()
+            {
+                Id = 4,
+                Name = "Ancient History",
+                Description = "In this course you can learn how the people in the ancient times have lived. Interested? Let's learn together!",
+                TeacherId = Guid.Parse("047e49c7-8466-4419-88e3-1b6f7107d247")
+            };
+
+            courses.Add(course);
+
+            course = new Course()
+            {
+                Id = 5,
+                Name = "Middle Ages",
+                Description = "In this course you can learn how hard were the middle ages and why they are important. Join today!",
                 TeacherId = Guid.Parse("047e49c7-8466-4419-88e3-1b6f7107d247")
             };
 

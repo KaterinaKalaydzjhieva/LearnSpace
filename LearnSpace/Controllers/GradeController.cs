@@ -14,14 +14,14 @@ namespace LearnSpace.Web.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IActionResult> AllGrades(string id)
+		public async Task<IActionResult> AllGrades()
 		{
-			var list = await gradeService.GetAllGradesAsync(id);
+			var list = await gradeService.GetAllGradesAsync(GetUserId());
 
 			return View(list);
 		}
 
-		public async Task<IActionResult> GradeInfo(string userId, int id) 
+		public async Task<IActionResult> GradeInfo(int id) 
 		{
 			var grade = await gradeService.GetGradeInfoAsync(id);
 

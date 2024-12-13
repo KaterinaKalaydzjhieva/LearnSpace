@@ -28,16 +28,16 @@
                         @if (User.IsStudent())
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Student" asp-action="Dashboard" asp-route-id="@User.Id()">Dashboard</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Student" asp-action="Dashboard">Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Grade" asp-action="AllGrades" asp-route-id="@User.Id()">Grades</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Grade" asp-action="AllGrades">Grades</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Class" asp-action="AllClassesForStudent" asp-route-id="@User.Id()">Classes</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Class" asp-action="AllClassesForStudent">Classes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Assignment" asp-action="AllAssignments" asp-route-id="@User.Id()">Assignments</a>
+                                <a class="nav-link text-white" asp-area="" asp-controller="Assignment" asp-action="AllAssignments">Assignments</a>
                             </li>
                         }
 

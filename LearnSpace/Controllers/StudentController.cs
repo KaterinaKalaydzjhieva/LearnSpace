@@ -15,18 +15,18 @@ namespace LearnSpace.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Dashboard(string id)
+        public async Task<IActionResult> Dashboard()
         {
             if (!User.Identity!.IsAuthenticated)
             {
                 return Redirect("/User/Register");
             }
-            if (!(await studentService.ExistsByIdAsync(id)))
+            if (!(await studentService.ExistsByIdAsync(GetUserId())))
             {
                 return RedirectToAction("Error404", "Home", new { area = "" });
             }
 
-            var student = await studentService.GetStudentDashboardInformationAsync(id);
+            var student = await studentService.GetStudentDashboardInformationAsync(GetUserId());
 
             return View(student);
         }

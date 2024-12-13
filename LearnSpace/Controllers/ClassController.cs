@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LearnSpace.Web.Controllers
 {
-    public class ClassController : Controller
+    public class ClassController : BaseController
     {
         private readonly IClassService classService;
 
@@ -13,32 +13,36 @@ namespace LearnSpace.Web.Controllers
             classService = _classService;
         }
         [HttpGet]
-        public async Task<IActionResult> AllClassesForStudent(string id) 
+        public async Task<IActionResult> AllClassesForStudent() 
         {
-            var list = await classService.GetAllClassesForStudentAsync(id);
+            var list = await classService.GetAllClassesForStudentAsync(GetUserId());
 
             return View(list);
         }
 
         [HttpGet]
-        public IActionResult AllClasses(string id)
+        public IActionResult AllClasses()
         {
-            var list = classService.GetAllClasses(id);
+            var list = classService.GetAllClasses(GetUserId());
 
             return View(list);
         }
 
         [HttpPost]
-        public async Task<IActionResult> LeaveClass(string userId, int classId) 
+        public async Task<IActionResult> LeaveClass(int classId) 
         {
+            var userId = GetUserId();
+
             await classService.LeaveClassAsync(userId, classId);
 
             return RedirectToAction(nameof(AllClassesForStudent), new { userId = userId });
         }
 
         [HttpPost]
-        public async Task<IActionResult> JoinClass(string userId, int classId) 
+        public async Task<IActionResult> JoinClass(int classId) 
         {
+            var userId = GetUserId();
+
             await classService.JoinClassAsync(userId, classId);
 
             return RedirectToAction(nameof(AllClassesForStudent), userId);
