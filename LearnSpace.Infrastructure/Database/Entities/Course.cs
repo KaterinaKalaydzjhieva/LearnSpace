@@ -26,8 +26,6 @@ namespace LearnSpace.Infrastructure.Database.Entities
         [Required]
         public int GroupCapacity { get; set; }
 
-        public int GroupCount { get; set; } = 0;
-
         [ForeignKey(nameof(Teacher))]
         public Guid TeacherId { get; set; }
         public virtual Teacher Teacher { get; set; } = null!;

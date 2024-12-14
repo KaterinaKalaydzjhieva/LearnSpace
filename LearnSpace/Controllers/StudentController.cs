@@ -1,4 +1,5 @@
 ﻿using LearnSpace.Core.Interfaces.Student;
+using LearnSpace.Web.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,8 +29,8 @@ namespace LearnSpace.Web.Controllers
 
             var student = await studentService.GetStudentDashboardInformationAsync(GetUserId());
 
-            return View(student);
+			return View(student);
         }
 
-    }
+	}
 }

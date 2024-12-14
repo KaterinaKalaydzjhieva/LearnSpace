@@ -70,28 +70,65 @@
 </style>
 
 <script>
-	const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
-	const data = {
-		labels: labels,
-		datasets: [{
-			label: 'Grades by months',
-			data: [65, 59, 80, 81, 56, 55, 40],
-			fill: false,
-			borderColor: 'rgb(75, 192, 192)',
-			tension: 0.1
-		}]
-	};
+    // Function to fetch chart data and render the chart
+    async function fetchAndRenderChart() {
+        try {
+            // Fetch data from the backend endpoint
+            const averageSuccessData = @Html.Raw(Json.Serialize(Model.ChartData));;
 
-	const config = {
-		type: 'line',
-		data: data,
-		options: {}
-	};
+            // Check if the response is ok
+            if (!response.ok) {
+                throw new Error('Failed to fetch chart data');
+            }
 
-	var myChart = new Chart(
-		document.getElementById('lineChart'),
-		config
+            // Extract labels (dates) and data points (average grades)
+            const labels = averageSuccessData.map(item => item.Date); // Dates for X-axis
+            const dataPoints = averageSuccessData.map(item => item.AverageGrade); // Average grades for Y-axis
 
-	);
+            // Chart.js configuration
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: 'Average Success Over Time',
+                    data: dataPoints,
+                    fill: false,
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.1
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Date'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Average Success'
+                            },
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+
+            // Render the chart in the canvas element
+            new Chart(document.getElementById('lineChart'), config);
+
+        } catch (error) {
+            console.error('Error rendering chart:', error);
+        }
+    }
+
+    // Call the function to fetch and render the chart on page load
+    fetchAndRenderChart();
 </script>
 

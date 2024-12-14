@@ -32,8 +32,8 @@ namespace LearnSpace.Core.Services.Student
             {
                 ClassSorting.GroupCapacityAscending => classesToShow.OrderBy(c => c.GroupCapacity),
                 ClassSorting.GroupCapacityDescending => classesToShow.OrderByDescending(c => c.GroupCapacity),
-                ClassSorting.LowCapacity => classesToShow.OrderBy(c => c.GroupCapacity-c.GroupCount),
-                ClassSorting.HighCapacity => classesToShow.OrderByDescending(c => c.GroupCapacity - c.GroupCount),
+                ClassSorting.LowCapacity => classesToShow.OrderBy(c => c.GroupCapacity-c.CourseStudents.Count),
+                ClassSorting.HighCapacity => classesToShow.OrderByDescending(c => c.GroupCapacity - c.CourseStudents.Count),
 
                 _ => classesToShow.OrderBy(c => c.Id)
             };
@@ -48,7 +48,8 @@ namespace LearnSpace.Core.Services.Student
                                     Name = c.Name,
                                     AssignmentCount = c.Assignments.Count,
 									CurrentStudentCount = c.CourseStudents.Count, 
-									GroupCapacity = c.GroupCapacity
+									GroupCapacity = c.GroupCapacity,
+                                    GroupCurrentCount = c.CourseStudents.Count,
 
 								}).ToList();
 
@@ -88,6 +89,13 @@ namespace LearnSpace.Core.Services.Student
 
         public async Task JoinClassAsync(string userId, int id)
         {
+            var course = await repository.GetByIdAsync<Course>(id);
+
+            if (course.GroupCapacity - course.CourseStudents.Count <= 0)
+            {
+                return;
+            }
+
             var student = await repository.GetStudentAsync(userId);
             var studentCourse = new StudentCourse
             {

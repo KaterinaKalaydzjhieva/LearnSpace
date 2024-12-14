@@ -40,11 +40,9 @@ namespace LearnSpace.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> LeaveClass(int classId) 
         {
-            var userId = GetUserId();
+            await classService.LeaveClassAsync(GetUserId(), classId);
 
-            await classService.LeaveClassAsync(userId, classId);
-
-            return RedirectToAction(nameof(AllClassesForStudent), new { userId = userId });
+            return RedirectToAction(nameof(AllClassesForStudent));
         }
 
         [HttpPost]

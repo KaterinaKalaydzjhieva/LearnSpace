@@ -1,11 +1,11 @@
 ﻿@model AssignmentsClassViewModel
 
 @{
-    ViewBag.Title = $"Assignments for ";
+    ViewBag.Title = $"Assignments for {Model.ClassName}";
 }
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4" style="font-size:40px; font-weight: 700;">@ViewBag.Title <u>@Model.ClassName</u></h2>
+    <h2 class="text-center mb-4" style="font-size:40px; font-weight: 700;">Assignments for <u>@Model.ClassName</u></h2>
     <p class="text-muted">Total Assignments: <strong>@Model.AssignmentCount</strong></p>
 
     @if (Model.Assignments.Any())

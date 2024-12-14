@@ -21,7 +21,7 @@ namespace LearnSpace.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> AllAssignmentsForClass( int classId)
+        public async Task<IActionResult> AllAssignmentsForClass(int classId)
         {
             var assignments = await assignmentService.GetAllAssignmentsByClassAsync(GetUserId(), classId);
 

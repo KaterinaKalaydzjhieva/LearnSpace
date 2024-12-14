@@ -8,5 +8,6 @@ namespace LearnSpace.Core.Interfaces.Student
         Task<bool> ExistsByIdAsync(string userId);
 
         Task<StudentDashboardModel> GetStudentDashboardInformationAsync(string userId);
-    }
+
+	}
 }

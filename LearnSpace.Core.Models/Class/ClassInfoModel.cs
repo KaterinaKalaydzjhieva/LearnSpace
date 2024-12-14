@@ -8,6 +8,8 @@
         public int AssignmentCount { get; set; }
         public int CurrentStudentCount { get; set; }
         public int GroupCapacity { get; set; }
-        
+        public int GroupCurrentCount { get; set; }
+
+
     }
 }
