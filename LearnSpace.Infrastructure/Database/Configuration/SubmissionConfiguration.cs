@@ -10,77 +10,94 @@ namespace LearnSpace.Infrastructure.Database.Configuration
         {
             builder.HasData(SeedSubmissions());
         }
-        private static List<Submission> SeedSubmissions() 
+        private static List<Submission> SeedSubmissions()
         {
             var submissions = new List<Submission>();
-            
-            //1
-            var submission = new Submission()
+
+            var file1Content = FileToByteArray("D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task1.txt");
+            var file2Content = FileToByteArray("D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task2.txt");
+            var file3Content = FileToByteArray("D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task3.txt");
+            var file4Content = FileToByteArray("D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task4.txt");
+            var file5Content = FileToByteArray("D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task5.txt");
+
+            // 1
+            submissions.Add(new Submission()
             {
                 Id = 1,
                 AssignmentId = 2,
                 StudentId = Guid.Parse("5c07f155-602e-403b-bb86-5a786814f575"),
-                FilePath = "D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task1.txt",
+                FileType = "txt",
+                FileName ="task1",
+                FileContent = file1Content, 
                 SubmittedOn = DateTime.UtcNow,
                 GradeId = 1
-            };
+            });
 
-            submissions.Add(submission);
-
-            //2
-            submission = new Submission()
+            // 2
+            submissions.Add(new Submission()
             {
                 Id = 2,
                 AssignmentId = 4,
                 StudentId = Guid.Parse("18e76084-b8a6-4e78-bd26-143f33a05eb8"),
-                FilePath = "D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task2.txt",
+                FileContent = file2Content,
+                FileType = "txt",
+                FileName = "task2",
                 SubmittedOn = DateTime.UtcNow,
                 GradeId = 2
-            };
+            });
 
-            submissions.Add(submission);
-
-            //3
-            submission = new Submission()
+            // 3
+            submissions.Add(new Submission()
             {
                 Id = 3,
                 AssignmentId = 6,
                 StudentId = Guid.Parse("c6903087-71e5-41ba-80be-ed119b7902fc"),
-                FilePath = "D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task3.txt",
+                FileContent = file3Content,
+                FileType = "txt",
+                FileName = "task3",
                 SubmittedOn = DateTime.UtcNow,
                 GradeId = 3
-            };
+            });
 
-            submissions.Add(submission);
-
-            //4
-            submission = new Submission()
+            // 4
+            submissions.Add(new Submission()
             {
                 Id = 4,
                 AssignmentId = 8,
                 StudentId = Guid.Parse("f4aa693d-305e-426b-950c-d02a8ca8b56f"),
-                FilePath = "D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task4.txt",
+                FileContent = file4Content,
+                FileType = "txt",
+                FileName = "task4",
                 SubmittedOn = DateTime.UtcNow,
                 GradeId = 4
-            };
+            });
 
-            submissions.Add(submission);
-
-            //5
-            submission = new Submission()
+            // 5
+            submissions.Add(new Submission()
             {
                 Id = 5,
                 AssignmentId = 10,
                 StudentId = Guid.Parse("bb5432a1-ea56-450b-9db6-f7349faf28a6"),
-                FilePath = "D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task5.txt",
+                FileContent = file5Content,
+                FileType = "txt",
+                FileName = "task5",
                 SubmittedOn = DateTime.UtcNow,
                 GradeId = 5
-            };
-
-            submissions.Add(submission);
-
+            });
 
             return submissions;
         }
+
+        // Helper method to convert a file to byte[]
+        private static byte[] FileToByteArray(string filePath)
+        {
+            if (File.Exists(filePath))
+            {
+                return File.ReadAllBytes(filePath); // Read file content as byte array
+            }
+
+            throw new FileNotFoundException($"File not found: {filePath}");
+        }
+
     }
 }

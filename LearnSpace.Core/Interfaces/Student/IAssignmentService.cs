@@ -6,6 +6,6 @@ namespace LearnSpace.Core.Interfaces.Student
     {
         Task<AssignmentsClassViewModel> GetAllAssignmentsByClassAsync(string userId,int classId);
         Task<AllAssignmentsViewModel> GetAllAssignmentsAsync(string userId);
-        Task<AssignmentInfoViewModel> GetAssignmentInfoAsync(int id);
+        Task<AssignmentInfoViewModel> GetAssignmentInfoAsync(string userId, int assignmentId);
     }
 }

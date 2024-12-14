@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LearnSpace.Common\LearnSpace.Common.csproj" />
     <ProjectReference Include="..\LearnSpace.Core.Models\LearnSpace.Core.Models.csproj" />
     <ProjectReference Include="..\LearnSpace.Infrastructure\LearnSpace.Infrastructure.csproj" />
   </ItemGroup>

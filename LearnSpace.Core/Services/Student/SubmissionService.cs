@@ -1,6 +1,9 @@
 ﻿using LearnSpace.Core.Interfaces.Student;
 using LearnSpace.Infrastructure.Database.Entities;
 using LearnSpace.Infrastructure.Database.Repository;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.FileIO;
 
 namespace LearnSpace.Core.Services.Student
 {
@@ -11,20 +14,40 @@ namespace LearnSpace.Core.Services.Student
         {
             repository = _repository;
         }
-        public async Task CreateSubmissionAsync(string userId, int assignmentId, string filePath)
+        public async Task CreateSubmissionAsync(string userId, int assignmentId, IFormFile file)
         {
-            var user = await repository.GetStudentAsync(userId);
-
-            var submission = new Submission 
+            var student = await repository.GetStudentAsync(userId);
+            var sub = student.Submissions.FirstOrDefault(s => s.AssignmentId == assignmentId);
+            byte[] data;
+            using (var memoryStream = new MemoryStream())
             {
-                AssignmentId = assignmentId,
-                StudentId = user.Id,
-                FilePath = filePath,
-                SubmittedOn = DateTime.Now
-            };
+                await file.CopyToAsync(memoryStream);
+                data = memoryStream.ToArray();
+            }
 
-            await repository.AddAsync(submission);
+            if (sub==null) 
+            {
+                var submission = new Submission
+                {
+                    AssignmentId = assignmentId,
+                    StudentId = student.Id,
+                    FileName = Path.GetFileName(file.FileName),
+                    FileType = file.ContentType,
+                    SubmittedOn = DateTime.Now,
+                    FileContent = data
+                };
+
+                await repository.AddAsync(submission);
+            }
+            else
+            {
+                sub.FileName = Path.GetFileName(file.FileName);
+                sub.FileType = file.ContentType;
+                sub.SubmittedOn = DateTime.Now;
+                sub.FileContent = data;
+            }
             await repository.SaveChangesAsync();
+
         }
     }
 }

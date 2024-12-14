@@ -30,7 +30,7 @@ namespace LearnSpace.Web.Controllers
 
         public async Task<IActionResult> AssignmentInfo(int id) 
         {
-            var assignment = await assignmentService.GetAssignmentInfoAsync(id);
+            var assignment = await assignmentService.GetAssignmentInfoAsync(GetUserId(),id);
 
             return View(assignment);
         }

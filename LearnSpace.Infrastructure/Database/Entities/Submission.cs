@@ -19,8 +19,13 @@ namespace LearnSpace.Infrastructure.Database.Entities
         public virtual Student Student { get; set; } = null!;
 
         [Required]
-        [StringLength(FilePathMaxLength)]
-        public string FilePath { get; set; } = string.Empty;
+        public string FileName { get; set; } = string.Empty;
+
+        [Required]
+        public string FileType { get; set; } = string.Empty;
+
+        [Required]
+        public byte[] FileContent { get; set; } = null!;
 
         public DateTime SubmittedOn { get; set; }
 

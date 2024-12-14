@@ -1,4 +1,6 @@
 ﻿using LearnSpace.Core.Interfaces.Student;
+using LearnSpace.Core.Models.Assignment;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LearnSpace.Web.Controllers
 {
@@ -10,11 +12,15 @@ namespace LearnSpace.Web.Controllers
         {
             submissionService = _submissionService;
         }
-        //public async Task<IActionResult> SubmitAssignment(int assignmentId, string filePath) 
-        //{
-        //    await submissionService.CreateSubmissionAsync(GetUserId(), assignmentId, filePath);
+        [HttpPost]
+        public async Task<IActionResult> SubmitAssignment(int assignmentId, IFormFile filePath)
+        {
+            
 
-        //    return
-        //}
+            await submissionService.CreateSubmissionAsync(GetUserId(), assignmentId, filePath);
+
+            return RedirectToAction("AssignmentInfo", "Assignment", new { id = assignmentId });   
+        }
+
     }
 }
