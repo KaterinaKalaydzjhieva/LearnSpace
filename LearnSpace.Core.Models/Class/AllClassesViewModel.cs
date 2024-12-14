@@ -9,9 +9,6 @@ namespace LearnSpace.Core.Models.Class
 	public class AllClassesViewModel
 	{
         public List<ClassInfoModel> Classes { get; set; } = new List<ClassInfoModel>();
-        public int ClassesCount 
-        {
-            get => Classes.Count; 
-        }
+        public int TotalClassesCount { get; set; }
     }
 }

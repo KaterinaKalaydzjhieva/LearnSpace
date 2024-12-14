@@ -2,7 +2,6 @@
 using LearnSpace.Core.Models.Grade;
 using LearnSpace.Infrastructure.Database.Entities;
 using LearnSpace.Infrastructure.Database.Repository;
-using Microsoft.AspNetCore.Identity;
 
 namespace LearnSpace.Core.Services.Student
 {
@@ -22,19 +21,21 @@ namespace LearnSpace.Core.Services.Student
 
             foreach (var course in courses)
             {
-                if (course.Assignments.Any(a => a.Grades.Any()))
+                if (course.Assignments.Any(a => a.Submissions.Select(s=>s.Grade).Any(g=>g.Submission.StudentId == student.Id)))
                 {
                     gradeCourse.Grades = course.Assignments
-                                        .SelectMany(a => a.Grades.Where(g => g.StudentId == student.Id))
+                                        .SelectMany(a => a.Submissions.Select(s => s.Grade).Where(g => g.StudentId == student.Id))
                                         .Select(g => new GradeServiceModel
                                         {
                                             Score = g.Score,
                                             Id = g.Id
                                         }).ToList();
+                    
                 }
                 gradeCourse.Name = course.Name;
                 list.Add(gradeCourse);
                 gradeCourse = new GradeCourseViewModel();
+
             }
 
             return list;
@@ -47,10 +48,10 @@ namespace LearnSpace.Core.Services.Student
             var gradeInfo = new GradeInfoViewModel();
 
             gradeInfo.Id = id;
-            gradeInfo.CourseName = grade.Assignment.Course.Name;
-            gradeInfo.AssignmentDescription = grade.Assignment.Description;
+            gradeInfo.CourseName = grade.Submission.Assignment.Course.Name;
+            gradeInfo.AssignmentDescription = grade.Submission.Assignment.Description;
             gradeInfo.Score = grade.Score;
-            gradeInfo.Teacher = grade.Assignment.Course.Teacher.ApplicationUser.FirstName + " " + grade.Assignment.Course.Teacher.ApplicationUser.LastName;
+            gradeInfo.Teacher = grade.Submission.Assignment.Course.Teacher.ApplicationUser.FirstName + " " + grade.Submission.Assignment.Course.Teacher.ApplicationUser.LastName;
 
             return gradeInfo;
 

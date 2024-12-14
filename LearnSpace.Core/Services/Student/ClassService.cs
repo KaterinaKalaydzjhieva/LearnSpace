@@ -1,8 +1,8 @@
 ﻿using LearnSpace.Core.Interfaces.Student;
 using LearnSpace.Core.Models.Class;
+using LearnSpace.Core.Models.Enumerations;
 using LearnSpace.Infrastructure.Database.Entities;
 using LearnSpace.Infrastructure.Database.Repository;
-using Microsoft.EntityFrameworkCore;
 
 namespace LearnSpace.Core.Services.Student
 {
@@ -14,26 +14,50 @@ namespace LearnSpace.Core.Services.Student
             repository = _repository;
         }
 
-        public AllClassesViewModel GetAllClasses(string id)
+        public async Task<AllClassesViewModel> GetAllClassesAsync(string id, string? searchTerm = null, ClassSorting sorting = ClassSorting.GroupCapacityDescending, int currPage = 1, int classesPerPage = 15)
         {
-            var list = repository.All<Course>()
-                                .Where(course => !course.CourseStudents.Any(cs => cs.StudentId.ToString().ToLower() == id))
-                                .ToList();
+            var studentId = (await repository.GetStudentAsync(id)).Id.ToString().ToLower();
+            var classesToShow = repository.AllReadOnly<Course>()
+                                .Where(course => !course.CourseStudents.Any(cs => cs.StudentId.ToString().ToLower() == studentId));
 
-
-            var allClasses = list.Select(c => new ClassInfoModel
+            if (searchTerm != null)
             {
-                Id = c.Id,
-                TeacherName = c.Teacher.ApplicationUser.FirstName + " " + c.Teacher.ApplicationUser.LastName,
-                Name = c.Name,
-                AssignmentCount = c.Assignments.Count
+                string normalizedSearchedTerm = searchTerm.ToLower();
+                classesToShow = classesToShow
+                            .Where(c => (c.Name.ToLower().Contains(normalizedSearchedTerm)));
+            }
+            
 
-            }).ToList();
+            classesToShow = sorting switch
+            {
+                ClassSorting.GroupCapacityAscending => classesToShow.OrderBy(c => c.GroupCapacity),
+                ClassSorting.GroupCapacityDescending => classesToShow.OrderByDescending(c => c.GroupCapacity),
+                ClassSorting.LowCapacity => classesToShow.OrderBy(c => c.GroupCapacity-c.GroupCount),
+                ClassSorting.HighCapacity => classesToShow.OrderByDescending(c => c.GroupCapacity - c.GroupCount),
+
+                _ => classesToShow.OrderBy(c => c.Id)
+            };
+
+            var allClasses = classesToShow
+                                .Skip((currPage - 1) * classesPerPage)
+                                .Take(classesPerPage)
+                                .Select(c => new ClassInfoModel
+                                {
+                                    Id = c.Id,
+                                    TeacherName = c.Teacher.ApplicationUser.FirstName + " " + c.Teacher.ApplicationUser.LastName,
+                                    Name = c.Name,
+                                    AssignmentCount = c.Assignments.Count,
+									CurrentStudentCount = c.CourseStudents.Count, 
+									GroupCapacity = c.GroupCapacity
+
+								}).ToList();
 
             var result = new AllClassesViewModel
             {
-                Classes = allClasses
+                Classes = allClasses,
             };
+
+            result.TotalClassesCount = result.Classes.Count;
 
             return result;
         }
@@ -52,9 +76,12 @@ namespace LearnSpace.Core.Services.Student
                     TeacherName = c.Teacher.ApplicationUser.FirstName + " " + c.Teacher.ApplicationUser.LastName,
                     Name = c.Name,
                     AssignmentCount = c.Assignments.Count,
+                    CurrentStudentCount = c.CourseStudents.Count,
+                    GroupCapacity = c.GroupCapacity
                 };
                 classes.Classes.Add(classInfo);
             }
+            classes.TotalClassesCount = classes.Classes.Count;
 
             return classes;
         }

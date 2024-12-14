@@ -16,6 +16,7 @@
                     <th scope="col">#</th>
                     <th scope="col">Title</th>
                     <th scope="col">Due Date</th>
+                    <th scope="col">Submitted</th>
                     <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -26,6 +27,16 @@
                         <th scope="row">@assignment.Id</th>
                         <td>@assignment.Title</td>
                         <td>@assignment.DueDate</td>
+                        <td>
+                            @if (assignment.IsSubmitted)
+                            {
+                                <span class="badge bg-success">Yes</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-danger">No</span>
+                            }
+                        </td>
                         <td class="text-center">
                             <a asp-controller="Assignment" asp-action="AssignmentInfo" asp-route-id="@assignment.Id" class="btn btn-info btn-sm">Details</a>
                         </td>

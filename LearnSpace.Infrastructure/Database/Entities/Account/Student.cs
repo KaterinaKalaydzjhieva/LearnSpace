@@ -7,14 +7,12 @@ namespace LearnSpace.Infrastructure.Database.Entities.Account
         public Student()
         {
             Id = Guid.NewGuid();
-            this.Grades = new HashSet<Grade>();
             this.StudentCourses = new HashSet<StudentCourse>();
             this.Submissions = new HashSet<Submission>();
         }
 
         [Key]
         public Guid Id { get; set; }
-        public virtual IEnumerable<Grade> Grades { get; set; }
         public virtual IEnumerable<StudentCourse> StudentCourses { get; set; } 
         public virtual IEnumerable<Submission> Submissions { get; set; } 
 

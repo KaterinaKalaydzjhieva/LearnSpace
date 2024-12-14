@@ -26,7 +26,7 @@ namespace LearnSpace.Core.Services.Teacher
             var model = new TeacherDashboardModel
             {
                 FullName = user.ApplicationUser.FirstName + " " + user.ApplicationUser.LastName,
-                GradeCount = user.Courses.SelectMany(c=>c.Assignments.SelectMany(a=>a.Grades)).Count(),
+                GradeCount = user.Courses.SelectMany(c=>c.Assignments.Select(a=>a.Submissions.Select(s=>s.Grade))).Count(),
                 AssignmentCount = user.Assignments.Count,
                 ClassCount = user.Courses.Count
             };

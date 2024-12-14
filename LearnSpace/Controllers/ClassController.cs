@@ -1,4 +1,5 @@
 ﻿using LearnSpace.Core.Interfaces.Student;
+using LearnSpace.Core.Models.Class;
 using LearnSpace.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,11 +22,19 @@ namespace LearnSpace.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult AllClasses()
+        public async Task<IActionResult> AllClasses([FromQuery] AllClassesQueryModel query)
         {
-            var list = classService.GetAllClasses(GetUserId());
+            var model = await classService.GetAllClassesAsync(
+                     GetUserId(),
+                     query.SearchTerm,
+                     query.Sorting,
+                     query.CurrentPage,
+                     query.ClassesPerPage
+            );
+            query.TotalClassesCount = model.TotalClassesCount;
+            query.Classes = model.Classes;
 
-            return View(list);
+            return View(query);
         }
 
         [HttpPost]

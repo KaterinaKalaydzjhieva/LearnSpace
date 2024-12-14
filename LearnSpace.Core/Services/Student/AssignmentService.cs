@@ -14,14 +14,15 @@ namespace LearnSpace.Core.Services.Student
         }
         public async Task<AllAssignmentsViewModel> GetAllAssignmentsAsync(string userId)
         {
-            var user = await repository.GetStudentAsync(userId);
+            var student = await repository.GetStudentAsync(userId);
 
-            var allAssignments = user.StudentCourses
+            var allAssignments = student.StudentCourses
                                 .SelectMany(sc => sc.Course.Assignments).Select(a => new AssignmentServiceModel
                                 {
                                     Id = a.Id,
                                     DueDate = a.DueDate.ToString(DateFormat),
-                                    Title = a.Title
+                                    Title = a.Title,
+                                    IsSubmitted = a.Submissions.Any(s=>s.StudentId == student.Id),
 
                                 }).ToList();
 

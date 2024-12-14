@@ -26,6 +26,7 @@ namespace LearnSpace.Infrastructure.Database.Entities
         [ForeignKey(nameof(Submission))]
         public int SubmissionId { get; set; }
         public virtual Submission Submission { get; set; } = null!;
+
     }
 
 }

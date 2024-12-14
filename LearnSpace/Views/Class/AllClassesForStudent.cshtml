@@ -6,7 +6,7 @@
 
 <div class="container mt-5">
     <h2 class="mb-4 text-center" style="font-size:40px; font-weight: 700;">@ViewBag.Title</h2>
-    <p class="text-muted">Total Classes: <strong>@Model.ClassesCount</strong></p>
+    <p class="text-muted">Total Classes: <strong>@Model.TotalClassesCount</strong></p>
 
     @if (Model.Classes.Any())
     {
@@ -17,6 +17,7 @@
                     <th scope="col">Class Name</th>
                     <th scope="col">Teacher Name</th>
                     <th scope="col">Assignments Count</th>
+                    <th scope="col">Capacity</th>
                     <th scope="col" class="text-center">Actions</th>
                 </tr>
             </thead>
@@ -28,6 +29,7 @@
                         <td>@classInfo.Name</td>
                         <td>@classInfo.TeacherName</td>
                         <td>@classInfo.AssignmentCount</td>
+                        <td>@classInfo.CurrentStudentCount/@classInfo.GroupCapacity</td>
                         <td class="text-center">
                             <div class="d-flex justify-content-center">
                                 <!-- Leave Class Button -->
@@ -47,7 +49,6 @@
                         </td>
                     </tr>
                 }
-                @* End of foreach *@
             </tbody>
         </table>
     }
@@ -58,4 +59,3 @@
         </div>
     }
 </div>
-
