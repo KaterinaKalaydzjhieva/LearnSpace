@@ -54,7 +54,7 @@ namespace LearnSpace.Web.Controllers
 
             await classService.JoinClassAsync(userId, classId);
 
-            return RedirectToAction(nameof(AllClassesForStudent), userId);
+            return RedirectToAction(nameof(AllClassesForStudent));
         }
     }
 }

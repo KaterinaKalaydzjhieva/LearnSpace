@@ -21,10 +21,10 @@ namespace LearnSpace.Core.Services.Student
 
             foreach (var course in courses)
             {
-                if (course.Assignments.Any(a => a.Submissions.Select(s=>s.Grade).Any(g=>g.Submission.StudentId == student.Id)))
+                if (course.Assignments.Any(a => a.Submissions.Where(s=>s.Grade != null).Select(s=>s.Grade).Any(g=>g.Submission.StudentId == student.Id)))
                 {
                     gradeCourse.Grades = course.Assignments
-                                        .SelectMany(a => a.Submissions.Select(s => s.Grade).Where(g => g.StudentId == student.Id))
+                                        .SelectMany(a => a.Submissions.Where(s => s.Grade != null).Select(s => s.Grade).Where(g => g.StudentId == student.Id))
                                         .Select(g => new GradeServiceModel
                                         {
                                             Score = g.Score,

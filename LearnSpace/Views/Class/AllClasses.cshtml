@@ -89,7 +89,6 @@
                         <td>@classInfo.CurrentStudentCount/@classInfo.GroupCapacity</td>
                         <td class="text-center">
                             <form asp-controller="Class" asp-action="JoinClass" method="post">
-                                <input type="hidden" name="userId" value="@User.Id()" />
                                 <input type="hidden" name="classId" value="@classInfo.Id" />
                                 <button type="submit" class="btn btn-info btn-sm">Join</button>
                             </form>

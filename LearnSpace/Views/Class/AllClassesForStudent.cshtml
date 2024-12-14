@@ -36,7 +36,7 @@
                                 <form asp-controller="Class" asp-action="LeaveClass" method="post" class="me-2">
                                     <input type="hidden" name="classId" value="@classInfo.Id" />
                                     <input type="hidden" name="userId" value="@User.Id()" />
-                                    <button type="submit" class="btn btn-danger btn-sm">Leave</button>
+                                    <button id="leave-class-form" type="submit" class="btn btn-danger btn-sm">Leave</button>
                                 </form>
 
                                 <!-- View Assignments Button -->
@@ -59,3 +59,16 @@
         </div>
     }
 </div>
+
+<script>
+    document.getElementById('leave-class-btn').addEventListener('click', function (event) {
+        // Show confirmation dialog
+        if (confirm('Are you sure you want to leave the class?')) {
+            // If the user clicks "OK", perform the action
+            window.location.href = '/Class/LeaveClass'; // Replace with your actual URL
+        } else {
+            // If the user clicks "Cancel", do nothing
+            event.preventDefault();
+        }
+    });
+</script>

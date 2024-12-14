@@ -32,7 +32,7 @@ namespace LearnSpace.Core.Services.Student
             model.FullName = student.ApplicationUser.FirstName + " " + student.ApplicationUser.LastName;
             if (student.Submissions.Select(s=>s.Grade).Any())
             {
-                model.Success = student.Submissions.Select(s=>s.Grade).ToList().Average(g => g.Score);
+                model.Success = student.Submissions.Where(s => s.Grade != null).Select(s=>s.Grade).ToList().Average(g => g.Score);
             }
             model.GradeCount = student.Submissions.Select(s => s.Grade).Count();
             model.ClassCount = student.StudentCourses.Count();
