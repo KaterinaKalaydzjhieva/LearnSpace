@@ -87,6 +87,30 @@ namespace LearnSpace.Core.Services.Student
             return classes;
         }
 
+        public async Task<AllClassesViewModel> GetAllClassesForTeacherAsync(string userId)
+        {
+            var teacher = await repository.GetTeacherAsync(userId);
+            var classes = new AllClassesViewModel();
+            var courses = teacher.Courses;
+
+            foreach (var c in courses)
+            {
+                var classInfo = new ClassInfoModel()
+                {
+                    Id = c.Id,
+                    TeacherName = c.Teacher.ApplicationUser.FirstName + " " + c.Teacher.ApplicationUser.LastName,
+                    Name = c.Name,
+                    AssignmentCount = c.Assignments.Count,
+                    CurrentStudentCount = c.CourseStudents.Count,
+                    GroupCapacity = c.GroupCapacity
+                };
+                classes.Classes.Add(classInfo);
+            }
+            classes.TotalClassesCount = classes.Classes.Count;
+
+            return classes;
+        }
+
         public async Task JoinClassAsync(string userId, int id)
         {
             var course = await repository.GetByIdAsync<Course>(id);

@@ -1,0 +1,29 @@
+﻿@model CreateAssignmentFormModel
+
+@{
+    ViewBag.Title = "Create Assignment";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4" style="font-size:40px; font-weight: 700;">Create a New Assignment</h2>
+
+    <form asp-action="CreateAssignment" asp-controller="Assignment" method="post">
+        <div class="mb-3">
+            <label for="Title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="Title" name="Title" placeholder="Enter assignment title" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="Description" class="form-label">Description</label>
+            <textarea class="form-control" id="Description" name="Description" rows="5" placeholder="Enter assignment description" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="DueDate" class="form-label">Due Date</label>
+            <input type="date" class="form-control" id="DueDate" name="DueDate" required>
+        </div>
+
+        <input type="hidden" id="ClassId" name="ClassId" value="@Model.ClassId" />
+        <button type="submit" class="btn btn-primary btn-lg">Create Assignment</button>
+    </form>
+</div>

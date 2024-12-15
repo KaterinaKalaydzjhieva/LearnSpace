@@ -14,6 +14,28 @@ namespace LearnSpace.Core.Services.Student
         {
             repository = _repository;
         }
+
+        public async Task CreateAssignment(CreateAssignmentFormModel model)
+        {
+            DateTime parsedDueDate;
+            const string dateFormat = "yyyy-MM-dd";
+            if (!DateTime.TryParseExact(model.DueDate, dateFormat, null, System.Globalization.DateTimeStyles.None, out parsedDueDate))
+            {
+                throw new ArgumentException($"Invalid date format. Expected format is {dateFormat}.");
+            }
+
+            var assignment = new Assignment()
+            {
+                Title = model.Title,
+                Description = model.Description,
+                DueDate = parsedDueDate,
+                CourseId = model.ClassId
+            };
+
+            await repository.AddAsync(assignment);
+            await repository.SaveChangesAsync();
+        }
+
         public async Task<AllAssignmentsViewModel> GetAllAssignmentsAsync(string userId)
         {
             var student = await repository.GetStudentAsync(userId);
@@ -36,7 +58,7 @@ namespace LearnSpace.Core.Services.Student
             return result;
         }
 
-        public async Task<AssignmentsClassViewModel> GetAllAssignmentsByClassAsync(string userId, int classId)
+        public async Task<AssignmentsClassViewModel> GetAllAssignmentsByClassForStudentAsync(string userId, int classId)
         {
             var student = await repository.GetStudentAsync(userId);
             var course = await repository.GetByIdAsync<Course>(classId);
@@ -61,6 +83,29 @@ namespace LearnSpace.Core.Services.Student
 
         }
 
+        public async Task<AllAssignmentsForTeacherViewModel> GetAllAssignmentsByClassForTeacherAsync(string userId, int classId)
+        {
+            var teacher = await repository.GetTeacherAsync(userId);
+            var course = await repository.GetByIdAsync<Course>(classId);
+
+            var assignments = teacher.Courses
+                                        .First(c => c.Id == classId)
+                                        .Assignments.Select(a => new AssignmentForTeacherModel
+                                        {
+                                            Id = a.Id,
+                                            DueDate = a.DueDate.ToString(DateFormat),
+                                            Title = a.Title,
+                                        }).ToList();
+
+            var result = new AllAssignmentsForTeacherViewModel()
+            {
+                Assignments = assignments,
+                ClassId = classId
+            };
+
+            return result;
+        }
+
         public async Task<AssignmentInfoViewModel> GetAssignmentInfoAsync(string userId, int assignmentId)
         {
             var assignment = await repository.GetByIdAsync<Assignment>(assignmentId);
@@ -80,6 +125,20 @@ namespace LearnSpace.Core.Services.Student
                                                         .SubmittedOn
                                                         .ToString(DateFormat):
                                                 string.Empty
+            };
+
+            return model;
+        }
+
+        public async Task<AssignmentsInfoForTeacherViewModel> GetAssignmentInfoForTeacherAsync(int assignmentId)
+        {
+            var assignment = await repository.GetByIdAsync<Assignment>(assignmentId);
+            var model = new AssignmentsInfoForTeacherViewModel
+            {
+                Title = assignment.Title,
+                Description = assignment.Description,
+                DueDate = assignment.DueDate.ToString(DateFormat),
+                ClassName = assignment.Course.Name
             };
 
             return model;

@@ -40,7 +40,15 @@
                                 <a class="nav-link text-white" asp-area="" asp-controller="Assignment" asp-action="AllAssignments">Assignments</a>
                             </li>
                         }
-
+                        else if (User.IsTeacher())
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Teacher" asp-action="Dashboard">Dashboard</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Class" asp-action="AllClassesForTeacher">Classes</a>
+                            </li>
+                        }
 
 
                     </ul>
@@ -48,9 +56,17 @@
 
                         @if (User.IsUser())
                         {
-                            <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Class" asp-action="AllClasses">Explore</a>
-                            </li>
+                            if (User.IsStudent())
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Class" asp-action="AllClasses">Explore</a>
+                                </li>
+                            }
+                            else if (User.IsTeacher())
+                            {
+                                
+                            
+                            }
                             <li class="nav-item">
                                 <a class="nav-link text-white" asp-area="" asp-controller="User" asp-action="Logout">Log out</a>
                             </li>

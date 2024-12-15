@@ -6,6 +6,7 @@ namespace LearnSpace.Core.Interfaces.Student
     public interface IClassService
     {
         Task<AllClassesViewModel> GetAllClassesForStudentAsync(string userId);
+        Task<AllClassesViewModel> GetAllClassesForTeacherAsync(string userId);
         Task LeaveClassAsync(string userId, int classId);
         Task<AllClassesViewModel> GetAllClassesAsync(
                                         string userId,

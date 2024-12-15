@@ -22,6 +22,14 @@ namespace LearnSpace.Web.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> AllClassesForTeacher()
+        {
+            var list = await classService.GetAllClassesForTeacherAsync(GetUserId());
+
+            return View(list);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> AllClasses([FromQuery] AllClassesQueryModel query)
         {
             var model = await classService.GetAllClassesAsync(

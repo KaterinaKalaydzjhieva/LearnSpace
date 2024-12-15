@@ -21,15 +21,17 @@ namespace LearnSpace.Core.Services.Teacher
 
         public async Task<TeacherDashboardModel> GetTeacherDashboardInformationAsync(string id)
         {
-            var user = await repository.GetTeacherAsync(id);
+            var teacher = await repository.GetTeacherAsync(id);
 
             var model = new TeacherDashboardModel
             {
-                FullName = user.ApplicationUser.FirstName + " " + user.ApplicationUser.LastName,
-                GradeCount = user.Courses.SelectMany(c=>c.Assignments.Select(a=>a.Submissions.Select(s=>s.Grade))).Count(),
-                AssignmentCount = user.Assignments.Count,
-                ClassCount = user.Courses.Count
-            };
+                FullName = teacher.ApplicationUser.FirstName + " " + teacher.ApplicationUser.LastName,
+                TotalStudentsEnrolled = teacher.Courses.Sum(c=>c.CourseStudents.Count),
+                AssignmentCount = teacher.Courses.SelectMany(c=>c.Assignments).Count(),
+				WaitingSubmissions = teacher.Assignments
+		                                .SelectMany(a => a.Submissions)
+		                                .Count(s => s.GradeId == null)
+			};
 
             return model;
         }
