@@ -42,7 +42,7 @@
                         </td>
                         <td class="text-center">
                             <a href="@Url.Action("AssignmentInfoForTeacher", "Assignment", new { id = assignment.Id })" class="btn btn-info btn-sm">Details</a>
-                            <a href="@Url.Action("All", "Submissions", new { id = assignment.Id })" class="btn btn-success btn-sm">Submissions</a>
+                            <a href="@Url.Action("AllSubmissionsForAssignment", "Submission", new { assignmentId = assignment.Id })" class="btn btn-success btn-sm">Submissions</a>
                         </td>
                     </tr>
                 }

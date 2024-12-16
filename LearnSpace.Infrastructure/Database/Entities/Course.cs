@@ -11,6 +11,7 @@ namespace LearnSpace.Infrastructure.Database.Entities
         {
             this.CourseStudents = new HashSet<StudentCourse>();
             this.Assignments = new HashSet<Assignment>();
+            this.Grades = new HashSet<Grade>();
         }
         [Key]
         public int Id { get; set; }
@@ -31,6 +32,7 @@ namespace LearnSpace.Infrastructure.Database.Entities
         public virtual Teacher Teacher { get; set; } = null!;
         public virtual ICollection<StudentCourse> CourseStudents { get; set; }
         public virtual ICollection<Assignment> Assignments { get; set; }
+        public virtual ICollection<Grade> Grades { get; set; }
     }
 
 }

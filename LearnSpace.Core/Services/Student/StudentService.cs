@@ -29,11 +29,11 @@ namespace LearnSpace.Core.Services.Student
             var model = new StudentDashboardModel();
 
             model.FullName = student.ApplicationUser.FirstName + " " + student.ApplicationUser.LastName;
-            if (student.Submissions.Select(s=>s.Grade).Any())
+            if (student.StudentCourses.Any(sc=>sc.Course.Grades.Any()))
             {
-                model.Success = student.Submissions.Where(s => s.Grade != null).Select(s=>s.Grade).ToList().Average(g => g.Score);
+                model.Success = student.StudentCourses.SelectMany(sc=>sc.Course.Grades).ToList().Average(g => g.Score);
             }
-            model.GradeCount = student.Submissions.Select(s => s.Grade).Where(g=>g!=null).Count();
+            model.GradeCount = student.StudentCourses.SelectMany(sc=>sc.Course.Grades).Count();
             model.ClassCount = student.StudentCourses.Count();
             model.AssignmentCount = student.StudentCourses.Sum(c => c.Course.Assignments.Count);
 

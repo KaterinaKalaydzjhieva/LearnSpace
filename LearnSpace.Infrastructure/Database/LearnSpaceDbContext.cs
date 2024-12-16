@@ -4,6 +4,7 @@ using LearnSpace.Infrastructure.Database.Entities.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace LearnSpace.Infrastructure.Database
 {
@@ -60,17 +61,23 @@ namespace LearnSpace.Infrastructure.Database
                     .HasForeignKey(sc => sc.CourseId)
                     .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete
 
-            builder.Entity<Grade>()
-                    .HasOne(g => g.Submission)
-                    .WithOne(s=>s.Grade)
-                    .HasForeignKey<Grade>(g=>g.SubmissionId)
-                    .OnDelete(DeleteBehavior.Restrict); // Prevent cascading delete
-
             builder.Entity<ApplicationUser>()
                     .HasOne(u => u.Student)
                     .WithOne(s => s.ApplicationUser)
                     .HasForeignKey<Student>(s => s.ApplicationUserId);
 
+            builder.Entity<Grade>()
+                    .HasOne(g => g.Student)
+                    .WithMany(s => s.Grades)
+                    .HasForeignKey(g => g.StudentId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Grade>()
+                    .HasOne(g => g.Course) // Relationship with Courses table
+                    .WithMany(c => c.Grades)
+                    .HasForeignKey(g => g.CourseId)
+                    .OnDelete(DeleteBehavior.Restrict); // Prevent cascading deletes
+            
             //Seeding
 
             builder.ApplyConfiguration(new ApplicationUserConfiguration());

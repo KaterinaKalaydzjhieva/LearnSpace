@@ -28,9 +28,9 @@ namespace LearnSpace.Core.Services.Teacher
                 FullName = teacher.ApplicationUser.FirstName + " " + teacher.ApplicationUser.LastName,
                 TotalStudentsEnrolled = teacher.Courses.Sum(c=>c.CourseStudents.Count),
                 AssignmentCount = teacher.Courses.SelectMany(c=>c.Assignments).Count(),
-				WaitingSubmissions = teacher.Assignments
+				WaitingSubmissions = teacher.Courses.SelectMany(c=>c.Assignments)
 		                                .SelectMany(a => a.Submissions)
-		                                .Count(s => s.GradeId == null)
+		                                .Count()
 			};
 
             return model;

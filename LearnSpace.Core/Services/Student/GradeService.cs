@@ -21,10 +21,9 @@ namespace LearnSpace.Core.Services.Student
 
             foreach (var course in courses)
             {
-                if (course.Assignments.Any(a => a.Submissions.Where(s=>s.Grade != null).Select(s=>s.Grade).Any(g=>g.Submission.StudentId == student.Id)))
+                if (course.Grades.Any(g=>g.StudentId == student.Id))
                 {
-                    gradeCourse.Grades = course.Assignments
-                                        .SelectMany(a => a.Submissions.Where(s => s.Grade != null).Select(s => s.Grade).Where(g => g.StudentId == student.Id))
+                    gradeCourse.Grades = course.Grades.Where(g=>g.StudentId == student.Id)
                                         .Select(g => new GradeServiceModel
                                         {
                                             Score = g.Score,
@@ -48,10 +47,10 @@ namespace LearnSpace.Core.Services.Student
             var gradeInfo = new GradeInfoViewModel();
 
             gradeInfo.Id = id;
-            gradeInfo.CourseName = grade.Submission.Assignment.Course.Name;
-            gradeInfo.AssignmentDescription = grade.Submission.Assignment.Description;
+            gradeInfo.CourseName = grade.Course.Name;
+            gradeInfo.AssignmentDescription = grade.Course.Description;
             gradeInfo.Score = grade.Score;
-            gradeInfo.Teacher = grade.Submission.Assignment.Course.Teacher.ApplicationUser.FirstName + " " + grade.Submission.Assignment.Course.Teacher.ApplicationUser.LastName;
+            gradeInfo.Teacher = grade.Course.Teacher.ApplicationUser.FirstName + " " + grade.Course.Teacher.ApplicationUser.LastName;
 
             return gradeInfo;
 

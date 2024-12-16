@@ -29,9 +29,6 @@ namespace LearnSpace.Infrastructure.Database.Entities
 
         public DateTime SubmittedOn { get; set; }
 
-        [ForeignKey(nameof(Grade))]
-        public int? GradeId { get; set; }
-        public virtual Grade? Grade { get; set; }
     }
 
 }

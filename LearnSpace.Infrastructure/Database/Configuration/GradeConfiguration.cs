@@ -22,7 +22,8 @@ namespace LearnSpace.Infrastructure.Database.Configuration
                 Score = 4,
                 DateGraded = DateTime.Now,
                 StudentId = Guid.Parse("5c07f155-602e-403b-bb86-5a786814f575"),
-                SubmissionId = 1
+                Description = "You can do more.",
+                CourseId = 1
             };
 
             grades.Add(grade);
@@ -34,7 +35,8 @@ namespace LearnSpace.Infrastructure.Database.Configuration
                 Score = 3,
                 DateGraded = DateTime.Now,
                 StudentId = Guid.Parse("18e76084-b8a6-4e78-bd26-143f33a05eb8"),
-                SubmissionId = 2
+                Description = "You can do more.",
+                CourseId = 2
             };
 
             grades.Add(grade);
@@ -46,7 +48,8 @@ namespace LearnSpace.Infrastructure.Database.Configuration
                 Score = 5,
                 DateGraded = DateTime.Now,
                 StudentId = Guid.Parse("c6903087-71e5-41ba-80be-ed119b7902fc"),
-                SubmissionId = 3
+                Description = "You can do more.",
+                CourseId = 3
             };
 
             grades.Add(grade);
@@ -58,7 +61,8 @@ namespace LearnSpace.Infrastructure.Database.Configuration
                 Score = 6,
                 DateGraded = DateTime.Now,
                 StudentId = Guid.Parse("f4aa693d-305e-426b-950c-d02a8ca8b56f"),
-                SubmissionId = 4
+                Description = "You can do more.",
+                CourseId = 4
             };
 
             grades.Add(grade);
@@ -70,8 +74,9 @@ namespace LearnSpace.Infrastructure.Database.Configuration
 				Score = 6,
 				DateGraded = DateTime.Now,
 				StudentId = Guid.Parse("bb5432a1-ea56-450b-9db6-f7349faf28a6"),
-                SubmissionId = 5
-			};
+                Description = "You can do more.",
+                CourseId = 5
+            };
 
 			grades.Add(grade);
 

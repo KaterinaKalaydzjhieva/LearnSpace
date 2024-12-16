@@ -30,7 +30,6 @@ namespace LearnSpace.Infrastructure.Database.Configuration
                 FileName ="task1",
                 FileContent = file1Content, 
                 SubmittedOn = DateTime.UtcNow,
-                GradeId = 1
             });
 
             // 2
@@ -43,7 +42,6 @@ namespace LearnSpace.Infrastructure.Database.Configuration
                 FileType = "txt",
                 FileName = "task2",
                 SubmittedOn = DateTime.UtcNow,
-                GradeId = 2
             });
 
             // 3
@@ -56,7 +54,6 @@ namespace LearnSpace.Infrastructure.Database.Configuration
                 FileType = "txt",
                 FileName = "task3",
                 SubmittedOn = DateTime.UtcNow,
-                GradeId = 3
             });
 
             // 4
@@ -69,7 +66,6 @@ namespace LearnSpace.Infrastructure.Database.Configuration
                 FileType = "txt",
                 FileName = "task4",
                 SubmittedOn = DateTime.UtcNow,
-                GradeId = 4
             });
 
             // 5
@@ -82,13 +78,11 @@ namespace LearnSpace.Infrastructure.Database.Configuration
                 FileType = "txt",
                 FileName = "task5",
                 SubmittedOn = DateTime.UtcNow,
-                GradeId = 5
             });
 
             return submissions;
         }
 
-        // Helper method to convert a file to byte[]
         private static byte[] FileToByteArray(string filePath)
         {
             if (File.Exists(filePath))
