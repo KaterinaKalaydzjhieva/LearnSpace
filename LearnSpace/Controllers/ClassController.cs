@@ -62,5 +62,28 @@ namespace LearnSpace.Web.Controllers
 
             return RedirectToAction(nameof(AllClassesForStudent));
         }
+
+        [HttpGet]
+        public IActionResult CreateClass()
+        {
+            var model = classService.GetCreateClassModel(GetUserId());
+
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateClass(CreateClassModel model)
+        {
+            await classService.CreateClassAsync(model);
+
+            return RedirectToAction(nameof(AllClassesForTeacher));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteClass(int id)
+        {
+            await classService.DeleteClassAsync(id);
+
+            return RedirectToAction(nameof(AllClassesForTeacher));
+        }
     }
 }

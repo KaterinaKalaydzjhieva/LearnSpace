@@ -12,6 +12,46 @@ namespace LearnSpace.Core.Services.Student
         {
             repository = _repository;
         }
+
+        public async Task CreateGradeAsync(CreateGradeViewModel model)
+        {
+            var grade = new Grade()
+            {
+                CourseId = model.CourseId,
+                StudentId = Guid.Parse(model.StudentId),
+                Score = model.Score,
+                DateGraded = DateTime.Now,
+                Description = model.Description,
+            };
+
+            await repository.AddAsync(grade);
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task<int> DeleteGradeAsync(int id)
+        {
+            var classId = repository.GetByIdAsync<Grade>(id).Result.CourseId;
+            await repository.DeleteAsync<Grade>(id);
+            await repository.SaveChangesAsync();
+
+            return classId;
+        }
+
+        public async Task<CreateGradeViewModel> GetAddGradeModelAsync(int classId, string userId)
+        {
+            var student = await repository.GetByIdAsync<LearnSpace.Infrastructure.Database.Entities.Account.Student>(Guid.Parse(userId));
+            var course = await repository.GetByIdAsync<Course>(classId);
+            var model = new CreateGradeViewModel
+            {
+                CourseId = classId,
+                StudentId = student.Id.ToString().ToLower(),
+                CourseName = course.Name,
+                StudentName = student.ApplicationUser.FirstName + " " + student.ApplicationUser.LastName 
+            };
+            
+            return model;
+        }
+
         public async Task<List<GradeCourseViewModel>> GetAllGradesAsync(string id)
         {
             var student = await repository.GetStudentAsync(id);
@@ -48,9 +88,10 @@ namespace LearnSpace.Core.Services.Student
 
             gradeInfo.Id = id;
             gradeInfo.CourseName = grade.Course.Name;
-            gradeInfo.AssignmentDescription = grade.Course.Description;
             gradeInfo.Score = grade.Score;
             gradeInfo.Teacher = grade.Course.Teacher.ApplicationUser.FirstName + " " + grade.Course.Teacher.ApplicationUser.LastName;
+            gradeInfo.Description = grade.Description;
+            gradeInfo.CourseId = grade.Course.Id;
 
             return gradeInfo;
 

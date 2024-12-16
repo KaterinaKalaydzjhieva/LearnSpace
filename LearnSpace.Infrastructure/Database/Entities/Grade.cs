@@ -12,7 +12,7 @@ namespace LearnSpace.Infrastructure.Database.Entities
 
         [Required]
         [Range(ScoreMin,ScoreMax)]
-        public double Score { get; set; }
+        public int Score { get; set; }
 
         public string Description { get; set; }
 

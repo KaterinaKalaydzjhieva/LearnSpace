@@ -12,9 +12,17 @@ namespace LearnSpace.Web.Controllers
         {
             teacherService = _teacherService;
         }
-        public async Task<IActionResult> Dashboard() 
+        [HttpGet]
+        public async Task<IActionResult> Dashboard()
         {
             var model = await teacherService.GetTeacherDashboardInformationAsync(GetUserId());
+
+            return View(model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> GradeBook(int classId) 
+        {
+            var model = await teacherService.GetGradeBookByClassAsync(GetUserId(), classId);
 
             return View(model);
         }

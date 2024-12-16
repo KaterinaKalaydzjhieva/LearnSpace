@@ -15,5 +15,9 @@ namespace LearnSpace.Core.Interfaces.Student
                                         int currPage = 1,
                                         int classesPerPage = 15);
         Task JoinClassAsync(string userId, int id);
+
+        CreateClassModel GetCreateClassModel(string id);
+        Task CreateClassAsync(CreateClassModel model);
+        Task DeleteClassAsync(int id);
     }
 }

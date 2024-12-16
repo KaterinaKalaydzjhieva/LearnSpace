@@ -14,6 +14,26 @@ namespace LearnSpace.Core.Services.Student
             repository = _repository;
         }
 
+        public async Task CreateClassAsync(CreateClassModel model)
+        {
+            var course = new Course() 
+            {
+                TeacherId = Guid.Parse(model.TeacherId),
+                Description = model.Description,
+                Name = model.Name,
+                GroupCapacity = model.GroupCapacity,
+            };
+
+            await repository.AddAsync(course);
+            await repository.SaveChangesAsync();
+        }
+
+        public async Task DeleteClassAsync(int id)
+        {
+            await repository.DeleteAsync<Course>(id);
+            await repository.SaveChangesAsync();
+        }
+
         public async Task<AllClassesViewModel> GetAllClassesAsync(string id, string? searchTerm = null, ClassSorting sorting = ClassSorting.GroupCapacityDescending, int currPage = 1, int classesPerPage = 15)
         {
             var studentId = (await repository.GetStudentAsync(id)).Id.ToString().ToLower();
@@ -109,6 +129,18 @@ namespace LearnSpace.Core.Services.Student
             classes.TotalClassesCount = classes.Classes.Count;
 
             return classes;
+        }
+
+        public  CreateClassModel GetCreateClassModel(string id)
+        {
+            var teacherId = repository.GetTeacherAsync(id).Result.Id.ToString().ToLower();
+
+            var model = new CreateClassModel() 
+            {
+                TeacherId = teacherId,
+            };
+
+            return model;
         }
 
         public async Task JoinClassAsync(string userId, int id)

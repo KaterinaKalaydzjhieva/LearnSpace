@@ -31,9 +31,9 @@ namespace LearnSpace.Core.Services.Student
             model.FullName = student.ApplicationUser.FirstName + " " + student.ApplicationUser.LastName;
             if (student.StudentCourses.Any(sc=>sc.Course.Grades.Any()))
             {
-                model.Success = student.StudentCourses.SelectMany(sc=>sc.Course.Grades).ToList().Average(g => g.Score);
+                model.Success = student.StudentCourses.SelectMany(sc=>sc.Course.Grades.Where(g=>g.StudentId == student.Id)).ToList().Average(g => g.Score);
             }
-            model.GradeCount = student.StudentCourses.SelectMany(sc=>sc.Course.Grades).Count();
+            model.GradeCount = student.StudentCourses.SelectMany(sc=>sc.Course.Grades.Where(g => g.StudentId == student.Id)).Count();
             model.ClassCount = student.StudentCourses.Count();
             model.AssignmentCount = student.StudentCourses.Sum(c => c.Course.Assignments.Count);
 
