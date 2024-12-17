@@ -28,28 +28,34 @@
                         @if (User.IsStudent())
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Student" asp-action="Dashboard">Dashboard</a>
+                                <a class="nav-link text-white" asp-area="Student" asp-controller="Student" asp-action="Dashboard">Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Grade" asp-action="AllGrades">Grades</a>
+                                <a class="nav-link text-white" asp-area="Student" asp-controller="Grade" asp-action="AllGrades">Grades</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Class" asp-action="AllClassesForStudent">Classes</a>
+                                <a class="nav-link text-white" asp-area="Student" asp-controller="Class" asp-action="AllClassesForStudent">Classes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Assignment" asp-action="AllAssignments">Assignments</a>
+                                <a class="nav-link text-white" asp-area="Student" asp-controller="Assignment" asp-action="AllAssignments">Assignments</a>
                             </li>
                         }
                         else if (User.IsTeacher())
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Teacher" asp-action="Dashboard">Dashboard</a>
+                                <a class="nav-link text-white" asp-area="Teacher" asp-controller="Teacher" asp-action="Dashboard">Dashboard</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Class" asp-action="AllClassesForTeacher">Classes</a>
+                                <a class="nav-link text-white" asp-area="Teacher" asp-controller="Class" asp-action="AllClassesForTeacher">Classes</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-white" asp-area="" asp-controller="Submission" asp-action="AllSubmissionsForTeacher">Submissions</a>
+                                <a class="nav-link text-white" asp-area="Teacher" asp-controller="Submission" asp-action="AllSubmissionsForTeacher">Submissions</a>
+                            </li>
+                        }
+                        else if (User.IsAdmin())
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-area="Admin" asp-controller="Admin" asp-action="AllUsers">Users</a>
                             </li>
                         }
 
@@ -62,13 +68,8 @@
                             if (User.IsStudent())
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link text-white" asp-area="" asp-controller="Class" asp-action="AllClasses">Explore</a>
+                                    <a class="nav-link text-white" asp-area="Student" asp-controller="Class" asp-action="AllClasses">Explore</a>
                                 </li>
-                            }
-                            else if (User.IsTeacher())
-                            {
-                                
-                            
                             }
                             <li class="nav-item">
                                 <a class="nav-link  text-white" onclick="return confirm('Are you sure you want to delete this grade?');" asp-area="" asp-controller="User" asp-action="Logout">Log out</a>

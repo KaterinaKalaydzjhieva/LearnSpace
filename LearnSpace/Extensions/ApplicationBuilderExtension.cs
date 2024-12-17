@@ -32,7 +32,7 @@ namespace LearnSpace.Web.Extensions
                 await userManager.AddToRoleAsync(admin, AdminRoleName);
 
 
-                var studentEmails = new[] { "student1@abv.bg", "student2@abv.bg", "student3@abv.bg", "student4@abv.bg" };
+                var studentEmails = new[] { "student1@abv.bg", "student2@abv.bg", "student3@abv.bg", "student4@abv.bg", "student5@abv.bg" };
 
                 foreach (var email in studentEmails)
                 {

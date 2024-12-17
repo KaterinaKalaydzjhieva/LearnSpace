@@ -1,10 +1,9 @@
-﻿using LearnSpace.Core.Interfaces.Student;
-using LearnSpace.Core.Interfaces.Teacher;
-using LearnSpace.Core.Services.Student;
-using LearnSpace.Core.Services.Teacher;
+﻿using LearnSpace.Core.Interfaces;
+using LearnSpace.Core.Services;
 using LearnSpace.Infrastructure.Database;
 using LearnSpace.Infrastructure.Database.Entities.Account;
 using LearnSpace.Infrastructure.Database.Repository;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,25 +19,30 @@ namespace LearnSpace.Web.Extensions
             services.AddScoped<IAssignmentService, AssignmentService>();
             services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<ISubmissionService, SubmissionService>();
+            services.AddScoped<IAdminService, AdminService>();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Login";
+                options.AccessDeniedPath = "/Account/AccessDenied";
+            });
+            ////Roles Authorization
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("Administrator", policy => policy.RequireRole("Admin"));
+            //    options.AddPolicy("User", policy => policy.RequireRole("User"));
+            //});
+            ////Authentication
+            //services.AddAuthentication(options =>
+            //{
+            //    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //})
+            //.AddCookie(options =>
+            //{
+            //    options.LoginPath = "/User/Login";
+            //});
 
-			//Roles Authorization
-			//services.AddAuthorization(options =>
-			//{
-			//    options.AddPolicy("Administrator", policy => policy.RequireRole("Administrator"));
-			//    options.AddPolicy("User", policy => policy.RequireRole("User"));
-			//});
-			//Authentication
-			//services.AddAuthentication(options =>
-			//{
-			//    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-			//    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-			//})
-			//.AddCookie(options =>
-			//{
-			//    options.LoginPath = "/User/Login";
-			//});
-
-			return services;
+            return services;
         }
 		public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, IConfiguration config)
 		{
