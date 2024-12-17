@@ -1,4 +1,4 @@
-﻿@model RegisterViewModel
+﻿@model RegisterTeacherViewModel
 @{
 	ViewData["Title"] = "Registration";
 }
@@ -10,7 +10,7 @@
 			<div class="card border-0 shadow" style="max-height: 80vh; overflow-y: auto;">
 				<div class="card-body" style="max-height: 80vh; overflow-y: auto;">
 					<h1 class="text-center">@ViewData["Title"]</h1>
-					<form asp-controller="User" asp-action="Register" method="post">
+					<form asp-controller="User" asp-action="RegisterTeacher" method="post">
 						<hr />
 						<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 						<div class="form-floating mb-3">
@@ -22,6 +22,11 @@
 							<input asp-for="LastName" class="form-control" aria-required="true" placeholder="example" />
 							<label asp-for="LastName">Last Name</label>
 							<span asp-validation-for="LastName" class="text-danger"></span>
+						</div>
+						<div class="form-floating mb-3">
+							<input asp-for="SubjectSpecialization" class="form-control" aria-required="true" placeholder="example" />
+							<label asp-for="SubjectSpecialization">Subject Specialization</label>
+							<span asp-validation-for="SubjectSpecialization" class="text-danger"></span>
 						</div>
 						<div class="form-floating mb-3">
 							<input asp-for="Email" class="form-control" aria-required="true" placeholder="example" />

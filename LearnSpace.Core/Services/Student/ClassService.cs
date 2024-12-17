@@ -3,6 +3,7 @@ using LearnSpace.Core.Models.Class;
 using LearnSpace.Core.Models.Enumerations;
 using LearnSpace.Infrastructure.Database.Entities;
 using LearnSpace.Infrastructure.Database.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace LearnSpace.Core.Services.Student
 {
@@ -30,6 +31,14 @@ namespace LearnSpace.Core.Services.Student
 
         public async Task DeleteClassAsync(int id)
         {
+            var assignments = repository.All<Assignment>().ToList().Where(a=>a.CourseId == id);
+            var grades = repository.All<Grade>().ToList().Where(g => g.CourseId == id);
+            var studentCourses = repository.All<StudentCourse>().ToList().Where(sc => sc.CourseId == id);
+
+            repository.DeleteRange(assignments);
+            repository.DeleteRange(grades);
+            repository.DeleteRange(studentCourses);
+
             await repository.DeleteAsync<Course>(id);
             await repository.SaveChangesAsync();
         }
