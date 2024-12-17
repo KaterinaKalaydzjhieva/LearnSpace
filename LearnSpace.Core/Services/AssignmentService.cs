@@ -2,6 +2,7 @@
 using LearnSpace.Core.Models.Assignment;
 using LearnSpace.Infrastructure.Database.Entities;
 using LearnSpace.Infrastructure.Database.Repository;
+using Microsoft.AspNetCore.Components.Server.Circuits;
 using Microsoft.AspNetCore.Identity;
 using static LearnSpace.Common.Constants;
 
@@ -34,6 +35,13 @@ namespace LearnSpace.Core.Services
 
             await repository.AddAsync(assignment);
             await repository.SaveChangesAsync();
+        }
+
+        public async Task<bool> ExistsByIdAsync(int id)
+        {
+            var assignment = await repository.GetByIdAsync<Assignment>(id);
+
+            return assignment != null;
         }
 
         public async Task<AllAssignmentsViewModel> GetAllAssignmentsAsync(string userId)

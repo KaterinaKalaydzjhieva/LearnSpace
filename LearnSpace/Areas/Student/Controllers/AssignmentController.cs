@@ -23,6 +23,10 @@ namespace LearnSpace.Web.Areas.Student.Controllers
         [HttpGet]
         public async Task<IActionResult> AllAssignmentsClassStudent(int classId)
         {
+            if (!(await assignmentService.ExistsByIdAsync(classId))) 
+            {
+                return RedirectToAction("Error404", "Error"); 
+            }
             var assignments = await assignmentService.GetAllAssignmentsByClassForStudentAsync(GetUserId(), classId);
 
             return View(assignments);

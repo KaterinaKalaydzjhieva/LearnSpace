@@ -6,8 +6,7 @@ namespace LearnSpace.Web.Controllers
     [AllowAnonymous]
     public class ErrorController : Controller
     {
-        
-        public IActionResult NotFound()
+        public IActionResult Error404()
         {
             return View();
         }

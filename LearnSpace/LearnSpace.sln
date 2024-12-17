@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearnSpace.Core", "..\Learn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearnSpace.Common", "..\LearnSpace.Common\LearnSpace.Common.csproj", "{81C752C2-D953-4305-A327-71C1C565C369}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnSpace.Core.Models", "..\LearnSpace.Core.Models\LearnSpace.Core.Models.csproj", "{DC4CD035-8DB3-44AB-8008-3D0508E73454}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearnSpace.Core.Models", "..\LearnSpace.Core.Models\LearnSpace.Core.Models.csproj", "{DC4CD035-8DB3-44AB-8008-3D0508E73454}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearnSpace.UnitTests", "..\LearnSpace.UnitTests\LearnSpace.UnitTests.csproj", "{BEDD16C6-CCC0-4342-926E-9F1347A63BB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{DC4CD035-8DB3-44AB-8008-3D0508E73454}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DC4CD035-8DB3-44AB-8008-3D0508E73454}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DC4CD035-8DB3-44AB-8008-3D0508E73454}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEDD16C6-CCC0-4342-926E-9F1347A63BB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEDD16C6-CCC0-4342-926E-9F1347A63BB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEDD16C6-CCC0-4342-926E-9F1347A63BB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEDD16C6-CCC0-4342-926E-9F1347A63BB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
