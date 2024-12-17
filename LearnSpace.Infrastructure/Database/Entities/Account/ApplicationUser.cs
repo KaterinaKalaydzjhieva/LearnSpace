@@ -9,7 +9,6 @@ namespace LearnSpace.Infrastructure.Database.Entities.Account
         public ApplicationUser()
         {
             Id = Guid.NewGuid();
-            this.Notifications = new HashSet<Notification>();
         }
 
         [Required]
@@ -22,7 +21,6 @@ namespace LearnSpace.Infrastructure.Database.Entities.Account
 
         [Required]
         public DateTime DateOfBirth { get; set; }
-        public virtual IEnumerable<Notification> Notifications { get; set; }
 
         public virtual Student? Student { get; set; }
         public virtual Teacher? Teacher { get; set; }

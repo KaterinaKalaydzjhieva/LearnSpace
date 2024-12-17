@@ -4,7 +4,6 @@ using LearnSpace.Infrastructure.Database.Entities.Account;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 
 namespace LearnSpace.Infrastructure.Database
 {
@@ -19,7 +18,6 @@ namespace LearnSpace.Infrastructure.Database
         public virtual DbSet<Grade> Grades { get; set; } = null!;
         public virtual DbSet<Course> Courses { get; set; } = null!;
         public virtual DbSet<StudentCourse> StudentsCourses { get; set; } = null!;
-        public virtual DbSet<Notification> Notifications { get; set; } = null!;
         public virtual DbSet<Submission> Submissions { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -31,20 +29,6 @@ namespace LearnSpace.Infrastructure.Database
                        sc.StudentId,
                        sc.CourseId
                    });
-
-            // Notifications: Prevent cascading delete (keep as Restrict if desired)
-            builder.Entity<Notification>()
-                   .HasOne(n => n.Student)
-                   .WithMany()
-                   .HasForeignKey(n => n.StudentId)
-                   .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Notification>()
-                   .HasOne(n => n.Teacher)
-                   .WithMany()
-                   .HasForeignKey(n => n.TeacherId)
-                   .OnDelete(DeleteBehavior.Restrict);
-
             // Assignments: Allow cascading delete when a course is deleted
             builder.Entity<Assignment>()
                    .HasOne(a => a.Course)

@@ -1,5 +1,6 @@
 ﻿using LearnSpace.Core.Interfaces.Student;
 using LearnSpace.Core.Models.Assignment;
+using LearnSpace.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearnSpace.Web.Controllers
@@ -44,8 +45,24 @@ namespace LearnSpace.Web.Controllers
         public async Task<IActionResult> DeleteSubmission(int submissionId, string assignmentId) 
         {
             await submissionService.DeleteSubmissionIdAsync(submissionId);
-            return RedirectToAction(nameof(AllSubmissionsForAssignment), new { assignmentId = assignmentId});
+            if (User.IsStudent()) 
+            {
+                return RedirectToAction(nameof(AllSubmissionsForAssignment), new { assignmentId = assignmentId});
+            }
+            else if(User.IsTeacher()) 
+            {
+                return RedirectToAction(nameof(AllSubmissionsForTeacher));
+            }
+
+            return NotFound();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> AllSubmissionsForTeacher() 
+        {
+            var model = await submissionService.GetAllSubmissionsForTeacherAsync(GetUserId());
+
+            return View(model);
+        }
     }
 }

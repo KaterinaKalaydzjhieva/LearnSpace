@@ -51,7 +51,7 @@ namespace LearnSpace.Core.Services.Student
 
         }
 
-        public async Task<SubmissionsByAssignmentViewModel> GetAllSubmissionsForAssignmentAsync(int assignmentId)
+        public async Task<SubmissionsViewModel> GetAllSubmissionsForAssignmentAsync(int assignmentId)
         {
             var assignment = await repository.GetByIdAsync<Assignment>(assignmentId);
             var submissions = assignment.Submissions
@@ -65,7 +65,7 @@ namespace LearnSpace.Core.Services.Student
                                             StudentName = s.Student.ApplicationUser.FirstName + " "+ s.Student.ApplicationUser.LastName,
             
                                         }).ToList();
-            var result = new SubmissionsByAssignmentViewModel
+            var result = new SubmissionsViewModel
             {
                 Submissions = submissions
             };
@@ -91,5 +91,28 @@ namespace LearnSpace.Core.Services.Student
             await repository.SaveChangesAsync();
         }
 
+        public async Task<SubmissionsViewModel> GetAllSubmissionsForTeacherAsync(string userId)
+        {
+            var teacherId = repository.GetTeacherAsync(userId).Result.Id;
+            var submissions = await repository
+                                            .AllReadOnly<Submission>()
+                                            .Where(s=>s.Assignment.Course.TeacherId == teacherId)
+                                            .Select(s=> new SubmissionQueryModel 
+                                            {
+                                                Id = s.Id,
+                                                AssignmentId = s.AssignmentId,
+                                                StudentName = s.Student.ApplicationUser.FirstName + " " + s.Student.ApplicationUser.LastName,
+                                                AssignmentTitle = s.Assignment.Title,
+                                                FileName = s.FileName,
+                                                SubmittedOn = s.SubmittedOn.ToString(DateFormat)
+                                            
+                                            }).ToListAsync();
+            var model = new SubmissionsViewModel
+            {
+                Submissions = submissions
+            };
+
+            return model;
+        }
     }
 }
