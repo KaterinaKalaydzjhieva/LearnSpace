@@ -1,4 +1,4 @@
-﻿@model List<LearnSpace.Core.Models.Admin.UserViewModel>
+﻿@model List<UserViewModel>
 
 @{
     ViewData["Title"] = "User Management";
@@ -46,11 +46,11 @@
                                 <span>No roles assigned</span>
                             }
                         </td>
-                        <td class="text-center">
-                            <div class="mb-2">
-                                <form asp-area="Admin" asp-controller="Admin" asp-action="AddRole" method="post" class="d-flex justify-content-center gap-2">
+                        <td >
+                            <div class="d-flex flex-column align-items-start gap-2">
+                                <form asp-area="Admin" asp-controller="Admin" asp-action="AddRole" method="post" class="d-flex gap-2">
                                     <input type="hidden" name="userId" value="@user.Id" />
-                                    <select name="role" class="form-select form-select-sm w-50" required>
+                                    <select name="role" class="form-select form-select-sm w-auto" required>
                                         <option value="">Select Role to Add</option>
                                         @{
                                             var allRoles = new List<string> { "Administrator", "Teacher", "Student" };
@@ -64,12 +64,10 @@
                                     </select>
                                     <button type="submit" class="btn btn-primary btn-sm">Add Role</button>
                                 </form>
-                            </div>
 
-                            <div>
-                                <form asp-controller="Admin" asp-action="DeleteRole" method="post" class="d-flex justify-content-center gap-2">
+                                <form asp-area="Admin" asp-controller="Admin" asp-action="DeleteRole" method="post" class="d-flex gap-2">
                                     <input type="hidden" name="userId" value="@user.Id" />
-                                    <select name="role" class="form-select form-select-sm w-50" required>
+                                    <select name="role" class="form-select form-select-sm w-auto" required>
                                         <option value="">Select Role to Delete</option>
                                         @if (user.Roles != null && user.Roles.Any())
                                         {
@@ -80,6 +78,13 @@
                                         }
                                     </select>
                                     <button type="submit" class="btn btn-danger btn-sm">Delete Role</button>
+                                </form>
+
+                                <form asp-area="Admin" asp-controller="Admin" asp-action="DeleteUser" method="post">
+                                    <input type="hidden" name="userId" value="@user.Id" />
+                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?')">
+                                        Delete User
+                                    </button>
                                 </form>
                             </div>
                         </td>

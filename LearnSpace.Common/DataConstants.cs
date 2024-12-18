@@ -68,7 +68,7 @@
 
         public static class Submission
         {
-            public const int FilePathMaxLength = 500;
+            public const int FileMaxSize = 5 * 1024 * 1024;
         }
     }
 }

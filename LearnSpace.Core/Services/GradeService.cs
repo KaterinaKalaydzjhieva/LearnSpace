@@ -13,6 +13,13 @@ namespace LearnSpace.Core.Services
             repository = _repository;
         }
 
+        public async Task<bool> ExistsByIdAsync(int id)
+        {
+            var grade = await repository.GetByIdAsync<Grade>(id);
+
+            return grade != null;
+        }
+
         public async Task CreateGradeAsync(CreateGradeViewModel model)
         {
             var grade = new Grade()

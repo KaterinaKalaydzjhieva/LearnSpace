@@ -34,5 +34,12 @@ namespace LearnSpace.Web.Areas.Admin.Controllers
 
             return RedirectToAction(nameof(AllUsers));
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string userId) 
+        {
+            await adminService.DeleteUserAsync(userId);
+
+            return RedirectToAction(nameof(AllUsers));
+        }
     }
 }

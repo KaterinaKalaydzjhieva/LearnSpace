@@ -3,11 +3,6 @@ using LearnSpace.Core.Models.Admin;
 using LearnSpace.Infrastructure.Database.Entities.Account;
 using LearnSpace.Infrastructure.Database.Repository;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LearnSpace.Core.Services
 {
@@ -38,7 +33,13 @@ namespace LearnSpace.Core.Services
             await userManager.RemoveFromRoleAsync(user, role);
         }
 
-        public async Task<List<UserViewModel>> GetAllUsersAsync()
+        public async Task DeleteUserAsync(string userId)
+        {
+            await repository.DeleteAsync<ApplicationUser>(Guid.Parse(userId));
+            await repository.SaveChangesAsync();
+		}
+
+		public async Task<List<UserViewModel>> GetAllUsersAsync()
         {
             var users = repository.AllReadOnly<ApplicationUser>()
                                     .Select(a=>new UserViewModel 

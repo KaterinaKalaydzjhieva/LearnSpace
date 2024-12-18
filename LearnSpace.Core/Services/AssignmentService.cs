@@ -37,7 +37,18 @@ namespace LearnSpace.Core.Services
             await repository.SaveChangesAsync();
         }
 
-        public async Task<bool> ExistsByIdAsync(int id)
+		public async Task<int> DeleteAssignment(int id)
+		{
+            var assignment = await repository.GetByIdAsync<Assignment>(id);
+            var classId = assignment.CourseId;
+
+            await repository.DeleteAsync<Assignment>(id);
+            await repository.SaveChangesAsync();
+
+            return classId;
+		}
+
+		public async Task<bool> ExistsByIdAsync(int id)
         {
             var assignment = await repository.GetByIdAsync<Assignment>(id);
 

@@ -10,5 +10,14 @@ namespace LearnSpace.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult Error403()
+        {
+            return View();
+        }
+        public IActionResult Error500()
+        {
+            return View();
+        }
     }
 }

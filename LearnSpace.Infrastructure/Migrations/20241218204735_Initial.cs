@@ -213,7 +213,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -225,8 +225,7 @@ namespace LearnSpace.Infrastructure.Migrations
                     Title = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     DueDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: false),
-                    TeacherId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    CourseId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -237,11 +236,6 @@ namespace LearnSpace.Infrastructure.Migrations
                         principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Assignments_Teachers_TeacherId",
-                        column: x => x.TeacherId,
-                        principalTable: "Teachers",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -264,13 +258,13 @@ namespace LearnSpace.Infrastructure.Migrations
                         column: x => x.CourseId,
                         principalTable: "Courses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Grades_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -318,7 +312,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         column: x => x.AssignmentId,
                         principalTable: "Assignments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Submissions_Students_StudentId",
                         column: x => x.StudentId,
@@ -332,14 +326,14 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateOfBirth", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6"), 0, "2df95a16-1795-4bcd-a989-9cfd1d755bfb", new DateTime(2006, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "student2@abv.bg", false, "Diana", "Atanasova", false, null, "STUDENT2@ABV.BG", "STUDENT2", "AQAAAAEAACcQAAAAECcGfqBCrcueGVwe4dBE3JLt7QVOSuQSjw5AMW+4uVatZophE4IpwiFtUcRzCK5AnA==", null, false, "509eeeaa-d590-4854-bfde-e31deb385daf", false, "student2" },
-                    { new Guid("267a7709-17b4-413c-9026-a6f365d59731"), 0, "d171efb2-53e5-4bb4-a882-70203a4e8c2b", new DateTime(2006, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "student5@abv.bg", false, "Lili", "Samardjieva", false, null, "STUDENT5@ABV.BG", "STUDENT5", "AQAAAAEAACcQAAAAEIE19+8w16vxq+bfI5cs5RSo0/iNcmcWdcjmEprp1fGdz5FEjU2OLnfAiNBEh1i3aw==", null, false, "ec6a151b-8e44-44f2-941e-4a0858a249ef", false, "student5" },
-                    { new Guid("2d522f0f-1d26-429e-8bef-0098f10d96e9"), 0, "f4cd723c-4005-4dba-a7ed-ddc60fc95278", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@abv.bg", false, "Admin", "Adminov", false, null, "ADMIN@ABV.BG", "ADMIN", "AQAAAAEAACcQAAAAEIgs8Vh0XyFIpeuPaIImk/zAve0kPv8aDQ6aKyRgFpH/iA/bYASbJEtRmb6OUMX2Ig==", null, false, "339c0b4d-bccc-4f6d-84c0-ba2ca75b519e", false, "Admin" },
-                    { new Guid("3cc698b0-736e-490a-97e3-3f343bf8bfd8"), 0, "e4c5cdb6-b037-49e3-b080-8b09112e9c9d", new DateTime(2005, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "student3@abv.bg", false, "Ema", "Ivanova", false, null, "STUDENT3@ABV.BG", "STUDENT3", "AQAAAAEAACcQAAAAEN3Wnoj7wYaaYOS6DodKN30DR3oKTmePTC8j1Y4vGmncwzfFhf8eTdBt0mJ6jAxNLA==", null, false, "fa89c355-eb74-471d-8dfa-fa9562ad86b1", false, "student3" },
-                    { new Guid("a52dc824-b577-4862-ac67-29d391116793"), 0, "9c72d080-160f-4810-9829-7a6dc943876f", new DateTime(2005, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "student1@abv.bg", false, "Vladislav", "Popov", false, null, "STUDENT1@ABV.BG", "STUDENT1", "AQAAAAEAACcQAAAAELZy/LZ6tyHpiMjnLLx6yiJmCflxDg28NSLUeCRXQc8KTCkQ+y4AwPcK2yFLpa5jzA==", null, false, "2a444352-724d-4522-bdd9-5b78ed55336c", false, "student1" },
-                    { new Guid("bc5f8df5-6115-4344-897b-73e185df4bff"), 0, "3c9b191c-de07-43bd-aa55-2b3a9d56b1ba", new DateTime(1982, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher2@abv.bg", false, "Grigor", "Georgiev", false, null, "TEACHER2@ABV.BG", "TEACHER2", "AQAAAAEAACcQAAAAEA8NTfVx82r3+tkd2dUgBAZW9juenhnuuzggVVG6U9tMPv2OVuMa3l4XZ7Nk8nazTA==", null, false, "0b73ee1c-0b20-407f-a070-4576810ad2ae", false, "teacher2" },
-                    { new Guid("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1"), 0, "4741998b-76d1-4629-b1d7-e7da625784f3", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher1@abv.bg", false, "Ivan", "Ivanov", false, null, "TEACHER1@ABV.BG", "TEACHER1", "AQAAAAEAACcQAAAAEJSaAUlHXwnhBiDoZiVoP+5zcRaAyg2IxZb1ya6JpLDxghHbwBqYme4jy3XGO0hfEQ==", null, false, "3f31fa04-61eb-41f6-adcf-634004225463", false, "teacher1" },
-                    { new Guid("ebdc00b8-7106-4cbd-a482-da93c40103d3"), 0, "6aa50529-3b6a-4d7a-9dea-c240d0b099aa", new DateTime(2006, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "student4@abv.bg", false, "Alex", "Georgiev", false, null, "STUDENT4@ABV.BG", "STUDENT4", "AQAAAAEAACcQAAAAEAOocECkgcQTDrgJNf/k2gBS7xNGD6plO/1HHddYwyZ92rxdeMq8XuwBNxqq5fjnmQ==", null, false, "1872061e-dbd2-4e34-a0a6-4b16fc89ee5b", false, "student4" }
+                    { new Guid("08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6"), 0, "3e1f7889-1be5-4b31-b356-251d991d9c8e", new DateTime(2006, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "student2@abv.bg", false, "Diana", "Atanasova", false, null, "STUDENT2@ABV.BG", "STUDENT2", "AQAAAAEAACcQAAAAENtOEOsDRHRG7ijMm8gNH4Yvq4XmnKWwA52GTKUi5iw92+a5LWQCFG6XVmxTO7+64g==", null, false, "581b32b8-8a53-4dc8-9012-11f54279139a", false, "student2" },
+                    { new Guid("267a7709-17b4-413c-9026-a6f365d59731"), 0, "184b4d50-cb34-45d2-a85a-63337a3a81d3", new DateTime(2006, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "student5@abv.bg", false, "Lili", "Samardjieva", false, null, "STUDENT5@ABV.BG", "STUDENT5", "AQAAAAEAACcQAAAAELWmsjDkw93dRqbJJ1LZMKtJGlqxv/63bhL/tDEe5iv+4Yman9PYAFE2lmqp5N4kTQ==", null, false, "783d3fa9-7a98-4fc5-a1a6-f177f63341e7", false, "student5" },
+                    { new Guid("2d522f0f-1d26-429e-8bef-0098f10d96e9"), 0, "6e73b780-1240-493b-9328-838d962776ab", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@abv.bg", false, "Admin", "Adminov", false, null, "ADMIN@ABV.BG", "ADMIN", "AQAAAAEAACcQAAAAEG+7ZDhhN7SQF//EpqNeIC8RMlD3fYmaBD7cXbakW84clP5AmaxVwApyCA1Q9Dvtkw==", null, false, "5d5f336d-8b41-46e2-b036-880e59e413c7", false, "Admin" },
+                    { new Guid("3cc698b0-736e-490a-97e3-3f343bf8bfd8"), 0, "25ab17a3-f622-4e28-adc8-7e992084160e", new DateTime(2005, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "student3@abv.bg", false, "Ema", "Ivanova", false, null, "STUDENT3@ABV.BG", "STUDENT3", "AQAAAAEAACcQAAAAECgUJKxUzY+GJx2QYhjS+xTYoSrZfhZ5q2Rg0wYA+Pil0RSz8fKCUNycwLQhPpLf9Q==", null, false, "6f4c0d70-8340-4cee-8f42-8364d53d731e", false, "student3" },
+                    { new Guid("a52dc824-b577-4862-ac67-29d391116793"), 0, "530fb095-0756-4ca8-95d4-e7a3a1bb3056", new DateTime(2005, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "student1@abv.bg", false, "Vladislav", "Popov", false, null, "STUDENT1@ABV.BG", "STUDENT1", "AQAAAAEAACcQAAAAEOmQZq1J/gqffJlw2O58XPx0gEUneH0awtIxfkBLnMuKrs+inRFhciqkfKpDVR/jnA==", null, false, "81e5c346-aea3-4b30-b8b9-8a2c5b941631", false, "student1" },
+                    { new Guid("bc5f8df5-6115-4344-897b-73e185df4bff"), 0, "fa9bd63b-b854-43b6-8d45-1b14692121b8", new DateTime(1982, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher2@abv.bg", false, "Grigor", "Georgiev", false, null, "TEACHER2@ABV.BG", "TEACHER2", "AQAAAAEAACcQAAAAELKcB0JiC/i5HBijXst4pzZbYYpA3Lj5dICk+6Iq1OCf2h3uNPva9w+pHEHY7h0XvA==", null, false, "222d7572-9b47-46f2-b4c7-210e1b42d56a", false, "teacher2" },
+                    { new Guid("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1"), 0, "7b79f178-ff27-49f0-93dd-dced5afdae97", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher1@abv.bg", false, "Ivan", "Ivanov", false, null, "TEACHER1@ABV.BG", "TEACHER1", "AQAAAAEAACcQAAAAENT6jjDY9LBX/F3TM9B+EyYSb0Mu7zDqbCgU5Lr5MpqVNHH5AzY7ZlJeeklRPfZjow==", null, false, "23e015e5-090f-4cf1-ad85-8f3c0cb92974", false, "teacher1" },
+                    { new Guid("ebdc00b8-7106-4cbd-a482-da93c40103d3"), 0, "fb3b9678-2311-45a3-b7dc-0168aaafa9ae", new DateTime(2006, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "student4@abv.bg", false, "Alex", "Georgiev", false, null, "STUDENT4@ABV.BG", "STUDENT4", "AQAAAAEAACcQAAAAED1pUcSalPE8Bm4EYWZFC5Qeg/lV0IjPaLi6f9/54yQbQSmLwRP2IR6/yT5T7OYo9A==", null, false, "9f06e15d-2dba-44db-af69-f904106e2e57", false, "student4" }
                 });
 
             migrationBuilder.InsertData(
@@ -377,19 +371,19 @@ namespace LearnSpace.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "Assignments",
-                columns: new[] { "Id", "CourseId", "Description", "DueDate", "TeacherId", "Title" },
+                columns: new[] { "Id", "CourseId", "Description", "DueDate", "Title" },
                 values: new object[,]
                 {
-                    { 1, 1, "Test your understanding of the core concepts of geometry, including identifying shapes, calculating angles, and writing geometric proofs. This assessment covers both basic and advanced topics to challenge your spatial reasoning and problem-solving skills.", new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Geometric Foundations: Shapes, Angles, and Proofs" },
-                    { 2, 1, "This test focuses on applying geometric theorems to calculate areas, volumes, and properties of 2D and 3D shapes. Ideal for students ready to showcase their analytical abilities and mastery of geometric principles.", new DateTime(2024, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "The Geometry Challenge: Area, Volume, and Theorems" },
-                    { 3, 2, "Test your mastery of foundational algebra concepts, including solving equations, working with inequalities, and graphing linear and quadratic functions. Perfect for sharpening your analytical and computational skills.", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Algebra Essentials: Equations, Inequalities, and Graphs" },
-                    { 4, 2, "Put your algebra knowledge to the test with questions covering systems of equations, polynomial operations, and real-world applications. Designed to evaluate both theoretical understanding and practical problem-solving ability.", new DateTime(2024, 12, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Algebra in Action: Systems, Polynomials, and Word Problems" },
-                    { 5, 3, "Assess your understanding of key events in modern history, from political revolutions to world wars and the social transformations that shaped the 19th and 20th centuries. Test your knowledge of causes, consequences, and global impacts.", new DateTime(2024, 12, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Modern History Milestones: Revolutions, Wars, and Transformations" },
-                    { 6, 3, "Examine pivotal events and trends of the 20th century, from world wars to the civil rights movement and globalization. This test evaluates your understanding of historical causes, key figures, and lasting legacies.", new DateTime(2024, 12, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "The Twentieth Century: Conflict, Progress, and Globalization" },
-                    { 7, 4, "Explore the rise and fall of ancient civilizations, from Mesopotamia to Rome. This test covers key developments in governance, culture, and innovation that shaped early human history.", new DateTime(2024, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Ancient Civilizations: Foundations of the Modern World" },
-                    { 8, 4, "Dive into the fascinating world of ancient empires, legendary battles, and enduring myths. This assessment evaluates your knowledge of ancient societies, their achievements, and their lasting influence on humanity.", new DateTime(2024, 12, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Empires and Myths: A Journey Through Ancient History" },
-                    { 9, 5, "Test your knowledge of the medieval period, from the structure of feudal society to the influence of the Church and the everyday lives of people in the Middle Ages. Explore the events and ideas that defined this era.", new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "The Middle Ages: Feudalism, Faith, and Fiefdoms" },
-                    { 10, 5, "This test examines the major events and themes of the Middle Ages, including the Crusades, the growth of monarchies, and the cultural and intellectual achievements that emerged from this dynamic period.", new DateTime(2024, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Medieval History: Crusades, Kingdoms, and Culture" }
+                    { 1, 1, "Test your understanding of the core concepts of geometry, including identifying shapes, calculating angles, and writing geometric proofs. This assessment covers both basic and advanced topics to challenge your spatial reasoning and problem-solving skills.", new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "Geometric Foundations: Shapes, Angles, and Proofs" },
+                    { 2, 1, "This test focuses on applying geometric theorems to calculate areas, volumes, and properties of 2D and 3D shapes. Ideal for students ready to showcase their analytical abilities and mastery of geometric principles.", new DateTime(2024, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Geometry Challenge: Area, Volume, and Theorems" },
+                    { 3, 2, "Test your mastery of foundational algebra concepts, including solving equations, working with inequalities, and graphing linear and quadratic functions. Perfect for sharpening your analytical and computational skills.", new DateTime(2024, 12, 26, 0, 0, 0, 0, DateTimeKind.Unspecified), "Algebra Essentials: Equations, Inequalities, and Graphs" },
+                    { 4, 2, "Put your algebra knowledge to the test with questions covering systems of equations, polynomial operations, and real-world applications. Designed to evaluate both theoretical understanding and practical problem-solving ability.", new DateTime(2024, 12, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Algebra in Action: Systems, Polynomials, and Word Problems" },
+                    { 5, 3, "Assess your understanding of key events in modern history, from political revolutions to world wars and the social transformations that shaped the 19th and 20th centuries. Test your knowledge of causes, consequences, and global impacts.", new DateTime(2024, 12, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "Modern History Milestones: Revolutions, Wars, and Transformations" },
+                    { 6, 3, "Examine pivotal events and trends of the 20th century, from world wars to the civil rights movement and globalization. This test evaluates your understanding of historical causes, key figures, and lasting legacies.", new DateTime(2024, 12, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Twentieth Century: Conflict, Progress, and Globalization" },
+                    { 7, 4, "Explore the rise and fall of ancient civilizations, from Mesopotamia to Rome. This test covers key developments in governance, culture, and innovation that shaped early human history.", new DateTime(2024, 12, 28, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ancient Civilizations: Foundations of the Modern World" },
+                    { 8, 4, "Dive into the fascinating world of ancient empires, legendary battles, and enduring myths. This assessment evaluates your knowledge of ancient societies, their achievements, and their lasting influence on humanity.", new DateTime(2024, 12, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Empires and Myths: A Journey Through Ancient History" },
+                    { 9, 5, "Test your knowledge of the medieval period, from the structure of feudal society to the influence of the Church and the everyday lives of people in the Middle Ages. Explore the events and ideas that defined this era.", new DateTime(2024, 12, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), "The Middle Ages: Feudalism, Faith, and Fiefdoms" },
+                    { 10, 5, "This test examines the major events and themes of the Middle Ages, including the Crusades, the growth of monarchies, and the cultural and intellectual achievements that emerged from this dynamic period.", new DateTime(2024, 12, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "Medieval History: Crusades, Kingdoms, and Culture" }
                 });
 
             migrationBuilder.InsertData(
@@ -397,11 +391,11 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: new[] { "Id", "CourseId", "DateGraded", "Description", "Score", "StudentId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2024, 12, 17, 12, 5, 56, 393, DateTimeKind.Local).AddTicks(6251), "You can do more.", 4, new Guid("5c07f155-602e-403b-bb86-5a786814f575") },
-                    { 2, 2, new DateTime(2024, 12, 17, 12, 5, 56, 393, DateTimeKind.Local).AddTicks(6287), "You can do more.", 3, new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8") },
-                    { 3, 3, new DateTime(2024, 12, 17, 12, 5, 56, 393, DateTimeKind.Local).AddTicks(6290), "You can do more.", 5, new Guid("c6903087-71e5-41ba-80be-ed119b7902fc") },
-                    { 4, 4, new DateTime(2024, 12, 17, 12, 5, 56, 393, DateTimeKind.Local).AddTicks(6293), "You can do more.", 6, new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f") },
-                    { 5, 5, new DateTime(2024, 12, 17, 12, 5, 56, 393, DateTimeKind.Local).AddTicks(6296), "You can do more.", 6, new Guid("bb5432a1-ea56-450b-9db6-f7349faf28a6") }
+                    { 1, 1, new DateTime(2024, 12, 18, 22, 47, 34, 417, DateTimeKind.Local).AddTicks(5444), "You can do more.", 4, new Guid("5c07f155-602e-403b-bb86-5a786814f575") },
+                    { 2, 2, new DateTime(2024, 12, 18, 22, 47, 34, 417, DateTimeKind.Local).AddTicks(5497), "You can do more.", 3, new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8") },
+                    { 3, 3, new DateTime(2024, 12, 18, 22, 47, 34, 417, DateTimeKind.Local).AddTicks(5504), "You can do more.", 5, new Guid("c6903087-71e5-41ba-80be-ed119b7902fc") },
+                    { 4, 4, new DateTime(2024, 12, 18, 22, 47, 34, 417, DateTimeKind.Local).AddTicks(5514), "You can do more.", 6, new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f") },
+                    { 5, 5, new DateTime(2024, 12, 18, 22, 47, 34, 417, DateTimeKind.Local).AddTicks(5520), "You can do more.", 6, new Guid("bb5432a1-ea56-450b-9db6-f7349faf28a6") }
                 });
 
             migrationBuilder.InsertData(
@@ -426,11 +420,11 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: new[] { "Id", "AssignmentId", "FileContent", "FileName", "FileType", "StudentId", "SubmittedOn" },
                 values: new object[,]
                 {
-                    { 1, 2, new byte[] { 49, 50, 51, 49, 50, 52, 49, 50, 52, 50, 51, 52 }, "task1.txt", "text/plain", new Guid("5c07f155-602e-403b-bb86-5a786814f575"), new DateTime(2024, 12, 17, 10, 5, 56, 393, DateTimeKind.Utc).AddTicks(6066) },
-                    { 2, 4, new byte[] { 113, 119, 100, 113, 101, 50, 113, 101, 119, 113, 101, 113, 119, 101, 119, 113, 100, 113, 119, 101, 113, 100 }, "task2.txt", "text/plain", new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8"), new DateTime(2024, 12, 17, 10, 5, 56, 393, DateTimeKind.Utc).AddTicks(6076) },
-                    { 3, 6, new byte[] { 113, 119, 101, 113, 119, 101, 113, 119, 101, 115, 97, 100 }, "task3.txt", "text/plain", new Guid("c6903087-71e5-41ba-80be-ed119b7902fc"), new DateTime(2024, 12, 17, 10, 5, 56, 393, DateTimeKind.Utc).AddTicks(6078) },
-                    { 4, 8, new byte[] { 113, 119, 100, 113, 119, 32, 113, 119, 100, 32, 113, 119, 100 }, "task4.txt", "text/plain", new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f"), new DateTime(2024, 12, 17, 10, 5, 56, 393, DateTimeKind.Utc).AddTicks(6080) },
-                    { 5, 10, new byte[] { 113, 87, 69, 67, 119, 100, 119, 97, 100, 97, 119 }, "task5.txt", "text/plain", new Guid("bb5432a1-ea56-450b-9db6-f7349faf28a6"), new DateTime(2024, 12, 17, 10, 5, 56, 393, DateTimeKind.Utc).AddTicks(6082) }
+                    { 1, 2, new byte[] { 49, 50, 51, 49, 50, 52, 49, 50, 52, 50, 51, 52 }, "task1.txt", "text/plain", new Guid("5c07f155-602e-403b-bb86-5a786814f575"), new DateTime(2024, 12, 18, 20, 47, 34, 417, DateTimeKind.Utc).AddTicks(4669) },
+                    { 2, 4, new byte[] { 113, 119, 100, 113, 101, 50, 113, 101, 119, 113, 101, 113, 119, 101, 119, 113, 100, 113, 119, 101, 113, 100 }, "task2.txt", "text/plain", new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8"), new DateTime(2024, 12, 18, 20, 47, 34, 417, DateTimeKind.Utc).AddTicks(4706) },
+                    { 3, 6, new byte[] { 113, 119, 101, 113, 119, 101, 113, 119, 101, 115, 97, 100 }, "task3.txt", "text/plain", new Guid("c6903087-71e5-41ba-80be-ed119b7902fc"), new DateTime(2024, 12, 18, 20, 47, 34, 417, DateTimeKind.Utc).AddTicks(4709) },
+                    { 4, 8, new byte[] { 113, 119, 100, 113, 119, 32, 113, 119, 100, 32, 113, 119, 100 }, "task4.txt", "text/plain", new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f"), new DateTime(2024, 12, 18, 20, 47, 34, 417, DateTimeKind.Utc).AddTicks(4712) },
+                    { 5, 10, new byte[] { 113, 87, 69, 67, 119, 100, 119, 97, 100, 97, 119 }, "task5.txt", "text/plain", new Guid("bb5432a1-ea56-450b-9db6-f7349faf28a6"), new DateTime(2024, 12, 18, 20, 47, 34, 417, DateTimeKind.Utc).AddTicks(4715) }
                 });
 
             migrationBuilder.CreateIndex(
@@ -476,11 +470,6 @@ namespace LearnSpace.Infrastructure.Migrations
                 name: "IX_Assignments_CourseId",
                 table: "Assignments",
                 column: "CourseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Assignments_TeacherId",
-                table: "Assignments",
-                column: "TeacherId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_TeacherId",

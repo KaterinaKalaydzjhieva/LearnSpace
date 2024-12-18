@@ -11,5 +11,6 @@ namespace LearnSpace.Core.Interfaces
         Task<AssignmentsInfoForTeacherViewModel> GetAssignmentInfoForTeacherAsync(int assignmentId);
         Task CreateAssignment(CreateAssignmentFormModel model);
         Task<bool> ExistsByIdAsync(int id);
+        Task<int> DeleteAssignment(int id);
     }
 }

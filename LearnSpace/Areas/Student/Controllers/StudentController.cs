@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LearnSpace.Web.Areas.Student.Controllers
 {
-    [Authorize(Roles = "Student")]
     public class StudentController : BaseController
     {
         private readonly IStudentService studentService;
@@ -19,15 +18,6 @@ namespace LearnSpace.Web.Areas.Student.Controllers
         [HttpGet]
         public async Task<IActionResult> Dashboard()
         {
-            if (!User.Identity!.IsAuthenticated)
-            {
-                return Redirect("/User/Register");
-            }
-            if (!await studentService.ExistsByIdAsync(GetUserId()))
-            {
-                return RedirectToAction("Error404", "Home", new { area = "" });
-            }
-
             var student = await studentService.GetStudentDashboardInformationAsync(GetUserId());
 
             return View(student);

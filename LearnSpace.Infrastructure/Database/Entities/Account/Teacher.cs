@@ -10,7 +10,6 @@ namespace LearnSpace.Infrastructure.Database.Entities.Account
         {
             Id = Guid.NewGuid();
             this.Courses = new HashSet<Course>();
-            this.Assignments = new HashSet<Assignment>();
         }
         [Key]
         public Guid Id { get; set; }
@@ -19,7 +18,6 @@ namespace LearnSpace.Infrastructure.Database.Entities.Account
         [StringLength(SubjectSpecializationMaxLen)]
         public string SubjectSpecialization { get; set; } = string.Empty;
         public virtual ICollection<Course> Courses { get; set; }
-        public virtual ICollection<Assignment> Assignments { get; set; }
 
         [ForeignKey(nameof(ApplicationUser))]
         public Guid ApplicationUserId { get; set; }

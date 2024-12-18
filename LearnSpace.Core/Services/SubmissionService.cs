@@ -4,8 +4,8 @@ using LearnSpace.Infrastructure.Database.Entities;
 using LearnSpace.Infrastructure.Database.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic.FileIO;
 using static LearnSpace.Common.Constants;
+using LearnSpace.Infrastructure.Database.Entities;
 namespace LearnSpace.Core.Services
 {
     public class SubmissionService : ISubmissionService
@@ -14,6 +14,13 @@ namespace LearnSpace.Core.Services
         public SubmissionService(IRepository _repository)
         {
             repository = _repository;
+        }
+
+        public async Task<bool> ExistsByIdAsync(int id)
+        {
+            var submission = await repository.GetByIdAsync<Submission>(id);
+
+            return submission != null;
         }
         public async Task CreateSubmissionAsync(string userId, int assignmentId, IFormFile file)
         {
@@ -113,6 +120,22 @@ namespace LearnSpace.Core.Services
             };
 
             return model;
+        }
+
+        public bool ContainsOnlyAllowedFileTypeAsync(IFormFile file)
+        {
+            var allowedExtensions = new[] { ".pdf", ".docx", ".xlsx", ".txt" };
+            var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();
+
+            return allowedExtensions.Contains(fileExtension);
+        }
+
+        public bool SizeIsNotTooBig(IFormFile file)
+        {
+            const long maxFileSize = 5 * 1024 * 1024; // 5 MB
+
+            return file.Length <= maxFileSize;
+            
         }
     }
 }

@@ -15,6 +15,13 @@ namespace LearnSpace.Core.Services
             repository = _repository;
         }
 
+        public async Task<bool> ExistsByIdAsync(int id)
+        {
+            var course = await repository.GetByIdAsync<Course>(id);
+
+            return course != null;
+        }
+
         public async Task CreateClassAsync(CreateClassModel model)
         {
             var course = new Course()
@@ -31,13 +38,13 @@ namespace LearnSpace.Core.Services
 
         public async Task DeleteClassAsync(int id)
         {
-            var assignments = repository.All<Assignment>().ToList().Where(a => a.CourseId == id);
-            var grades = repository.All<Grade>().ToList().Where(g => g.CourseId == id);
-            var studentCourses = repository.All<StudentCourse>().ToList().Where(sc => sc.CourseId == id);
+            //var assignments = repository.All<Assignment>().ToList().Where(a => a.CourseId == id);
+            //var grades = repository.All<Grade>().ToList().Where(g => g.CourseId == id);
+            //var studentCourses = repository.All<StudentCourse>().ToList().Where(sc => sc.CourseId == id);
 
-            repository.DeleteRange(assignments);
-            repository.DeleteRange(grades);
-            repository.DeleteRange(studentCourses);
+            //repository.DeleteRange(assignments);
+            //repository.DeleteRange(grades);
+            //repository.DeleteRange(studentCourses);
 
             await repository.DeleteAsync<Course>(id);
             await repository.SaveChangesAsync();

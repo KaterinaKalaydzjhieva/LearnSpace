@@ -15,7 +15,7 @@ namespace LearnSpace.Web.Areas.Student.Controllers
         [HttpGet]
         public async Task<IActionResult> AllClassesForStudent()
         {
-            var list = await classService.GetAllClassesForStudentAsync(GetUserId());
+            var list = await classService.GetAllClassesForStudentAsync(UserId);
 
             return View(list);
         }
@@ -24,7 +24,7 @@ namespace LearnSpace.Web.Areas.Student.Controllers
         public async Task<IActionResult> AllClasses([FromQuery] AllClassesQueryModel query)
         {
             var model = await classService.GetAllClassesAsync(
-                     GetUserId(),
+                     UserId,
                      query.SearchTerm,
                      query.Sorting,
                      query.CurrentPage,
@@ -39,7 +39,12 @@ namespace LearnSpace.Web.Areas.Student.Controllers
         [HttpPost]
         public async Task<IActionResult> LeaveClass(int classId)
         {
-            await classService.LeaveClassAsync(GetUserId(), classId);
+            if (!(await classService.ExistsByIdAsync(classId))) 
+            {
+                return RedirectToAction("Error404", "Error");
+            }
+            
+            await classService.LeaveClassAsync(UserId, classId);
 
             return RedirectToAction(nameof(AllClassesForStudent));
         }
@@ -47,11 +52,16 @@ namespace LearnSpace.Web.Areas.Student.Controllers
         [HttpPost]
         public async Task<IActionResult> JoinClass(int classId)
         {
-            var userId = GetUserId();
+            if (!(await classService.ExistsByIdAsync(classId)))
+            {
+                return RedirectToAction("Error404", "Error");
+            }
 
-            await classService.JoinClassAsync(userId, classId);
+            await classService.JoinClassAsync(UserId, classId);
 
             return RedirectToAction(nameof(AllClassesForStudent));
         }
+
+        private string UserId => GetUserId();
     }
 }

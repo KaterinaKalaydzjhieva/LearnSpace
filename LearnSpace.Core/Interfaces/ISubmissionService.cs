@@ -10,5 +10,8 @@ namespace LearnSpace.Core.Interfaces
         Task<SubmissionFileModel> GetFileBySubmissionIdAsync(int submissionId);
         Task DeleteSubmissionIdAsync(int submissionId);
         Task<SubmissionsViewModel> GetAllSubmissionsForTeacherAsync(string userId);
+        Task<bool> ExistsByIdAsync(int id);
+        bool ContainsOnlyAllowedFileTypeAsync(IFormFile file);
+        bool SizeIsNotTooBig(IFormFile file);
     }
 }

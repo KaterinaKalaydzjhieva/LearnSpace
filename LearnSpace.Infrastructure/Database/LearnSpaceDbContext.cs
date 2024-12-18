@@ -10,7 +10,10 @@ namespace LearnSpace.Infrastructure.Database
     public class LearnSpaceDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
     {
         public LearnSpaceDbContext(DbContextOptions<LearnSpaceDbContext> options)
-        : base(options) { }
+        : base(options) 
+        {
+            this.ChangeTracker.LazyLoadingEnabled = true;
+        }
 
         public virtual DbSet<Student> Students { get; set; } = null!;
         public virtual DbSet<Teacher> Teachers { get; set; } = null!;
@@ -28,71 +31,96 @@ namespace LearnSpace.Infrastructure.Database
                        sc.StudentId,
                        sc.CourseId
                    });
-            //Courses
-            builder.Entity<Course>()
-                   .HasMany(c=>c.Assignments)
-                   .WithOne(a=>a.Course)
-                   .HasForeignKey(a=>a.CourseId)
-                   .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Course>()
-                   .HasMany(c => c.Grades)
-                   .WithOne(g => g.Course)
-                   .HasForeignKey(g => g.CourseId)
-                   .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Student>()
+                    .HasMany(s => s.StudentCourses)
+                    .WithOne(sc => sc.Student)
+                    .HasForeignKey(sc => sc.StudentId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Course>()
-                   .HasMany(c => c.CourseStudents)
-                   .WithOne(cs => cs.Course)
-                   .HasForeignKey(cs => cs.CourseId)
-                   .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Student>()
+                    .HasMany(s => s.Submissions)
+                    .WithOne(sc => sc.Student)
+                    .HasForeignKey(sc => sc.StudentId)
+                    .OnDelete(DeleteBehavior.Cascade);
 
-            // Assignments
-            builder.Entity<Assignment>()
-                   .HasOne(a => a.Course)
-                   .WithMany(c => c.Assignments)
-                   .HasForeignKey(a => a.CourseId)
-                   .OnDelete(DeleteBehavior.Restrict);
-
-            // Submissions
             builder.Entity<Submission>()
-                   .HasOne(s => s.Assignment)
-                   .WithMany(a => a.Submissions)
-                   .HasForeignKey(s => s.AssignmentId)
-                   .OnDelete(DeleteBehavior.Restrict);
+                    .HasOne(s => s.Assignment)
+                    .WithMany   (a => a.Submissions)
+                    .HasForeignKey(s => s.AssignmentId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
-            // StudentCourse
-            builder.Entity<StudentCourse>()
-                   .HasOne(sc => sc.Student)
-                   .WithMany(s => s.StudentCourses)
-                   .HasForeignKey(sc => sc.StudentId)
-                   .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<StudentCourse>()
-                   .HasOne(sc => sc.Course)
-                   .WithMany(c => c.CourseStudents)
-                   .HasForeignKey(sc => sc.CourseId)
-                   .OnDelete(DeleteBehavior.Restrict);
-
-            // ApplicationUser
+            builder.Entity<Student>()
+                    .HasMany(s => s.Grades)
+                    .WithOne(s => s.Student)
+                    .HasForeignKey(g=>g.StudentId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Grade>()
+                    .HasOne(g => g.Course)
+                    .WithMany(c=>c.Grades)
+                    .HasForeignKey(g => g.CourseId)
+                    .OnDelete(DeleteBehavior.Restrict);
             builder.Entity<ApplicationUser>()
-                   .HasOne(u => u.Student)
-                   .WithOne(s => s.ApplicationUser)
-                   .HasForeignKey<Student>(s => s.ApplicationUserId);
+                    .HasOne(a => a.Student)
+                    .WithOne(s=>s.ApplicationUser)
+                    .OnDelete(DeleteBehavior.Cascade);
 
-            // Grades
-            builder.Entity<Grade>()
-                   .HasOne(g => g.Course)
-                   .WithMany(c => c.Grades)
-                   .HasForeignKey(g => g.CourseId)
-                   .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<ApplicationUser>()
+                    .HasOne(a => a.Teacher)
+                    .WithOne(s => s.ApplicationUser)
+                    .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Teacher>()
+                    .HasMany(t => t.Courses)
+                    .WithOne(c => c.Teacher)
+                    .HasForeignKey(t => t.TeacherId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            builder.Entity<Course>()
+                    .HasMany(c => c.Grades)
+                    .WithOne(g => g.Course)
+                    .HasForeignKey(g => g.CourseId)
+                    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<Grade>()
-                   .HasOne(g => g.Student)
-                   .WithMany(s => s.Grades)
-                   .HasForeignKey(g => g.StudentId)
-                   .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Course>()
+                    .HasMany(c => c.CourseStudents)
+                    .WithOne(sc => sc.Course)
+                    .HasForeignKey(sc => sc.CourseId)
+                    .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<Course>()
+                    .HasMany(c => c.Assignments)
+                    .WithOne(a => a.Course)
+                    .HasForeignKey(a => a.CourseId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Course>()
+                    .HasOne(c => c.Teacher)
+                    .WithMany(t => t.Courses)
+                    .HasForeignKey(c => c.TeacherId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Assignment>()
+                    .HasMany(a => a.Submissions)
+                    .WithOne(s => s.Assignment)
+                    .HasForeignKey(s => s.AssignmentId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Assignment>()
+                    .HasOne(a => a.Course)
+                    .WithMany(c => c.Assignments)
+                    .HasForeignKey(a => a.CourseId)
+                    .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<StudentCourse>()
+                    .HasOne(sc => sc.Student)
+                    .WithMany(s => s.StudentCourses)
+                    .HasForeignKey(sc => sc.StudentId)
+                    .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<StudentCourse>()
+                    .HasOne(sc => sc.Course)
+                    .WithMany(c => c.CourseStudents)
+                    .HasForeignKey(sc => sc.CourseId)
+                    .OnDelete(DeleteBehavior.Cascade);
             //Seeding
 
             builder.ApplyConfiguration(new ApplicationUserConfiguration());

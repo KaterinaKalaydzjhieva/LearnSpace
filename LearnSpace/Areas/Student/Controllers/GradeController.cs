@@ -1,4 +1,5 @@
 ﻿using LearnSpace.Core.Interfaces;
+using LearnSpace.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearnSpace.Web.Areas.Student.Controllers
@@ -22,6 +23,11 @@ namespace LearnSpace.Web.Areas.Student.Controllers
         [HttpGet]
         public async Task<IActionResult> GradeInfo(int id)
         {
+            if (!(await gradeService.ExistsByIdAsync(id)))
+            {
+                return RedirectToAction("Error404", "Error");
+            }
+
             var grade = await gradeService.GetGradeInfoAsync(id);
 
             return View(grade);

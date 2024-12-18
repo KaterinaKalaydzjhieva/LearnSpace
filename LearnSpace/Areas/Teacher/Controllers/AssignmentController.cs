@@ -46,5 +46,13 @@ namespace LearnSpace.Web.Areas.Teacher.Controllers
 
             return RedirectToAction(nameof(AllAssignmentsClassTeacher), new { classId = model.ClassId });
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAssignment(int id)
+        {
+            var classId =await assignmentService.DeleteAssignment(id);
+
+            return RedirectToAction(nameof(AllAssignmentsClassTeacher), new { classId =  classId});
+        }
     }
 }

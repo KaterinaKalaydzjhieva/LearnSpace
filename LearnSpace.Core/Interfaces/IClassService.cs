@@ -19,5 +19,6 @@ namespace LearnSpace.Core.Interfaces
         CreateClassModel GetCreateClassModel(string id);
         Task CreateClassAsync(CreateClassModel model);
         Task DeleteClassAsync(int id);
+        Task<bool> ExistsByIdAsync(int id);
     }
 }

@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LearnSpace.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -18,19 +20,6 @@ namespace LearnSpace.Controllers
 
         public IActionResult AboutUs()
         {
-            return View();
-        }
-
-        public async Task<ActionResult> Error(int statusCode) 
-        {
-            if(statusCode== 400)
-            {
-                return View("Error400");
-            }
-            else if (statusCode == 401)
-            {
-                return View("Error401");
-            }
             return View();
         }
 
