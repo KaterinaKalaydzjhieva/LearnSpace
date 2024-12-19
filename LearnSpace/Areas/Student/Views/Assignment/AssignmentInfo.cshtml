@@ -22,7 +22,7 @@
 			<form asp-controller="Submission" asp-action="SubmitAssignment" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="assignmentId" value="@Model.Id" />
 				<div class="file-upload-container d-flex align-items-center">
-					<label class="me-3">Upload File:</label>
+					<label class="me-3">Upload File:</label>	
 					<input type="file" name="filePath" id="fileInput" class="form-control" />
 					<span id="uploadMessage" class="ms-3 text-success" style="display: none;">File uploaded</span>
 				</div>
@@ -41,6 +41,19 @@
 			{
 				<div class="alert alert-warning text-center mt-4">
 					<strong>No submission found.</strong>
+				</div>
+			}
+
+			@if (TempData["Errors"] != null)
+			{
+				var errors = TempData["Errors"] as List<string>;
+				<div class="alert alert-danger">
+					<ul>
+						@foreach (var error in errors)
+						{
+							<li>@error</li>
+						}
+					</ul>
 				</div>
 			}
 			<div class="card-footer text-center">

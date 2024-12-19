@@ -1,131 +1,150 @@
 using LearnSpace.Core.Services;
-using LearnSpace.Infrastructure.Database;
+using LearnSpace.Infrastructure.Database.Entities;
 using LearnSpace.Infrastructure.Database.Entities.Account;
 using LearnSpace.Infrastructure.Database.Repository;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+using Moq;
 
-//public class AdminServiceTests
-//{
-//    private LearnSpaceDbContext context;
-//    private IRepository repository;
-//    private UserManager<ApplicationUser> userManager;
-//    private AdminService adminService;
 
-//    [SetUp]
-//    public void Setup()
-//    {
-//        var contextOptions = new DbContextOptionsBuilder<LearnSpaceDbContext>()
-//            .UseInMemoryDatabase("LearnSpaceDbTest")
-//            .Options;
+namespace LearnSpace.UnitTests
+{
+	[TestFixture]
+	public class AdminServiceTests
+	{
+		private AdminService adminService;
+		private Mock<IRepository> mockRepository;
+		private Mock<UserManager<ApplicationUser>> mockUserManager;
+		private Mock<RoleManager<IdentityRole<Guid>>> mockRoleManager;
 
-//        context = new LearnSpaceDbContext(contextOptions);
-//        context.Database.EnsureDeleted();
-//        context.Database.EnsureCreated();
+		[SetUp]
+		public void Setup()
+		{
+			mockRepository = new Mock<IRepository>();
 
-//        repository = new Repository(context);
+			var userStoreMock = new Mock<IUserStore<ApplicationUser>>();
+			mockUserManager = new Mock<UserManager<ApplicationUser>>(userStoreMock.Object, null, null, null, null, null, null, null, null);
 
-//        userManager = new UserManager<ApplicationUser>(
-//            new UserStore<ApplicationUser, IdentityRole<Guid>, LearnSpaceDbContext, Guid>(context),
-//            null, null, null, null, null, null, null, null
-//        );
+			var roleStoreMock = new Mock<IRoleStore<IdentityRole<Guid>>>();
+			mockRoleManager = new Mock<RoleManager<IdentityRole<Guid>>>(roleStoreMock.Object, null, null, null, null);
 
-//        adminService = new AdminService(userManager, repository);
-//    }
+			adminService = new AdminService(mockUserManager.Object, mockRepository.Object, mockRoleManager.Object);
+		}
 
-//    [Test]
-//    public async Task AddRoleAsync_ShouldAddRoleToUser()
-//    {
-//        // Arrange
-//        var user = new ApplicationUser { Id = Guid.NewGuid(), UserName = "testuser" };
-//        await context.Users.AddAsync(user);
-//        await context.SaveChangesAsync();
+		[Test]
+		public async Task AddRoleAsync_ShouldAddRoleToUser()
+		{
+			var userId = Guid.NewGuid().ToString();
+			var role = "Administrator";
+			var user = new ApplicationUser { Id = Guid.Parse(userId) };
 
-//        var role = "Admin";
-//        await context.Roles.AddAsync(new IdentityRole<Guid> { Id = Guid.NewGuid(), Name = role, NormalizedName = role.ToUpper() });
-//        await context.SaveChangesAsync();
+			mockRepository.Setup(r => r.GetByIdAsync<ApplicationUser>(Guid.Parse(userId))).ReturnsAsync(user);
 
-//        // Act
-//        await adminService.AddRoleAsync(user.Id.ToString(), role);
+			await adminService.AddRoleAsync(userId, role);
 
-//        // Assert
-//        var userRoles = await userManager.GetRolesAsync(user);
-//        Assert.Contains(role, userRoles);
-//    }
+			mockUserManager.Verify(um => um.AddToRoleAsync(user, role), Times.Once);
+		}
 
-//    [Test]
-//    public async Task DeleteRoleAsync_ShouldRemoveRoleFromUser()
-//    {
-//        // Arrange
-//        var user = new ApplicationUser { Id = Guid.NewGuid(), UserName = "testuser" };
-//        await context.Users.AddAsync(user);
-//        await context.SaveChangesAsync();
+		[Test]
+		public async Task DeleteRoleAsync_ShouldRemoveRoleFromUser()
+		{
+			var userId = Guid.NewGuid().ToString();
+			var role = "Admin";
+			var user = new ApplicationUser { Id = Guid.Parse(userId) };
 
-//        var role = "Admin";
-//        var roleEntity = new IdentityRole<Guid> { Id = Guid.NewGuid(), Name = role, NormalizedName = role.ToUpper() };
-//        await context.Roles.AddAsync(roleEntity);
-//        await context.SaveChangesAsync();
+			mockRepository.Setup(r => r.GetByIdAsync<ApplicationUser>(Guid.Parse(userId))).ReturnsAsync(user);
 
-//        await userManager.AddToRoleAsync(user, role);
+			await adminService.DeleteRoleAsync(userId, role);
 
-//        // Act
-//        await adminService.DeleteRoleAsync(user.Id.ToString(), role);
+			mockUserManager.Verify(um => um.RemoveFromRoleAsync(user, role), Times.Once);
+		}
 
-//        // Assert
-//        var userRoles = await userManager.GetRolesAsync(user);
-//        Assert.DoesNotContain(role, userRoles);
-//    }
+		[Test]
+		public async Task DeleteUserAsync_ShouldDeleteUserAndAssociatedData()
+		{
+			var userId = Guid.NewGuid().ToString();
+			var user = new ApplicationUser { Id = Guid.Parse(userId), Student = new Student() };
+			var student = new Student { Id = Guid.Parse(userId), StudentCourses = new List<StudentCourse>() };
 
-//    [Test]
-//    public async Task DeleteUserAsync_ShouldDeleteUserFromRepository()
-//    {
-//        // Arrange
-//        var user = new ApplicationUser { Id = Guid.NewGuid(), UserName = "testuser" };
-//        await context.Users.AddAsync(user);
-//        await context.SaveChangesAsync();
+			mockRepository.Setup(r => r.GetByIdAsync<ApplicationUser>(Guid.Parse(userId))).ReturnsAsync(user);
+			mockRepository.Setup(r => r.GetStudentAsync(userId)).ReturnsAsync(student);
 
-//        // Act
-//        await adminService.DeleteUserAsync(user.Id.ToString());
+			await adminService.DeleteUserAsync(userId);
 
-//        // Assert
-//        var deletedUser = await repository.GetByIdAsync<ApplicationUser>(user.Id);
-//        Assert.Null(deletedUser);
-//    }
+			mockRepository.Verify(r => r.DeleteRange<StudentCourse>(student.StudentCourses), Times.Once);
+			mockRepository.Verify(r => r.DeleteAsync<Student>(student.Id), Times.Once);
+			mockRepository.Verify(r => r.DeleteAsync<ApplicationUser>(Guid.Parse(userId)), Times.Once);
+			mockRepository.Verify(r => r.SaveChangesAsync(), Times.Once);
+		}
 
-//    [Test]
-//    public async Task GetAllUsersAsync_ShouldReturnAllUsersWithRoles()
-//    {
-//        // Arrange
-//        var user1 = new ApplicationUser { Id = Guid.NewGuid(), UserName = "user1", FirstName = "John", LastName = "Doe" };
-//        var user2 = new ApplicationUser { Id = Guid.NewGuid(), UserName = "user2", FirstName = "Jane", LastName = "Smith" };
-//        await context.Users.AddRangeAsync(user1, user2);
-//        await context.SaveChangesAsync();
+		[Test]
+		public async Task GetAllUsersAsync_ShouldReturnAllUsersWithRoles()
+		{
+			var users = new List<ApplicationUser>
+			{
+				new ApplicationUser { Id = Guid.NewGuid(), UserName = "User1", FirstName = "First1", LastName = "Last1" },
+				new ApplicationUser { Id = Guid.NewGuid(), UserName = "User2", FirstName = "First2", LastName = "Last2" }
+			};
 
-//        var roleAdmin = "Admin";
-//        var roleUser = "User";
+			mockRepository.Setup(r => r.AllReadOnly<ApplicationUser>()).Returns(users.AsQueryable());
 
-//        await context.Roles.AddRangeAsync(
-//            new IdentityRole<Guid> { Id = Guid.NewGuid(), Name = roleAdmin, NormalizedName = roleAdmin.ToUpper() },
-//            new IdentityRole<Guid> { Id = Guid.NewGuid(), Name = roleUser, NormalizedName = roleUser.ToUpper() }
-//        );
-//        await context.SaveChangesAsync();
+			foreach (var user in users)
+			{
+				mockRepository.Setup(r => r.GetByIdAsync<ApplicationUser>(user.Id)).ReturnsAsync(user);
+				mockUserManager.Setup(um => um.GetRolesAsync(user)).ReturnsAsync(new List<string> { "Role1" });
+			}
 
-//        await userManager.AddToRoleAsync(user1, roleAdmin);
-//        await userManager.AddToRoleAsync(user2, roleUser);
+			var result = await adminService.GetAllUsersAsync();
 
-//        // Act
-//        var result = await adminService.GetAllUsersAsync();
+			Assert.AreEqual(users.Count, result.Count);
+			foreach (var user in result)
+			{
+				Assert.IsTrue(user.Roles.Contains("Role1"));
+			}
+		}
 
-//        // Assert
-//        Assert.Equal(2, result.Count);
-//        Assert.Contains(result, u => u.UserName == "user1" && u.Roles.Contains("Admin"));
-//        Assert.Contains(result, u => u.UserName == "user2" && u.Roles.Contains("User"));
-//    }
+		[Test]
+		public async Task RoleExistsByNameAsync_ShouldReturnTrueIfRoleExists()
+		{
+			var roleName = "Admin";
 
-//    [TearDown]
-//    public void TearDown()
-//    {
-//        context.Dispose();
-//    }
-//}
+			mockRoleManager.Setup(rm => rm.RoleExistsAsync(roleName)).ReturnsAsync(true);
+
+			var result = await adminService.RoleExistsByNameAsync(roleName);
+
+			Assert.IsTrue(result);
+		}
+
+		[Test]
+		public async Task RoleExistsByNameAsync_ShouldThrowExceptionForInvalidRole()
+		{
+			var roleName = "";
+
+			Assert.ThrowsAsync<ArgumentException>(async () => await adminService.RoleExistsByNameAsync(roleName));
+		}
+
+		[Test]
+		public async Task UserExistsByIdAsync_ShouldReturnTrueIfUserExists()
+		{
+			var userId = Guid.NewGuid().ToString();
+			var user = new ApplicationUser { Id = Guid.Parse(userId) };
+
+			mockRepository.Setup(r => r.GetByIdAsync<ApplicationUser>(Guid.Parse(userId))).ReturnsAsync(user);
+
+			var result = await adminService.UserExistsByIdAsync(userId);
+
+			Assert.IsTrue(result);
+		}
+
+		[Test]
+		public async Task UserExistsByIdAsync_ShouldReturnFalseIfUserDoesNotExist()
+		{
+			var userId = Guid.NewGuid().ToString();
+
+			mockRepository.Setup(r => r.GetByIdAsync<ApplicationUser>(Guid.Parse(userId))).ReturnsAsync((ApplicationUser)null);
+
+			var result = await adminService.UserExistsByIdAsync(userId);
+
+			Assert.IsFalse(result);
+		}
+	}
+}
