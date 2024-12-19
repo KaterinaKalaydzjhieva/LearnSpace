@@ -1,5 +1,4 @@
 ﻿using LearnSpace.Core.Interfaces;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearnSpace.Web.Areas.Student.Controllers
@@ -32,6 +31,7 @@ namespace LearnSpace.Web.Areas.Student.Controllers
 
             return View(assignments);
         }
+
         [HttpGet]
         public async Task<IActionResult> AssignmentInfo(int id) 
         {

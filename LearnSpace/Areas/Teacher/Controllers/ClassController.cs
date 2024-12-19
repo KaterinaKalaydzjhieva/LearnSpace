@@ -1,5 +1,6 @@
 ﻿using LearnSpace.Core.Interfaces;
 using LearnSpace.Core.Models.Class;
+using LearnSpace.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearnSpace.Web.Areas.Teacher.Controllers
@@ -31,6 +32,10 @@ namespace LearnSpace.Web.Areas.Teacher.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateClass(CreateClassModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
             await classService.CreateClassAsync(model);
 
             return RedirectToAction(nameof(AllClassesForTeacher));
@@ -39,6 +44,10 @@ namespace LearnSpace.Web.Areas.Teacher.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteClass(int id)
         {
+            if (!(await classService.ExistsByIdAsync(id)))
+            {
+                return RedirectToAction("Error404", "Error");
+            }
             await classService.DeleteClassAsync(id);
 
             return RedirectToAction(nameof(AllClassesForTeacher));

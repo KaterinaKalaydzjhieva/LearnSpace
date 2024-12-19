@@ -35,7 +35,6 @@
                             <a href="@Url.Action("DownloadFile", "Submission", new { submissionId = submission.Id })" class="btn btn-success btn-sm m-1">Download</a>
                             <form asp-action="DeleteSubmission" asp-controller="Submission" method="post" class="d-inline">
                                 <input type="hidden" name="submissionId" value="@submission.Id" />
-                                <input type="hidden" name="assignmentId" value="@submission.AssignmentId" />
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
 

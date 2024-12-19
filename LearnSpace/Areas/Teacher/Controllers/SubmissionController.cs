@@ -1,6 +1,4 @@
 ﻿using LearnSpace.Core.Interfaces;
-using LearnSpace.Core.Models.Assignment;
-using LearnSpace.Web.Controllers;
 using LearnSpace.Web.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,6 +15,10 @@ namespace LearnSpace.Web.Areas.Teacher.Controllers
         [HttpGet]
         public async Task<IActionResult> AllSubmissionsForAssignment(int assignmentId)
         {
+            if (!(await submissionService.AssignmentExistsByIdAsync(assignmentId))) 
+            {
+                return RedirectToAction("Error404", "Error");
+            }
             var model = await submissionService.GetAllSubmissionsForAssignmentAsync(assignmentId);
 
             return View(model);
@@ -25,30 +27,42 @@ namespace LearnSpace.Web.Areas.Teacher.Controllers
         [HttpGet]
         public async Task<IActionResult> DownloadFile(int submissionId)
         {
+            if (!(await submissionService.ExistsByIdAsync(submissionId)))
+            {
+                return RedirectToAction("Error404", "Error");
+            }
+
             var model = await submissionService.GetFileBySubmissionIdAsync(submissionId);
 
             if (model == null)
             {
-                return NotFound("File not found.");
+                return RedirectToAction("Error404", "Error");
             }
 
             return File(model.FileContent, model.FileType, model.FileName);
         }
 
         [HttpPost]
-        public async Task<IActionResult> DeleteSubmission(int submissionId, string assignmentId)
+        public async Task<IActionResult> DeleteSubmission(int submissionId, int assignmentId)
         {
-            await submissionService.DeleteSubmissionIdAsync(submissionId);
-            if (User.IsStudent())
+
+            if (!(await submissionService.ExistsByIdAsync(submissionId)))
             {
+                return RedirectToAction("Error404", "Error");
+            }
+            await submissionService.DeleteSubmissionIdAsync(submissionId);
+            if (assignmentId != 0)
+            {
+                if (!(await submissionService.AssignmentExistsByIdAsync(assignmentId)))
+                {
+                    return RedirectToAction("Error404", "Error");
+                }
                 return RedirectToAction(nameof(AllSubmissionsForAssignment), new { assignmentId });
             }
-            else if (User.IsTeacher())
+            else 
             {
                 return RedirectToAction(nameof(AllSubmissionsForTeacher));
             }
-
-            return NotFound();
         }
 
         [HttpGet]

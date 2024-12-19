@@ -8,5 +8,6 @@ namespace LearnSpace.Core.Interfaces
 
         Task<TeacherDashboardModel> GetTeacherDashboardInformationAsync(string userId);
         Task<GradeBookViewModel> GetGradeBookByClassAsync(string userId, int classId);
+        Task<bool> ClassExistsByIdAsync(int id);
     }
 }

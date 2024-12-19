@@ -11,5 +11,7 @@ namespace LearnSpace.Core.Interfaces
         Task<int> DeleteGradeAsync(int id);
         Task<bool> ExistsByIdAsync(int id);
         Task<bool> ClassExistsByIdAsync(int id);
+        Task<bool> UserExistsByIdAsync(string userId);
+
     }
 }

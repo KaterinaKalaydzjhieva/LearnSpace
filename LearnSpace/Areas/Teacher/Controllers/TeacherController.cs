@@ -21,6 +21,10 @@ namespace LearnSpace.Web.Areas.Teacher.Controllers
         [HttpGet]
         public async Task<IActionResult> GradeBook(int classId)
         {
+            if (!(await teacherService.ClassExistsByIdAsync(classId))) 
+            {
+                return RedirectToAction("Error404", "Error");
+            }
             var model = await teacherService.GetGradeBookByClassAsync(GetUserId(), classId);
 
             return View(model);

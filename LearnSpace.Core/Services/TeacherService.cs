@@ -13,6 +13,14 @@ namespace LearnSpace.Core.Services
         {
             repository = _repository;
         }
+
+        public async Task<bool> ClassExistsByIdAsync(int id)
+        {
+            var course = await repository.GetByIdAsync<Course>(id);
+
+            return course != null;
+        }
+
         public async Task<bool> ExistsByIdAsync(string id)
         {
             var result = await repository.GetByIdAsync<ApplicationUser>(Guid.Parse(id));

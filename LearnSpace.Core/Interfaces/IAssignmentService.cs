@@ -12,5 +12,6 @@ namespace LearnSpace.Core.Interfaces
         Task CreateAssignment(CreateAssignmentFormModel model);
         Task<bool> ExistsByIdAsync(int id);
         Task<int> DeleteAssignment(int id);
+        Task<bool> ClassExistsByIdAsync(int id);
     }
 }

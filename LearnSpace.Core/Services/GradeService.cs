@@ -1,6 +1,7 @@
 ﻿using LearnSpace.Core.Interfaces;
 using LearnSpace.Core.Models.Grade;
 using LearnSpace.Infrastructure.Database.Entities;
+using LearnSpace.Infrastructure.Database.Entities.Account;
 using LearnSpace.Infrastructure.Database.Repository;
 
 namespace LearnSpace.Core.Services
@@ -109,6 +110,13 @@ namespace LearnSpace.Core.Services
             var course = await repository.GetByIdAsync<Course>(id);
 
             return course != null;
+        }
+
+        public async Task<bool> UserExistsByIdAsync(string studentId)
+        {
+            var student = await repository.GetByIdAsync<Student>(Guid.Parse(studentId));
+
+            return student != null;
         }
     }
 }

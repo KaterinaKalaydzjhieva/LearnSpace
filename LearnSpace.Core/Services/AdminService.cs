@@ -11,13 +11,17 @@ namespace LearnSpace.Core.Services
     {
         private readonly IRepository repository;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly RoleManager<IdentityRole<Guid>> roleManager;
 
         public AdminService(
                 UserManager<ApplicationUser> _userManager,
-                IRepository _repository)
+                IRepository _repository,
+                RoleManager<IdentityRole<Guid>> roleManager)
         {
             userManager = _userManager;
             repository = _repository;
+            this.roleManager = roleManager;
+
         }
 
         public async Task AddRoleAsync(string userId, string role)
@@ -77,6 +81,23 @@ namespace LearnSpace.Core.Services
             }
             
             return users;
+        }
+
+        public async Task<bool> RoleExistsByNameAsync(string role)
+        {
+            if (string.IsNullOrWhiteSpace(role))
+            {
+                throw new ArgumentException("Role name cannot be null or whitespace.");
+            }
+
+            return await roleManager.RoleExistsAsync(role);
+        }
+
+        public async Task<bool> UserExistsByIdAsync(string userId)
+        {
+            var user = await repository.GetByIdAsync<ApplicationUser>(Guid.Parse(userId));
+
+            return user != null;
         }
     }
 }

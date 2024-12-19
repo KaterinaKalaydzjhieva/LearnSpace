@@ -1,5 +1,4 @@
 ﻿using LearnSpace.Core.Interfaces;
-using LearnSpace.Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearnSpace.Web.Areas.Student.Controllers
@@ -20,6 +19,7 @@ namespace LearnSpace.Web.Areas.Student.Controllers
 
             return View(list);
         }
+
         [HttpGet]
         public async Task<IActionResult> GradeInfo(int id)
         {

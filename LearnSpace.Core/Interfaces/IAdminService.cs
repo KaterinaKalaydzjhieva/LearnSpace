@@ -8,5 +8,7 @@ namespace LearnSpace.Core.Interfaces
         Task AddRoleAsync(string userId, string role);
         Task DeleteRoleAsync(string userId, string role);
         Task DeleteUserAsync(string userId);
+        Task<bool> RoleExistsByNameAsync(string role);
+        Task<bool> UserExistsByIdAsync(string userId);
     }
 }

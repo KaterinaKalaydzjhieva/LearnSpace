@@ -24,7 +24,7 @@ namespace LearnSpace.Web.Areas.Student.Controllers
             }
             if (!submissionService.ContainsOnlyAllowedFileTypeAsync(filePath))
             {
-                ModelState.AddModelError("File", "Invalid file type. Allowed types are .pdf, .docx, .xlsx., .txt");
+                ModelState.AddModelError("File", "Invalid file type. Allowed types are .pdf, .docx, .txt");
                 return RedirectToAction("AssignmentInfo", "Assignment",new {area="Student", id = assignmentId });
             }
             if (!submissionService.SizeIsNotTooBig(filePath)) 

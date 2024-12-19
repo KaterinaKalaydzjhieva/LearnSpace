@@ -5,7 +5,6 @@ using LearnSpace.Infrastructure.Database.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using static LearnSpace.Common.Constants;
-using LearnSpace.Infrastructure.Database.Entities;
 namespace LearnSpace.Core.Services
 {
     public class SubmissionService : ISubmissionService
@@ -136,6 +135,13 @@ namespace LearnSpace.Core.Services
 
             return file.Length <= maxFileSize;
             
+        }
+
+        public async Task<bool> AssignmentExistsByIdAsync(int id)
+        {
+            var assignment = await repository.GetByIdAsync<Assignment>(id);
+
+            return assignment != null;
         }
     }
 }

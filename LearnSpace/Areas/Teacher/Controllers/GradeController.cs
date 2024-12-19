@@ -17,7 +17,6 @@ namespace LearnSpace.Web.Areas.Teacher.Controllers
         [HttpGet]
         public async Task<IActionResult> GradeInfo(int id)
         {
-
             if (!(await gradeService.ExistsByIdAsync(id))) 
             {
                 return RedirectToAction("Error404", "Error");
@@ -29,6 +28,11 @@ namespace LearnSpace.Web.Areas.Teacher.Controllers
         [HttpGet]
         public async Task<IActionResult> AddGrade(int classId, string studentId)
         {
+            if (!(await gradeService.UserExistsByIdAsync(studentId)))
+            {
+                return RedirectToAction("Error404", "Error");
+            }
+
             if (!(await gradeService.ClassExistsByIdAsync(classId)))
             {
                 return RedirectToAction("Error404", "Error");
@@ -42,7 +46,6 @@ namespace LearnSpace.Web.Areas.Teacher.Controllers
         [HttpPost]
         public async Task<IActionResult> AddGrade(CreateGradeViewModel model)
         {
-
             if (!ModelState.IsValid)
             {
                 return View(model);

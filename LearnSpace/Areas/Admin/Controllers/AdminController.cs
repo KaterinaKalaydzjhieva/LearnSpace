@@ -22,6 +22,18 @@ namespace LearnSpace.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRole(string userId, string role) 
         {
+            if (string.IsNullOrWhiteSpace(role))
+            {
+                return RedirectToAction("Error404", "Error");
+            }
+            if (!await adminService.UserExistsByIdAsync(userId)) 
+            {
+                return RedirectToAction("Error404", "Error");
+            }
+            if (!await adminService.RoleExistsByNameAsync(role))
+            {
+                return RedirectToAction("Error404", "Error");
+            }
             await adminService.AddRoleAsync(userId, role);
 
             return RedirectToAction(nameof(AllUsers));
@@ -30,6 +42,18 @@ namespace LearnSpace.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteRole(string userId, string role)
         {
+            if (string.IsNullOrWhiteSpace(role))
+            {
+                return RedirectToAction("Error404", "Error");
+            }
+            if (!await adminService.UserExistsByIdAsync(userId))
+            {
+                return RedirectToAction("Error404", "Error");
+            }
+            if (!await adminService.RoleExistsByNameAsync(role))
+            {
+                return RedirectToAction("Error404", "Error");
+            }
             await adminService.DeleteRoleAsync(userId, role);
 
             return RedirectToAction(nameof(AllUsers));
@@ -37,6 +61,11 @@ namespace LearnSpace.Web.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string userId) 
         {
+            if (!await adminService.UserExistsByIdAsync(userId))
+            {
+                return RedirectToAction("Error404", "Error");
+            }
+
             await adminService.DeleteUserAsync(userId);
 
             return RedirectToAction(nameof(AllUsers));
