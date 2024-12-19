@@ -38,13 +38,9 @@ namespace LearnSpace.Core.Services
 
         public async Task DeleteClassAsync(int id)
         {
-            //var assignments = repository.All<Assignment>().ToList().Where(a => a.CourseId == id);
-            //var grades = repository.All<Grade>().ToList().Where(g => g.CourseId == id);
-            //var studentCourses = repository.All<StudentCourse>().ToList().Where(sc => sc.CourseId == id);
+            var studentCourses = repository.All<StudentCourse>().ToList().Where(sc => sc.CourseId == id);
 
-            //repository.DeleteRange(assignments);
-            //repository.DeleteRange(grades);
-            //repository.DeleteRange(studentCourses);
+            repository.DeleteRange(studentCourses);
 
             await repository.DeleteAsync<Course>(id);
             await repository.SaveChangesAsync();

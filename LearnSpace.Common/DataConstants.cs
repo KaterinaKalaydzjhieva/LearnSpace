@@ -40,6 +40,9 @@
 
             public const int DescriptionMaxLen = 300;
             public const int DescriptionMinLen = 5;
+
+            public const int GroupCapacityMin = 5;
+            public const int GroupCapacityMax = 50;
         }
 
         public static class Grade

@@ -1,7 +1,5 @@
 ﻿using LearnSpace.Core.Interfaces;
 using LearnSpace.Core.Models.Grade;
-using LearnSpace.Infrastructure.Database.Entities;
-using LearnSpace.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearnSpace.Web.Areas.Teacher.Controllers
@@ -19,6 +17,11 @@ namespace LearnSpace.Web.Areas.Teacher.Controllers
         [HttpGet]
         public async Task<IActionResult> GradeInfo(int id)
         {
+
+            if (!(await gradeService.ExistsByIdAsync(id))) 
+            {
+                return RedirectToAction("Error404", "Error");
+            }
             var grade = await gradeService.GetGradeInfoAsync(id);
 
             return View(grade);
@@ -26,6 +29,11 @@ namespace LearnSpace.Web.Areas.Teacher.Controllers
         [HttpGet]
         public async Task<IActionResult> AddGrade(int classId, string studentId)
         {
+            if (!(await gradeService.ClassExistsByIdAsync(classId)))
+            {
+                return RedirectToAction("Error404", "Error");
+            }
+
             var model = await gradeService.GetAddGradeModelAsync(classId, studentId);
 
             return View(model);
@@ -34,6 +42,12 @@ namespace LearnSpace.Web.Areas.Teacher.Controllers
         [HttpPost]
         public async Task<IActionResult> AddGrade(CreateGradeViewModel model)
         {
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             await gradeService.CreateGradeAsync(model);
 
             return RedirectToAction("GradeBook", "Teacher", new { classId = model.CourseId });
@@ -42,6 +56,10 @@ namespace LearnSpace.Web.Areas.Teacher.Controllers
         [HttpPost]
         public async Task<IActionResult> DeleteGrade(int gradeId)
         {
+            if (!(await gradeService.ExistsByIdAsync(gradeId)))
+            {
+                return RedirectToAction("Error404", "Error");
+            }
             var classid = await gradeService.DeleteGradeAsync(gradeId);
 
             return RedirectToAction("GradeBook", "Teacher", new { classId = classid });

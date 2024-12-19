@@ -18,6 +18,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LearnSpace.Common\LearnSpace.Common.csproj" />
+    <ProjectReference Include="..\LearnSpace.Core.Models\LearnSpace.Core.Models.csproj" />
+    <ProjectReference Include="..\LearnSpace.Core\LearnSpace.Core.csproj" />
+    <ProjectReference Include="..\LearnSpace.Infrastructure\LearnSpace.Infrastructure.csproj" />
+    <ProjectReference Include="..\LearnSpace\LearnSpace.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="NUnit.Framework" />
   </ItemGroup>
 

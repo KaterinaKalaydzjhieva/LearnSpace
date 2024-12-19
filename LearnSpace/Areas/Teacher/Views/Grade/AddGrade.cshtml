@@ -40,3 +40,7 @@
         <a asp-controller="Teacher" asp-action="GradeBook" asp-route-classId="@Model.CourseId" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

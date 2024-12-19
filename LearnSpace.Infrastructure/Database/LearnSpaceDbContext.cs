@@ -48,32 +48,36 @@ namespace LearnSpace.Infrastructure.Database
                     .HasOne(s => s.Assignment)
                     .WithMany   (a => a.Submissions)
                     .HasForeignKey(s => s.AssignmentId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Student>()
                     .HasMany(s => s.Grades)
                     .WithOne(s => s.Student)
                     .HasForeignKey(g=>g.StudentId)
                     .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<Grade>()
                     .HasOne(g => g.Course)
                     .WithMany(c=>c.Grades)
                     .HasForeignKey(g => g.CourseId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.NoAction);
+
             builder.Entity<ApplicationUser>()
                     .HasOne(a => a.Student)
                     .WithOne(s=>s.ApplicationUser)
-                    .OnDelete(DeleteBehavior.Cascade);
+                    .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<ApplicationUser>()
                     .HasOne(a => a.Teacher)
                     .WithOne(s => s.ApplicationUser)
+                    .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Course>()
+                    .HasOne(c => c.Teacher)
+                    .WithMany(t => t.Courses)
+                    .HasForeignKey(c => c.TeacherId)
                     .OnDelete(DeleteBehavior.Cascade);
-            builder.Entity<Teacher>()
-                    .HasMany(t => t.Courses)
-                    .WithOne(c => c.Teacher)
-                    .HasForeignKey(t => t.TeacherId)
-                    .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<Course>()
                     .HasMany(c => c.Grades)
                     .WithOne(g => g.Course)
@@ -84,7 +88,7 @@ namespace LearnSpace.Infrastructure.Database
                     .HasMany(c => c.CourseStudents)
                     .WithOne(sc => sc.Course)
                     .HasForeignKey(sc => sc.CourseId)
-                    .OnDelete(DeleteBehavior.Restrict);
+                    .OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Course>()
                     .HasMany(c => c.Assignments)
@@ -92,35 +96,6 @@ namespace LearnSpace.Infrastructure.Database
                     .HasForeignKey(a => a.CourseId)
                     .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<Course>()
-                    .HasOne(c => c.Teacher)
-                    .WithMany(t => t.Courses)
-                    .HasForeignKey(c => c.TeacherId)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Assignment>()
-                    .HasMany(a => a.Submissions)
-                    .WithOne(s => s.Assignment)
-                    .HasForeignKey(s => s.AssignmentId)
-                    .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<Assignment>()
-                    .HasOne(a => a.Course)
-                    .WithMany(c => c.Assignments)
-                    .HasForeignKey(a => a.CourseId)
-                    .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<StudentCourse>()
-                    .HasOne(sc => sc.Student)
-                    .WithMany(s => s.StudentCourses)
-                    .HasForeignKey(sc => sc.StudentId)
-                    .OnDelete(DeleteBehavior.Cascade);
-
-            builder.Entity<StudentCourse>()
-                    .HasOne(sc => sc.Course)
-                    .WithMany(c => c.CourseStudents)
-                    .HasForeignKey(sc => sc.CourseId)
-                    .OnDelete(DeleteBehavior.Cascade);
             //Seeding
 
             builder.ApplyConfiguration(new ApplicationUserConfiguration());

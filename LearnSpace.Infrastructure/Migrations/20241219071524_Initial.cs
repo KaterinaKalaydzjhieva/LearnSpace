@@ -171,8 +171,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         name: "FK_Students_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -190,8 +189,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         name: "FK_Teachers_AspNetUsers_ApplicationUserId",
                         column: x => x.ApplicationUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -213,7 +211,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         column: x => x.TeacherId,
                         principalTable: "Teachers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -235,7 +233,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         column: x => x.CourseId,
                         principalTable: "Courses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -281,8 +279,7 @@ namespace LearnSpace.Infrastructure.Migrations
                         name: "FK_StudentsCourses_Courses_CourseId",
                         column: x => x.CourseId,
                         principalTable: "Courses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_StudentsCourses_Students_StudentId",
                         column: x => x.StudentId,
@@ -326,14 +323,14 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "DateOfBirth", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { new Guid("08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6"), 0, "3e1f7889-1be5-4b31-b356-251d991d9c8e", new DateTime(2006, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "student2@abv.bg", false, "Diana", "Atanasova", false, null, "STUDENT2@ABV.BG", "STUDENT2", "AQAAAAEAACcQAAAAENtOEOsDRHRG7ijMm8gNH4Yvq4XmnKWwA52GTKUi5iw92+a5LWQCFG6XVmxTO7+64g==", null, false, "581b32b8-8a53-4dc8-9012-11f54279139a", false, "student2" },
-                    { new Guid("267a7709-17b4-413c-9026-a6f365d59731"), 0, "184b4d50-cb34-45d2-a85a-63337a3a81d3", new DateTime(2006, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "student5@abv.bg", false, "Lili", "Samardjieva", false, null, "STUDENT5@ABV.BG", "STUDENT5", "AQAAAAEAACcQAAAAELWmsjDkw93dRqbJJ1LZMKtJGlqxv/63bhL/tDEe5iv+4Yman9PYAFE2lmqp5N4kTQ==", null, false, "783d3fa9-7a98-4fc5-a1a6-f177f63341e7", false, "student5" },
-                    { new Guid("2d522f0f-1d26-429e-8bef-0098f10d96e9"), 0, "6e73b780-1240-493b-9328-838d962776ab", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@abv.bg", false, "Admin", "Adminov", false, null, "ADMIN@ABV.BG", "ADMIN", "AQAAAAEAACcQAAAAEG+7ZDhhN7SQF//EpqNeIC8RMlD3fYmaBD7cXbakW84clP5AmaxVwApyCA1Q9Dvtkw==", null, false, "5d5f336d-8b41-46e2-b036-880e59e413c7", false, "Admin" },
-                    { new Guid("3cc698b0-736e-490a-97e3-3f343bf8bfd8"), 0, "25ab17a3-f622-4e28-adc8-7e992084160e", new DateTime(2005, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "student3@abv.bg", false, "Ema", "Ivanova", false, null, "STUDENT3@ABV.BG", "STUDENT3", "AQAAAAEAACcQAAAAECgUJKxUzY+GJx2QYhjS+xTYoSrZfhZ5q2Rg0wYA+Pil0RSz8fKCUNycwLQhPpLf9Q==", null, false, "6f4c0d70-8340-4cee-8f42-8364d53d731e", false, "student3" },
-                    { new Guid("a52dc824-b577-4862-ac67-29d391116793"), 0, "530fb095-0756-4ca8-95d4-e7a3a1bb3056", new DateTime(2005, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "student1@abv.bg", false, "Vladislav", "Popov", false, null, "STUDENT1@ABV.BG", "STUDENT1", "AQAAAAEAACcQAAAAEOmQZq1J/gqffJlw2O58XPx0gEUneH0awtIxfkBLnMuKrs+inRFhciqkfKpDVR/jnA==", null, false, "81e5c346-aea3-4b30-b8b9-8a2c5b941631", false, "student1" },
-                    { new Guid("bc5f8df5-6115-4344-897b-73e185df4bff"), 0, "fa9bd63b-b854-43b6-8d45-1b14692121b8", new DateTime(1982, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher2@abv.bg", false, "Grigor", "Georgiev", false, null, "TEACHER2@ABV.BG", "TEACHER2", "AQAAAAEAACcQAAAAELKcB0JiC/i5HBijXst4pzZbYYpA3Lj5dICk+6Iq1OCf2h3uNPva9w+pHEHY7h0XvA==", null, false, "222d7572-9b47-46f2-b4c7-210e1b42d56a", false, "teacher2" },
-                    { new Guid("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1"), 0, "7b79f178-ff27-49f0-93dd-dced5afdae97", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher1@abv.bg", false, "Ivan", "Ivanov", false, null, "TEACHER1@ABV.BG", "TEACHER1", "AQAAAAEAACcQAAAAENT6jjDY9LBX/F3TM9B+EyYSb0Mu7zDqbCgU5Lr5MpqVNHH5AzY7ZlJeeklRPfZjow==", null, false, "23e015e5-090f-4cf1-ad85-8f3c0cb92974", false, "teacher1" },
-                    { new Guid("ebdc00b8-7106-4cbd-a482-da93c40103d3"), 0, "fb3b9678-2311-45a3-b7dc-0168aaafa9ae", new DateTime(2006, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "student4@abv.bg", false, "Alex", "Georgiev", false, null, "STUDENT4@ABV.BG", "STUDENT4", "AQAAAAEAACcQAAAAED1pUcSalPE8Bm4EYWZFC5Qeg/lV0IjPaLi6f9/54yQbQSmLwRP2IR6/yT5T7OYo9A==", null, false, "9f06e15d-2dba-44db-af69-f904106e2e57", false, "student4" }
+                    { new Guid("08d20ff4-ecdd-4b8a-8142-4cf42ee6adc6"), 0, "616631ef-2d0b-460d-b31a-512a2a465a0c", new DateTime(2006, 7, 19, 0, 0, 0, 0, DateTimeKind.Unspecified), "student2@abv.bg", false, "Diana", "Atanasova", false, null, "STUDENT2@ABV.BG", "STUDENT2", "AQAAAAEAACcQAAAAELT1aLnBjT+YCwxmb+rDKtN5F3sJVX+B4teAiox4J0G72LvK59YLuUoWwgsZeytGOA==", null, false, "d39cee2f-d269-46ee-af85-d1130a268721", false, "student2" },
+                    { new Guid("267a7709-17b4-413c-9026-a6f365d59731"), 0, "8a03e2ac-d913-44da-859c-75edf0650479", new DateTime(2006, 3, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "student5@abv.bg", false, "Lili", "Samardjieva", false, null, "STUDENT5@ABV.BG", "STUDENT5", "AQAAAAEAACcQAAAAEHCeY5nNBme+zKPS6B4OB/L2V5M5byESnwbJXu16UZICD7U9LhqMAExlxWAqYySAKw==", null, false, "4dbfd547-f5bf-491b-ab47-c94dfa5db4b0", false, "student5" },
+                    { new Guid("2d522f0f-1d26-429e-8bef-0098f10d96e9"), 0, "fe0b88eb-78ad-4d74-a9fd-75eb56f1b0ae", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "admin@abv.bg", false, "Admin", "Adminov", false, null, "ADMIN@ABV.BG", "ADMIN", "AQAAAAEAACcQAAAAEKLa3Q+vDDgoFfA5e+OyPlVAgoifEJsx08ns513roxL1xGTosW1flx5ye2CszDWzqg==", null, false, "199f66e9-f86e-426d-8398-c92aac386e8f", false, "Admin" },
+                    { new Guid("3cc698b0-736e-490a-97e3-3f343bf8bfd8"), 0, "76347a03-569e-4663-b53b-b444d5ad80d3", new DateTime(2005, 10, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), "student3@abv.bg", false, "Ema", "Ivanova", false, null, "STUDENT3@ABV.BG", "STUDENT3", "AQAAAAEAACcQAAAAEPknBtIJw/C4qVlGpZsAe1bUnnf7pCXa0zYGxhqukMjJ5Q+Wb+iD4XFWvhDahlD7mw==", null, false, "5a056050-1190-4407-a4af-797f13b36d01", false, "student3" },
+                    { new Guid("a52dc824-b577-4862-ac67-29d391116793"), 0, "7507e65e-afc0-400e-a801-a1aa76741e50", new DateTime(2005, 3, 14, 0, 0, 0, 0, DateTimeKind.Unspecified), "student1@abv.bg", false, "Vladislav", "Popov", false, null, "STUDENT1@ABV.BG", "STUDENT1", "AQAAAAEAACcQAAAAECUwrJ+gmTBHm0mCzOL9dCwtxXIhYo7NGQ6cRefsOakhMMDcuIhgdWKkynCDeEifIQ==", null, false, "6af73024-0a70-400a-9537-4c32830df4da", false, "student1" },
+                    { new Guid("bc5f8df5-6115-4344-897b-73e185df4bff"), 0, "4f3f2566-0ff7-45e9-ae31-641a49f57cd9", new DateTime(1982, 8, 21, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher2@abv.bg", false, "Grigor", "Georgiev", false, null, "TEACHER2@ABV.BG", "TEACHER2", "AQAAAAEAACcQAAAAEEtc1+qey5Giy5/uB0HDo3/Bcou4gOqs5/bFb8pejPzWVzBDBMt2cUWOsyIiECiADw==", null, false, "f91dabee-1700-41dc-8102-8e9928b0d86b", false, "teacher2" },
+                    { new Guid("bdc70ff8-a02a-428f-ad1c-b5ba645a45e1"), 0, "d1216c4f-0a1f-4f32-ad99-2ba40c25b233", new DateTime(1980, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "teacher1@abv.bg", false, "Ivan", "Ivanov", false, null, "TEACHER1@ABV.BG", "TEACHER1", "AQAAAAEAACcQAAAAEKas/RWVyuC/zTdmEdKcElMMjcKer0yoEVMztDwTO1OBPQWKo+YQbukUQUm2E45gsg==", null, false, "fb5225e2-7a60-4103-965f-008e99d312a4", false, "teacher1" },
+                    { new Guid("ebdc00b8-7106-4cbd-a482-da93c40103d3"), 0, "258792c1-c48f-411b-9fc2-f9a859d0cfe4", new DateTime(2006, 2, 3, 0, 0, 0, 0, DateTimeKind.Unspecified), "student4@abv.bg", false, "Alex", "Georgiev", false, null, "STUDENT4@ABV.BG", "STUDENT4", "AQAAAAEAACcQAAAAEDxkNpSrwYdE4hpLFBLxtvw5stSdDCEME8c1+00mBsoWkweOGZEYLrPtMnGY7ewiNA==", null, false, "4f2136ee-9d0a-4172-9d57-fa7bc5f214b1", false, "student4" }
                 });
 
             migrationBuilder.InsertData(
@@ -391,11 +388,11 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: new[] { "Id", "CourseId", "DateGraded", "Description", "Score", "StudentId" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2024, 12, 18, 22, 47, 34, 417, DateTimeKind.Local).AddTicks(5444), "You can do more.", 4, new Guid("5c07f155-602e-403b-bb86-5a786814f575") },
-                    { 2, 2, new DateTime(2024, 12, 18, 22, 47, 34, 417, DateTimeKind.Local).AddTicks(5497), "You can do more.", 3, new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8") },
-                    { 3, 3, new DateTime(2024, 12, 18, 22, 47, 34, 417, DateTimeKind.Local).AddTicks(5504), "You can do more.", 5, new Guid("c6903087-71e5-41ba-80be-ed119b7902fc") },
-                    { 4, 4, new DateTime(2024, 12, 18, 22, 47, 34, 417, DateTimeKind.Local).AddTicks(5514), "You can do more.", 6, new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f") },
-                    { 5, 5, new DateTime(2024, 12, 18, 22, 47, 34, 417, DateTimeKind.Local).AddTicks(5520), "You can do more.", 6, new Guid("bb5432a1-ea56-450b-9db6-f7349faf28a6") }
+                    { 1, 1, new DateTime(2024, 12, 19, 9, 15, 24, 42, DateTimeKind.Local).AddTicks(59), "You can do more.", 4, new Guid("5c07f155-602e-403b-bb86-5a786814f575") },
+                    { 2, 2, new DateTime(2024, 12, 19, 9, 15, 24, 42, DateTimeKind.Local).AddTicks(127), "You can do more.", 3, new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8") },
+                    { 3, 3, new DateTime(2024, 12, 19, 9, 15, 24, 42, DateTimeKind.Local).AddTicks(131), "You can do more.", 5, new Guid("c6903087-71e5-41ba-80be-ed119b7902fc") },
+                    { 4, 4, new DateTime(2024, 12, 19, 9, 15, 24, 42, DateTimeKind.Local).AddTicks(135), "You can do more.", 6, new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f") },
+                    { 5, 5, new DateTime(2024, 12, 19, 9, 15, 24, 42, DateTimeKind.Local).AddTicks(139), "You can do more.", 6, new Guid("bb5432a1-ea56-450b-9db6-f7349faf28a6") }
                 });
 
             migrationBuilder.InsertData(
@@ -420,11 +417,11 @@ namespace LearnSpace.Infrastructure.Migrations
                 columns: new[] { "Id", "AssignmentId", "FileContent", "FileName", "FileType", "StudentId", "SubmittedOn" },
                 values: new object[,]
                 {
-                    { 1, 2, new byte[] { 49, 50, 51, 49, 50, 52, 49, 50, 52, 50, 51, 52 }, "task1.txt", "text/plain", new Guid("5c07f155-602e-403b-bb86-5a786814f575"), new DateTime(2024, 12, 18, 20, 47, 34, 417, DateTimeKind.Utc).AddTicks(4669) },
-                    { 2, 4, new byte[] { 113, 119, 100, 113, 101, 50, 113, 101, 119, 113, 101, 113, 119, 101, 119, 113, 100, 113, 119, 101, 113, 100 }, "task2.txt", "text/plain", new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8"), new DateTime(2024, 12, 18, 20, 47, 34, 417, DateTimeKind.Utc).AddTicks(4706) },
-                    { 3, 6, new byte[] { 113, 119, 101, 113, 119, 101, 113, 119, 101, 115, 97, 100 }, "task3.txt", "text/plain", new Guid("c6903087-71e5-41ba-80be-ed119b7902fc"), new DateTime(2024, 12, 18, 20, 47, 34, 417, DateTimeKind.Utc).AddTicks(4709) },
-                    { 4, 8, new byte[] { 113, 119, 100, 113, 119, 32, 113, 119, 100, 32, 113, 119, 100 }, "task4.txt", "text/plain", new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f"), new DateTime(2024, 12, 18, 20, 47, 34, 417, DateTimeKind.Utc).AddTicks(4712) },
-                    { 5, 10, new byte[] { 113, 87, 69, 67, 119, 100, 119, 97, 100, 97, 119 }, "task5.txt", "text/plain", new Guid("bb5432a1-ea56-450b-9db6-f7349faf28a6"), new DateTime(2024, 12, 18, 20, 47, 34, 417, DateTimeKind.Utc).AddTicks(4715) }
+                    { 1, 2, new byte[] { 49, 50, 51, 49, 50, 52, 49, 50, 52, 50, 51, 52 }, "task1.txt", "text/plain", new Guid("5c07f155-602e-403b-bb86-5a786814f575"), new DateTime(2024, 12, 19, 7, 15, 24, 41, DateTimeKind.Utc).AddTicks(9233) },
+                    { 2, 4, new byte[] { 113, 119, 100, 113, 101, 50, 113, 101, 119, 113, 101, 113, 119, 101, 119, 113, 100, 113, 119, 101, 113, 100 }, "task2.txt", "text/plain", new Guid("18e76084-b8a6-4e78-bd26-143f33a05eb8"), new DateTime(2024, 12, 19, 7, 15, 24, 41, DateTimeKind.Utc).AddTicks(9254) },
+                    { 3, 6, new byte[] { 113, 119, 101, 113, 119, 101, 113, 119, 101, 115, 97, 100 }, "task3.txt", "text/plain", new Guid("c6903087-71e5-41ba-80be-ed119b7902fc"), new DateTime(2024, 12, 19, 7, 15, 24, 41, DateTimeKind.Utc).AddTicks(9256) },
+                    { 4, 8, new byte[] { 113, 119, 100, 113, 119, 32, 113, 119, 100, 32, 113, 119, 100 }, "task4.txt", "text/plain", new Guid("f4aa693d-305e-426b-950c-d02a8ca8b56f"), new DateTime(2024, 12, 19, 7, 15, 24, 41, DateTimeKind.Utc).AddTicks(9258) },
+                    { 5, 10, new byte[] { 113, 87, 69, 67, 119, 100, 119, 97, 100, 97, 119 }, "task5.txt", "text/plain", new Guid("bb5432a1-ea56-450b-9db6-f7349faf28a6"), new DateTime(2024, 12, 19, 7, 15, 24, 41, DateTimeKind.Utc).AddTicks(9259) }
                 });
 
             migrationBuilder.CreateIndex(

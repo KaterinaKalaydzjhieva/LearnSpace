@@ -103,5 +103,12 @@ namespace LearnSpace.Core.Services
             return gradeInfo;
 
         }
+
+        public async Task<bool> ClassExistsByIdAsync(int id)
+        {
+            var course = await repository.GetByIdAsync<Course>(id);
+
+            return course != null;
+        }
     }
 }

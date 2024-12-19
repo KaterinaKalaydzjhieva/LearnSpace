@@ -10,5 +10,6 @@ namespace LearnSpace.Core.Interfaces
         Task CreateGradeAsync(CreateGradeViewModel model);
         Task<int> DeleteGradeAsync(int id);
         Task<bool> ExistsByIdAsync(int id);
+        Task<bool> ClassExistsByIdAsync(int id);
     }
 }

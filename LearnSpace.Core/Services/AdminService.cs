@@ -1,5 +1,6 @@
 ﻿using LearnSpace.Core.Interfaces;
 using LearnSpace.Core.Models.Admin;
+using LearnSpace.Infrastructure.Database.Entities;
 using LearnSpace.Infrastructure.Database.Entities.Account;
 using LearnSpace.Infrastructure.Database.Repository;
 using Microsoft.AspNetCore.Identity;
@@ -35,7 +36,24 @@ namespace LearnSpace.Core.Services
 
         public async Task DeleteUserAsync(string userId)
         {
+            var user = await repository.GetByIdAsync<ApplicationUser>(Guid.Parse(userId));
+            if (user.Student != null) 
+            {
+                var student = await repository.GetStudentAsync(userId);
+                var studentCourses = student.StudentCourses;
+                repository.DeleteRange<StudentCourse>(studentCourses);
+                await repository.DeleteAsync<Student>(student.Id);
+            }
+            else if (user.Teacher != null)
+            {
+                var teacher = await repository.GetTeacherAsync(userId);
+                var CourseStudents = teacher.Courses.SelectMany(c => c.CourseStudents);
+                repository.DeleteRange<StudentCourse>(CourseStudents);
+                await repository.DeleteAsync<Teacher>(teacher.Id);
+            }
+
             await repository.DeleteAsync<ApplicationUser>(Guid.Parse(userId));
+
             await repository.SaveChangesAsync();
 		}
 
