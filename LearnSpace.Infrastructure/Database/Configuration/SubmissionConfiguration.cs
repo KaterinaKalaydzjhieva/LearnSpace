@@ -14,11 +14,11 @@ namespace LearnSpace.Infrastructure.Database.Configuration
         {
             var submissions = new List<Submission>();
 
-            var file1Content = FileToByteArray("D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task1.txt");
-            var file2Content = FileToByteArray("D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task2.txt");
-            var file3Content = FileToByteArray("D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task3.txt");
-            var file4Content = FileToByteArray("D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task4.txt");
-            var file5Content = FileToByteArray("D:\\Programing Files\\C#\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task5.txt");
+            var file1Content = FileToByteArray("C:\\Users\\user-pc\\Source\\Repos\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task1.txt");
+            var file2Content = FileToByteArray("C:\\Users\\user-pc\\Source\\Repos\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task2.txt");
+            var file3Content = FileToByteArray("C:\\Users\\user-pc\\Source\\Repos\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task3.txt");
+            var file4Content = FileToByteArray("C:\\Users\\user-pc\\Source\\Repos\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task4.txt");
+            var file5Content = FileToByteArray("C:\\Users\\user-pc\\Source\\Repos\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task5.txt");
 
             // 1
             submissions.Add(new Submission()

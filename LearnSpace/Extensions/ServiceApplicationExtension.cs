@@ -25,22 +25,6 @@ namespace LearnSpace.Web.Extensions
                 options.LoginPath = "/Account/Login";
                 options.AccessDeniedPath = "/Account/AccessDenied";
             });
-            ////Roles Authorization
-            //services.AddAuthorization(options =>
-            //{
-            //    options.AddPolicy("Administrator", policy => policy.RequireRole("Admin"));
-            //    options.AddPolicy("User", policy => policy.RequireRole("User"));
-            //});
-            ////Authentication
-            //services.AddAuthentication(options =>
-            //{
-            //    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //    options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            //})
-            //.AddCookie(options =>
-            //{
-            //    options.LoginPath = "/User/Login";
-            //});
 
             return services;
         }
