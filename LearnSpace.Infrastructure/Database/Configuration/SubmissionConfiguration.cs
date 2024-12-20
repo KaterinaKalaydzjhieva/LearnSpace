@@ -14,11 +14,11 @@ namespace LearnSpace.Infrastructure.Database.Configuration
         {
             var submissions = new List<Submission>();
 
-            var file1Content = FileToByteArray("C:\\Users\\user-pc\\Source\\Repos\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task1.txt");
-            var file2Content = FileToByteArray("C:\\Users\\user-pc\\Source\\Repos\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task2.txt");
-            var file3Content = FileToByteArray("C:\\Users\\user-pc\\Source\\Repos\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task3.txt");
-            var file4Content = FileToByteArray("C:\\Users\\user-pc\\Source\\Repos\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task4.txt");
-            var file5Content = FileToByteArray("C:\\Users\\user-pc\\Source\\Repos\\LearnSpace\\LearnSpace\\wwwroot\\uploads\\submissions\\task5.txt");
+            var file1Content = FileToByteArray("\\uploads\\submissions\\task1.txt");
+            var file2Content = FileToByteArray("\\uploads\\submissions\\task1.txt");
+            var file3Content = FileToByteArray("\\uploads\\submissions\\task1.txt");
+            var file4Content = FileToByteArray("\\uploads\\submissions\\task1.txt");
+            var file5Content = FileToByteArray("\\uploads\\submissions\\task1.txt");
 
             // 1
             submissions.Add(new Submission()
@@ -83,11 +83,15 @@ namespace LearnSpace.Infrastructure.Database.Configuration
             return submissions;
         }
 
-        private static byte[] FileToByteArray(string filePath)
+        private static byte[] FileToByteArray(string relativePath)
         {
+            var rootPath = Path.Combine(Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)!.Parent!.Parent!.Parent!.FullName, "wwwroot");
+            relativePath = relativePath.TrimStart(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            var filePath = Path.Combine(rootPath, relativePath);
+
             if (File.Exists(filePath))
             {
-                return File.ReadAllBytes(filePath); // Read file content as byte array
+                return File.ReadAllBytes(filePath);
             }
 
             throw new FileNotFoundException($"File not found: {filePath}");

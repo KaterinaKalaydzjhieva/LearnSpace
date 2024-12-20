@@ -31,6 +31,17 @@
 					<button id="submitButton" type="submit" class="btn btn-primary">Submit</button>
 				</div>
 			</form>
+			@if (Model.Errors != null && Model.Errors.Any())
+			{
+				<div class="alert alert-danger mt-3">
+					<ul>
+						@foreach (var error in Model.Errors)
+						{
+							<li>@error</li>
+						}
+					</ul>
+				</div>
+			}
 			@if (Model.IsSubmitted)
 			{
 				<div class="alert alert-success text-center mt-4">
@@ -43,19 +54,7 @@
 					<strong>No submission found.</strong>
 				</div>
 			}
-
-			@if (TempData["Errors"] != null)
-			{
-				var errors = TempData["Errors"] as List<string>;
-				<div class="alert alert-danger">
-					<ul>
-						@foreach (var error in errors)
-						{
-							<li>@error</li>
-						}
-					</ul>
-				</div>
-			}
+			
 			<div class="card-footer text-center">
 				<button onclick="history.go(-1)" class="btn btn-secondary">Back to Assignments</button>
 			</div>
@@ -142,3 +141,37 @@
 @section Scripts {
 	<partial name="_ValidationScriptsPartial" />
 }
+document.addEventListener('DOMContentLoaded', function () {
+	const fileInput = document.getElementById('fileInput');
+	const submitButton = document.getElementById('submitButton');
+
+	function validateFile() {
+		const file = fileInput.files[0];
+		const errorSpan = document.querySelector('span[asp-validation-for="filePath"]');
+		errorSpan.textContent = '';
+
+		if (!file) {
+			errorSpan.textContent = 'Please upload a file.';
+			submitButton.disabled = true;
+			return;
+		}
+
+		const allowedTypes = ['application/pdf', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/plain'];
+		if (!allowedTypes.includes(file.type)) {
+			errorSpan.textContent = 'Invalid file type. Allowed types are .pdf, .docx, .txt.';
+			submitButton.disabled = true;
+			return;
+		}
+
+		const maxFileSize = 5 * 1024 * 1024; // 5 MB
+		if (file.size > maxFileSize) {
+			errorSpan.textContent = 'File size exceeds the maximum allowed limit of 5 MB.';
+			submitButton.disabled = true;
+			return;
+		}
+
+		submitButton.disabled = false;
+	}
+
+	fileInput.addEventListener('change', validateFile);
+});

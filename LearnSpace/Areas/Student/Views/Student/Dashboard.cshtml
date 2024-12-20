@@ -1,8 +1,10 @@
 ﻿@model StudentDashboardModel
 
+@{
+    ViewBag.Title = "Dashboard";
+}
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-
 <div id="dashboardStudent" class="d-flex flex-column">
 	<div class="text-center text-capitalize fs-4 text-white color-purple w-auto m-2">
 		@Model.FullName

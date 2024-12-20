@@ -1,4 +1,5 @@
 ﻿using LearnSpace.Core.Interfaces;
+using LearnSpace.Core.Models.Assignment;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearnSpace.Web.Areas.Student.Controllers
@@ -14,38 +15,45 @@ namespace LearnSpace.Web.Areas.Student.Controllers
         [HttpPost]
         public async Task<IActionResult> SubmitAssignment(int assignmentId, IFormFile filePath)
         {
-            if (!(await submissionService.AssignmentExistsByIdAsync(assignmentId)))
-            {
-                return RedirectToAction("Error404", "Error");
-            }
+			if (!(await submissionService.AssignmentExistsByIdAsync(assignmentId)))
+			{
+				ModelState.AddModelError("", "The assignment does not exist.");
+				return RedirectToAction("AssignmentInfo", "Assignment", new AssignmentInfoViewModel
+				{
+					Id = assignmentId,
+					Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()
+				});
+			}
 
+			if (filePath == null || filePath.Length == 0)
+			{
+				ModelState.AddModelError("filePath", "Please upload a file.");
+			}
 
-            if (filePath == null || filePath.Length == 0)
-            {
-                ModelState.AddModelError("File", "Please upload a file.");
-            }
-            if (!submissionService.ContainsOnlyAllowedFileTypeAsync(filePath))
-            {
-                ModelState.AddModelError("File", "Invalid file type. Allowed types are .pdf, .docx, .txt");
-                return RedirectToAction("AssignmentInfo", "Assignment", new { area = "Student", id = assignmentId });
-            }
-            if (!submissionService.SizeIsNotTooBig(filePath))
-            {
-                ModelState.AddModelError("File", "File size exceeds the maximum allowed limit of 5 MB.");
-                return RedirectToAction("", "Error");
-            }
+			if (!submissionService.ContainsOnlyAllowedFileType(filePath))
+			{
+				ModelState.AddModelError("filePath", "Invalid file type. Allowed types are .pdf, .docx, .txt.");
+			}
 
-            if (!ModelState.IsValid)
-            {
-                TempData["Errors"] = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList();
-                return RedirectToAction("AssignmentInfo", "Assignment", new { id = assignmentId });
-            }
+			if (!submissionService.SizeIsNotTooBig(filePath))
+			{
+				ModelState.AddModelError("filePath", "File size exceeds the maximum allowed limit of 5 MB.");
+			}
 
+			if (!ModelState.IsValid)
+			{
+				var model = new AssignmentInfoViewModel
+				{
+					Id = assignmentId,
+					Errors = ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList()
+				};
+				return RedirectToAction("AssignmentInfo", "Assignment", model);
+			}
 
-            await submissionService.CreateSubmissionAsync(GetUserId(), assignmentId, filePath);
+			await submissionService.CreateSubmissionAsync(GetUserId(), assignmentId, filePath);
 
-            return RedirectToAction("AssignmentInfo", "Assignment", new { id = assignmentId });
-        }
+			return RedirectToAction("AssignmentInfo", "Assignment", new { id = assignmentId });
+		}
 
     }
 }

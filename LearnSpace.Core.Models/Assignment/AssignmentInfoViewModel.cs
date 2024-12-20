@@ -11,6 +11,7 @@
         public string FilePath { get; set; }
         public bool IsSubmitted { get; set; }
         public string SubmissionDate { get; set; }
+		public List<string> Errors { get; set; } = new List<string>();
 
-    }
+	}
 }

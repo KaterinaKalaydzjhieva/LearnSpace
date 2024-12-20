@@ -121,7 +121,7 @@ namespace LearnSpace.Core.Services
             return model;
         }
 
-        public bool ContainsOnlyAllowedFileTypeAsync(IFormFile file)
+        public bool ContainsOnlyAllowedFileType(IFormFile file)
         {
             var allowedExtensions = new[] { ".pdf", ".docx", ".xlsx", ".txt" };
             var fileExtension = Path.GetExtension(file.FileName).ToLowerInvariant();

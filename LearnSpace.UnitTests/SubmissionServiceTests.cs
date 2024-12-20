@@ -170,7 +170,7 @@ namespace LearnSpace.UnitTests
 			var fileMock = new Mock<IFormFile>();
 			fileMock.Setup(f => f.FileName).Returns("test.pdf");
 
-			var result = submissionService.ContainsOnlyAllowedFileTypeAsync(fileMock.Object);
+			var result = submissionService.ContainsOnlyAllowedFileType(fileMock.Object);
 
 			Assert.IsTrue(result);
 		}
@@ -181,7 +181,7 @@ namespace LearnSpace.UnitTests
 			var fileMock = new Mock<IFormFile>();
 			fileMock.Setup(f => f.FileName).Returns("test.exe");
 
-			var result = submissionService.ContainsOnlyAllowedFileTypeAsync(fileMock.Object);
+			var result = submissionService.ContainsOnlyAllowedFileType(fileMock.Object);
 
 			Assert.IsFalse(result);
 		}

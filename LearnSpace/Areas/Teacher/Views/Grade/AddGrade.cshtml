@@ -1,7 +1,11 @@
-﻿@model LearnSpace.Core.Models.Grade.CreateGradeViewModel
+﻿@model CreateGradeViewModel
+
+@{
+    ViewBag.Title = "Add Grade";
+}
 
 <div class="container mt-5">
-    <h2 class="mb-4 text-center">Add Grade</h2>
+    <h2 class="mb-4 text-center">@ViewBag.Title</h2>
     <form asp-action="AddGrade" method="post">
         <input type="hidden" asp-for="CourseId" />
         <input type="hidden" asp-for="StudentId" />

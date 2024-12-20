@@ -12,7 +12,7 @@ namespace LearnSpace.Core.Interfaces
         Task<SubmissionsViewModel> GetAllSubmissionsForTeacherAsync(string userId);
         Task<bool> ExistsByIdAsync(int id);
         Task<bool> AssignmentExistsByIdAsync(int id);
-        bool ContainsOnlyAllowedFileTypeAsync(IFormFile file);
+        bool ContainsOnlyAllowedFileType(IFormFile file);
         bool SizeIsNotTooBig(IFormFile file);
     }
 }

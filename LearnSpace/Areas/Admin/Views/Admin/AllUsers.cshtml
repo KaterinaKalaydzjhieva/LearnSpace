@@ -77,13 +77,13 @@
                                             }
                                         }
                                     </select>
-                                    <button type="submit" class="btn btn-danger btn-sm">Delete Role</button>
+                                    <button onclick="return confirm('Are you sure you want to delete this role?');" type="submit" class="btn btn-danger btn-sm">Delete Role</button>
                                 </form>
                                 @if (!user.Roles.Contains("Administrator"))
                                 {
                                     <form asp-area="Admin" asp-controller="Admin" asp-action="DeleteUser" method="post">
                                         <input type="hidden" name="userId" value="@user.Id" />
-                                        <button type="submit" class="btn btn-danger btn-sm" >
+                                        <button onclick="return confirm('Are you sure you want to delete this user?');" type="submit" class="btn btn-danger btn-sm">
                                             Delete User
                                         </button>
                                     </form>
@@ -114,15 +114,3 @@
         };
     }
 }
-
-<script>
-    document.querySelectorAll('form').forEach(form => {
-        form.addEventListener('submit', function (event) {
-            if (this.querySelector('button.btn-danger')) {
-                if (!confirm('Are you sure you want to delete this role?')) {
-                    event.preventDefault();
-                }
-            }
-        });
-    });
-</script>
