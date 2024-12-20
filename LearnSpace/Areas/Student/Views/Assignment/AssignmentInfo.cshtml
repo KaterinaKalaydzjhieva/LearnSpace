@@ -55,9 +55,9 @@
 				</div>
 			}
 			
-			<div class="card-footer text-center">
-				<button onclick="history.go(-1)" class="btn btn-secondary">Back to Assignments</button>
-			</div>
+			@* <div class="card-footer text-center">
+				<button onclick="history.go(-1);" class="btn btn-secondary">Back to Assignments</button>
+			</div> *@
 		</div>
 	</div>
 </div>
@@ -140,7 +140,7 @@
 
 @section Scripts {
 	<partial name="_ValidationScriptsPartial" />
-}
+	<script>
 document.addEventListener('DOMContentLoaded', function () {
 	const fileInput = document.getElementById('fileInput');
 	const submitButton = document.getElementById('submitButton');
@@ -175,3 +175,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	fileInput.addEventListener('change', validateFile);
 });
+	 </script>
+}

@@ -22,7 +22,7 @@
 
         <div class="mb-3">
             <label asp-for="DueDate" class="form-label">Due Date</label>
-            <input asp-for="DueDate" type="date" class="form-control" id="DueDate" name="DueDate" required>
+            <input asp-for="DueDate" type="date" class="form-control" id="DueDate" name="DueDate" required >
             <span asp-validation-for="DueDate" class="text-danger"></span>
         </div>
 
@@ -33,4 +33,20 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Задайте минималната дата като текущата дата
+        var dueDateField = document.getElementById("DueDate");
+        dueDateField.setAttribute("min", new Date().toISOString().split("T")[0]);
+
+        // Забраняваме писането в полето, но запазваме календара
+        dueDateField.addEventListener("input", function(event) {
+            // Блокиране на ръчно въвеждане
+            if (event.target.value && !event.target.validity.valid) {
+                event.preventDefault();
+                event.target.setCustomValidity('Please select a date from the calendar');
+            } else {
+                event.target.setCustomValidity('');
+            }
+        });
+    </script>
 }
